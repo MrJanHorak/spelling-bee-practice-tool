@@ -28,3 +28,7 @@ That inspired me to see if I could design a tool to help her prepare.
 you can contact me at: jan-horak@gmx.de
 
 or connect with me on Linked.in: https://www.linkedin.com/in/jan-horak/
+
+# Resources
+
+Bee Favicon from : https://favicon.io/emoji-favicons/honeybee/
