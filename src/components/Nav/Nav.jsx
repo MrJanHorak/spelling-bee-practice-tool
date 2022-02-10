@@ -1,10 +1,12 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 
+import LogoDesktop from '../../assets/logo/logo-desktop.png'
+
 const Nav = (props) => {
   return (
     <nav className="nav-bar">
-      <NavLink id="logo" to="/index" <img src={LogoDesktop} alt="bee" />
+      <NavLink id="logo" to="/index" ><img src={LogoDesktop} alt="bee"/></NavLink>
       {props.user
       ?
     <>
