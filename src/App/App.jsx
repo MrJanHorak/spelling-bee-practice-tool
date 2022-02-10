@@ -5,6 +5,7 @@ import { Routes, Route, useNavigate, Navigate } from 'react-router-dom'
 import { getUser, logout } from '../services/authService'
 
 // Pages + Components
+import Nav from '../components/Nav/Nav'
 import SignUp from '../pages/Auth/SignUp'
 import SignIn from '../pages/Auth/SignIn'
 
@@ -17,17 +18,15 @@ const App = () => {
     setUser(currentUser)
   }
 
-
   const handleLogout = () => {
     logout()
     setUser(null)
     navigate('/')
   }
 
-
-
   return (
     <div className="App">
+      <Nav user={user} handleLogout={handleLogout} />
       <Routes>
 
         <Route path="/"
