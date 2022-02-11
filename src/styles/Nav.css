@@ -1,0 +1,36 @@
+.navOption {
+  margin: 0 10px 0 10px;
+  text-decoration: none;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 10px 35px 10px 35px;
+}
+
+.nav-bar a {
+  font-size: 14px;
+  text-decoration: none;
+  margin: 0px 0px 0px 18px;
+  font-family: "DM Sans", sans-serif;
+}
+
+#logo {
+  margin: 0;
+  display: flex;
+  margin-right: auto;
+  align-items: center;
+}
+
+#logo h3 {
+  font-size: 22px;
+  font-weight: bold;
+  font-family: "DM Sans", sans-serif;
+}
+
+#logo img {
+  height: 35px;
+  margin-right: 8px;
+}
