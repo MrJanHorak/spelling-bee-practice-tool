@@ -56,7 +56,7 @@ const SignUp = (props) => {
         <div className="form-container">
           <div className="title-container">
             <h1>Create an Account</h1>
-            {msg ? <h3>{msg}</h3> : <h3>Social media for developers</h3>}
+            {msg ? <h3>{msg}</h3> : <h3>A spelling bee for on the road.</h3>}
           </div>
 
           <form className="register-form" onSubmit={handleSubmit}>
