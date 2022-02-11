@@ -1,18 +1,7 @@
 .signup-page{
   display: flex;
   height: 94vh;
-}
-
-.left-container{
-  width: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-right: 1px solid #292934;
-}
-
-.right-container{
-  width: 50%;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -23,11 +12,11 @@
   flex-direction: column;
   width: 100%;
   align-items: flex-start;
+  
 }
 
 .title-container h3 {
   opacity: .5;
-  margin: 14px 0px 32px 0px;
   font-weight: 600;
 }
 
