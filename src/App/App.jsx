@@ -8,6 +8,8 @@ import { getUser, logout } from '../services/authService'
 import Nav from '../components/Nav/Nav'
 import SignUp from '../pages/Auth/SignUp'
 import SignIn from '../pages/Auth/SignIn'
+import Study from '../pages/Study/Study'
+import Spellingbee from '../pages/Spellingbee/Spellingbee'
 
 const App = () => {
   const navigate = useNavigate()
@@ -40,6 +42,9 @@ const App = () => {
         <Route path="/signup"
           element={<SignUp handleSignupOrLogin={handleSignupOrLogin} />}
         />
+
+        <Route path="/study" element={<Study />}/>
+        <Route path="/spellingbee" element={<Spellingbee />}/>
 
       </Routes>
 

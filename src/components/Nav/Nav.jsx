@@ -12,7 +12,7 @@ const Nav = (props) => {
       </NavLink>
       {props.user ? (
         <>
-          <NavLink to="/practice">Spelling Bee Mode</NavLink>
+          <NavLink to="/spellingbee">Spelling Bee Mode</NavLink>
           <NavLink to="/study">Study Words</NavLink>
           <NavLink to="/" onClick={props.handleLogout}>
             Logout
