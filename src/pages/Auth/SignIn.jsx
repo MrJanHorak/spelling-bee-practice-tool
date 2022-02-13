@@ -27,7 +27,7 @@ const SignIn = (props) => {
     try {
       await login(formData);
       props.handleSignupOrLogin();
-      navigate("/posts");
+      navigate("/");
     } catch (error) {
       setMsg(error.message);
     }
@@ -38,7 +38,7 @@ const SignIn = (props) => {
       <div className="form-container">
         <div className="title-container">
           <h1>Sign In</h1>
-          {msg ? <h3>{msg}</h3> : <h3>Social media for developers</h3>}
+          {msg ? <h3>{msg}</h3> : <h3>Spelling Bee Practice Tool</h3>}
         </div>
 
         <form className="register-form" onSubmit={handleSubmit}>

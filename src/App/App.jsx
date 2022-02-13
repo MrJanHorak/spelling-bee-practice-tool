@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Routes, Route, useNavigate, Navigate } from 'react-router-dom'
+import { Routes, Route, useNavigate } from 'react-router-dom'
 
 //Services
 import { getUser, logout } from '../services/authService'
@@ -10,6 +10,7 @@ import SignUp from '../pages/Auth/SignUp'
 import SignIn from '../pages/Auth/SignIn'
 import Study from '../pages/Study/Study'
 import Spellingbee from '../pages/Spellingbee/Spellingbee'
+import Admin from '../pages/Admin/Admin'
 
 const App = () => {
   const navigate = useNavigate()
@@ -17,6 +18,7 @@ const App = () => {
 
   const handleSignupOrLogin = async () => {
     const currentUser = getUser()
+    console.log(currentUser)
     setUser(currentUser)
   }
 
@@ -45,6 +47,7 @@ const App = () => {
 
         <Route path="/study" element={<Study />}/>
         <Route path="/spellingbee" element={<Spellingbee />}/>
+        <Route path="/admin" element={<Admin />} />
 
       </Routes>
 
