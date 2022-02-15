@@ -4,7 +4,8 @@ const Admin = (props) => {
 
   return (
     <>
-      <p>Admin panel</p>
+      <p>Add Word</p>
+      
     </>
   )
 }
