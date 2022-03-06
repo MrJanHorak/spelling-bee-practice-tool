@@ -7,10 +7,10 @@ function Definitions({ word }){
     let definitionsList =  word.definitions.map ((definition , i) =>{
       console.log(definition)
       return (
-      <>
-      <b>Definition {i}:</b> {definition.definition}<br />
-      <b>Part of speech:</b> {definition.partOfSpeech}<br />
-      </>
+      <div key={i}>
+      <b>Definition {i}:</b> <input type="text" defaultValue={definition.definition}/><br />
+      <b>Part of speech:</b> <input type="text" defaultValue={definition.partOfSpeech}/><br />
+      </div>
       )
     })
 

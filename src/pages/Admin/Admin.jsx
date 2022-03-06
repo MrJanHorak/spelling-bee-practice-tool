@@ -12,6 +12,7 @@ const Admin = () => {
   };
 
   useEffect(() => {
+    if (word){
     let wordsAPIUrl = `https://wordsapiv1.p.rapidapi.com/words/${word}/definitions`;
 
     const makeApiCall = () => {
@@ -31,6 +32,7 @@ const Admin = () => {
           });
     };
     makeApiCall();
+  }
   }, [word]);
 
   return (
