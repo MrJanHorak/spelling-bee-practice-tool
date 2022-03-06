@@ -12,34 +12,33 @@ const Admin = () => {
   };
 
   useEffect(() => {
-    if (word){
-    let wordsAPIUrl = `https://wordsapiv1.p.rapidapi.com/words/${word}/definitions`;
+    if (word) {
+      let wordsAPIUrl = `https://wordsapiv1.p.rapidapi.com/words/${word}/definitions`;
 
-    const makeApiCall = () => {
-      fetch(wordsAPIUrl,
-        {
+      const makeApiCall = () => {
+        fetch(wordsAPIUrl, {
           method: "GET",
           headers: {
             "x-rapidapi-host": "wordsapiv1.p.rapidapi.com",
             "x-rapidapi-key":
-              "a63a29f153msh85f1b0644ef47a0p17ed3bjsn38651c6a578c"
-          }
+              "a63a29f153msh85f1b0644ef47a0p17ed3bjsn38651c6a578c",
+          },
         })
           .then((res) => res.json())
           .then((data) => {
             console.log("wordData", data);
             setWordData(data);
           });
-    };
-    makeApiCall();
-  }
+      };
+      makeApiCall();
+    }
   }, [word]);
 
   return (
     <div className="App">
       <div>Add Words to wordlist:</div>
       <WordSearch handleSubmit={handleSubmit} />
-      {wordData.word? <Definitions word={wordData} /> : null}
+      {wordData.word ? <Definitions word={wordData} /> : null}
     </div>
   );
 };
