@@ -1,32 +1,32 @@
-import { set } from 'mongoose';
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 
-const WordSearch = (props) => {
-  
-  const [word, setWord] = useState ("")
+function WordSearch(props) {
+  const [wordSearch, setWordSearch] = useState('')
 
   const handleSubmit = e => {
-    console.log('handleSubmit clicked')
-    e.preventDefault()
-    props.handleSubmit(word)
-    setWord("")
-  }
+    console.log('handleSubmit clicked');
+    e.preventDefault();
+    props.handleSubmit(wordSearch)
+    setWordSearch('')
+  };
 
   const handleChange = e => {
-    console.log('handleChange')
-    const word = e.target.value
-    setWord(word)
+    console.log('handleChange clicked');
+    const word =  e.target.value
+    setWordSearch(word)
   }
 
   return (
     <>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="word">Search word to add to Spelling Bee wordlist:</label>
-        <input id="word" type="text" value={word} onChange={handleChange} />
-        <input type="submit" value="Search Word" />
+        <label htmlFor="word">
+          Search word:
+        </label>
+        <input id="word" type="text" value={wordSearch} onChange={handleChange} />
+        <input type="submit" value="Find Word Definitions" />
       </form>
     </>
-  )
-}
+  );
+};
 
-export default WordSearch
+export default WordSearch;
