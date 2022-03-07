@@ -3,6 +3,8 @@ import WordSearch from "../../components/WordSearch/WordSearch";
 import Definitions from "../../components/Definitions/Definitions";
 
 const Admin = () => {
+  const API_KEY = process.env.REACT_APP_API_KEY
+
   const [wordData, setWordData] = useState("");
   const [word, setWord] = useState("");
 
@@ -20,8 +22,7 @@ const Admin = () => {
           method: "GET",
           headers: {
             "x-rapidapi-host": "wordsapiv1.p.rapidapi.com",
-            "x-rapidapi-key":
-              "a63a29f153msh85f1b0644ef47a0p17ed3bjsn38651c6a578c",
+            "x-rapidapi-key": API_KEY,
           },
         })
           .then((res) => res.json())
