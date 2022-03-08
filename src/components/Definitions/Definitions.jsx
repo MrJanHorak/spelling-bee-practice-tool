@@ -1,48 +1,46 @@
 import React, { useState } from "react";
-import { createWord } from "../../services/wordService.js"
+import { createWord } from "../../services/wordService.js";
 
 function Definitions({ word }) {
-  const [gradeLevel, setGradeLevel] = useState(0);
-  const [chosenDefinition, setChosenDefinition] = useState("");
-  const [partOfSpeech, setPartOfSpeech] = useState("");
   const [wordData, setWordData] = useState({});
 
-  const handleAddWord = async (wordData ) => {
+  let gradeLevel = null;
+  let chosenDefinition = "";
+  let partOfSpeech = "";
+
+  const handleAddWord = async (wordData) => {
     try {
-      console.log("about to create word")
-      const newWord = await createWord(wordData)
-      console.log("wordData added to databese ", wordData.word)
-      setGradeLevel(0)
-      setChosenDefinition("")
-      setPartOfSpeech("")
-      setWordData()
+      console.log("about to create word");
+      const newWord = await createWord(wordData);
+      console.log("wordData added to database ", wordData.word);
+      setWordData();
     } catch (error) {
-      throw error
+      throw error;
     }
-  }
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(wordData);
-    handleAddWord(wordData)
+    handleAddWord(wordData);
   };
 
   const handleChange = (e) => {
+    console.log("taking care of changes");
     if (e.target.name === "gradeLevel") {
-      setGradeLevel(parseInt(e.target.value));
+      gradeLevel = parseInt(e.target.value);
     } else if (e.target.name === "definition") {
       let value = e.target.value.split(",");
-      setChosenDefinition(value[0]);
-      setPartOfSpeech(value[1]);
-      console.log(partOfSpeech)
+      chosenDefinition = value[0];
+      partOfSpeech = value[1];
     }
 
     setWordData({
-      "name": word.word,
-      "word": word.word,
-      "definition": chosenDefinition,
-      "partOfSpeech": partOfSpeech,
-      "gradeLevel": gradeLevel
+      name: word.word,
+      word: word.word,
+      definition: chosenDefinition,
+      partOfSpeech: partOfSpeech,
+      gradeLevel: gradeLevel,
     });
   };
 
