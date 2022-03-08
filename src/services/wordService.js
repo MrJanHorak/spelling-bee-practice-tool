@@ -1,8 +1,7 @@
-import * as tokenService from '../services/tokenService.js'
+import * as tokenService from "./tokenService";
+const BASE_URL = "/api/words";
 
-const BASE_URL = "localhost:3001/api/words"
-
-export const createWord = async(word) => {
+export const createWord = async (word) => {
   try {
     const res = await fetch(BASE_URL, {
       method: 'POST',
@@ -19,60 +18,58 @@ export const createWord = async(word) => {
   }
 }
 
-export const getWordById = async(wordId) => {
+export const getWordById = async (wordId) => {
   try {
-    const res = await fetch(`${BASE_URL}/${wordId}`,
-    {
-      headers:{
-        'Authorization': `Bearer ${tokenService.getToken()}`
-      }
-    })
-    const data = await res.json()
-    return data
+    const res = await fetch(`${BASE_URL}/${wordId}`, {
+      headers: {
+        Authorization: `Bearer ${tokenService.getToken()}`,
+      },
+    });
+    const data = await res.json();
+    return data;
   } catch (error) {
-    throw error
+    throw error;
   }
-}
+};
 
 export const getAllWords = async () => {
   try {
-    const res = await fetch(`${BASE_URL}`,
-    {
+    const res = await fetch(`${BASE_URL}`, {
       headers: {
-        'Authorization': `Bearer ${tokenService.getToken()}`
-      }
-    })
-    const data = await res.json()
-    return data 
+        Authorization: `Bearer ${tokenService.getToken()}`,
+      },
+    });
+    const data = await res.json();
+    return data;
   } catch (error) {
-    throw error
+    throw error;
   }
-}
+};
 
-export const updateWord = async(wordId, word) => {
+export const updateWord = async (wordId, word) => {
   try {
     const res = await fetch(`${BASE_URL}/${wordId}`, {
-      method: 'PUT',
+      method: "PUT",
       headers: {
-        'content-type': 'application/json',
-        'Authorization': `Bearer ${tokenService.getToken()}`
+        "content-type": "application/json",
+        Authorization: `Bearer ${tokenService.getToken()}`,
       },
-      body: JSON.stringify(word)
-    })
-    const data = await res.json()
-    return data
-  } catch (error){
-    throw error
+      body: JSON.stringify(word),
+    });
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    throw error;
   }
-}
+};
 
 export const deleteWord = async (wordId) => {
   try {
     await fetch(`${BASE_URL}${wordId}`, {
-      method: 'DELETE',
-      headers: {'Authorization': 'Bearer ' + tokenService.getToken() }
-    })
+      method: "DELETE",
+      headers: { Authorization: "Bearer " + tokenService.getToken() },
+    });
   } catch (error) {
-    throw error
+    throw error;
   }
-}
+};

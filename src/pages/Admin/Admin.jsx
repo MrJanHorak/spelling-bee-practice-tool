@@ -32,7 +32,7 @@ const Admin = () => {
       };
       makeApiCall();
     }
-  }, [word]);
+  }, [word, API_KEY]);
 
   return (
     <div className="App">
