@@ -3,13 +3,12 @@ import WordSearch from "../../components/WordSearch/WordSearch";
 import Definitions from "../../components/Definitions/Definitions";
 
 const Admin = () => {
-  const API_KEY = process.env.REACT_APP_API_KEY
+  const API_KEY = process.env.REACT_APP_API_KEY;
 
   const [wordData, setWordData] = useState("");
   const [word, setWord] = useState("");
 
   const handleSubmit = (wordSearch) => {
-    console.log("App - makeApiCall - title", wordSearch);
     setWord(wordSearch);
   };
 

@@ -1,21 +1,34 @@
-import React from "react";
+import React, { useState } from "react";
 
 function Definitions({ word }) {
-  console.log("props from WordSearch: ", word);
+  const [gradeLevel, setGradeLevel] = useState(0);
+  const [chosenDefinition, setChosenDefinition] = useState("");
+  const [partOfSpeech, setPartOfSpeech] = useState("");
+  const [wordData, setWordData] = useState({});
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(e.target.id);
+    console.log(wordData);
   };
 
   const handleChange = (e) => {
-    console.log("handleChange clicked");
-    console.log(e.target.id);
-    console.log(e.target.value.split(','));
+    if (e.target.name === "gradeLevel") {
+      setGradeLevel(e.target.value);
+    } else if (e.target.name === "definition") {
+      let value = e.target.value.split(",");
+      setChosenDefinition(value[0]);
+      setPartOfSpeech(value[1]);
+    }
+
+    setWordData({
+      word: word.word,
+      definition: chosenDefinition,
+      partOfSpeech: partOfSpeech,
+      gradeLevel: gradeLevel,
+    });
   };
 
   let definitionsList = word.definitions.map((definition, i) => {
-    console.log(definition);
     return (
       <div key={i}>
         <input
@@ -36,7 +49,12 @@ function Definitions({ word }) {
     <>
       <h2>Word: {word.word}</h2>
       <form onChange={handleChange} onSubmit={handleSubmit}>
-        {definitionsList}
+        <label>Grade Level: </label>
+        <input type="number" name="gradeLevel" />
+        <div>
+          <label>Definition: </label>
+          {definitionsList}
+        </div>
         <input type="submit" />
       </form>
     </>
