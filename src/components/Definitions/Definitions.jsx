@@ -1,10 +1,11 @@
 import React, { useState } from "react";
 import { createWord } from "../../services/wordService.js";
+import "../../styles/Admin.css";
 
 function Definitions({ word }) {
   const [wordData, setWordData] = useState({});
 
-  let gradeLevel = null;
+  let gradeLevel = 0;
   let chosenDefinition = "";
   let partOfSpeech = "";
 
@@ -53,26 +54,34 @@ function Definitions({ word }) {
           id={i}
           value={[definition.definition, definition.partOfSpeech]}
         />
-        <b>Definition {i + 1}:</b> {definition.definition}
-        <b> Part of speech:</b> {definition.partOfSpeech}
-        <br />
-        <br />
+        <label>
+          <b>Definition {i + 1}:</b> {definition.definition}
+          <br />
+          <b> Part of speech:</b> {definition.partOfSpeech}
+        </label>
       </div>
     );
   });
 
   return (
     <>
-      <h2>Word: {word.word}</h2>
-      <form onChange={handleChange} onSubmit={handleSubmit}>
-        <label>Grade Level: </label>
-        <input type="number" name="gradeLevel" />
-        <div>
-          <label>Definition: </label>
-          {definitionsList}
-        </div>
-        <input type="submit" />
-      </form>
+      <div className="definition-container">
+        <h2>Word: {word.word}</h2>
+        <form onChange={handleChange} onSubmit={handleSubmit}>
+          <label>
+            <h3>Grade Level:</h3>{" "}
+          </label>
+          <input type="number" name="gradeLevel" />
+          <div>
+            <label>
+              <h3>Definition: </h3>
+            </label>
+
+            {definitionsList}
+          </div>
+          <input id="submit-button" type="submit" />
+        </form>
+      </div>
     </>
   );
 }

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import WordSearch from "../../components/WordSearch/WordSearch";
 import Definitions from "../../components/Definitions/Definitions";
+import "../../styles/Admin.css";
 
 const Admin = () => {
   const API_KEY = process.env.REACT_APP_API_KEY;
@@ -35,10 +36,17 @@ const Admin = () => {
   }, [word, API_KEY]);
 
   return (
-    <div className="App">
-      <div>Add Words to wordlist:</div>
-      <WordSearch handleSubmit={handleSubmit} />
-      {wordData.word ? <Definitions word={wordData} /> : null}
+    <div className="admin-page">
+      <div className="form-container">
+      {!wordData.word ? (
+        <div>
+          <h2>Add Words to wordlist:</h2>
+          <WordSearch handleSubmit={handleSubmit} />
+        </div>
+      ) : (
+        <Definitions word={wordData} />
+      )}
+      </div>
     </div>
   );
 };
