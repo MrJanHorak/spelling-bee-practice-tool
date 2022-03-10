@@ -8,16 +8,27 @@ const Admin = () => {
 
   const [wordData, setWordData] = useState("");
   const [word, setWord] = useState("");
+  const [wordAdded, setWordAdded] = useState(0);
 
   const handleSubmit = (wordSearch) => {
     setWord(wordSearch);
   };
 
-  useEffect(() => {
-    if (word) {
-      let wordsAPIUrl = `https://wordsapiv1.p.rapidapi.com/words/${word}/definitions`;
+  const added = () => {
+    setWordAdded(wordAdded + 1);
+    setWord("");
+    setWordData("");
+  };
 
-      const makeApiCall = () => {
+  useEffect(() => {
+    setWord("");
+  }, [wordAdded]);
+
+  useEffect(() => {
+    let isMounted = true;
+    if (word) {
+      const makeApiCall = async () => {
+        let wordsAPIUrl = `https://wordsapiv1.p.rapidapi.com/words/${word}/definitions`;
         fetch(wordsAPIUrl, {
           method: "GET",
           headers: {
@@ -27,25 +38,29 @@ const Admin = () => {
         })
           .then((res) => res.json())
           .then((data) => {
-            console.log("wordData", data);
-            setWordData(data);
+            if (isMounted) {
+              setWordData(data);
+            }
           });
       };
       makeApiCall();
     }
+    return () => {
+      isMounted = false;
+    };
   }, [word, API_KEY]);
 
   return (
     <div className="admin-page">
       <div className="form-container">
-      {!wordData.word ? (
-        <div>
-          <h2>Add Words to wordlist:</h2>
-          <WordSearch handleSubmit={handleSubmit} />
-        </div>
-      ) : (
-        <Definitions word={wordData} />
-      )}
+        {!wordData.word ? (
+          <div>
+            <h2>Add Words to wordlist:</h2>
+            <WordSearch handleSubmit={handleSubmit} />
+          </div>
+        ) : (
+          <Definitions added={added} word={wordData} />
+        )}
       </div>
     </div>
   );

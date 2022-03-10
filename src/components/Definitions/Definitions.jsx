@@ -1,20 +1,18 @@
 import React, { useState } from "react";
+import { useEffect } from "react/cjs/react.development";
 import { createWord } from "../../services/wordService.js";
 import "../../styles/Admin.css";
 
-function Definitions({ word }) {
+function Definitions({ added, word }) {
   const [wordData, setWordData] = useState({});
-
-  let gradeLevel = 0;
-  let chosenDefinition = "";
-  let partOfSpeech = "";
+  const [gradeLevel, setGradeLevel] = useState(1);
+  const [chosenDefinition, setChosenDefinition] = useState("");
+  const [partOfSpeech, setPartOfSpeech] = useState("");
+  const [click, setClick] = useState(1);
 
   const handleAddWord = async (wordData) => {
     try {
-      console.log("about to create word");
       const newWord = await createWord(wordData);
-      console.log("wordData added to database ", wordData.word);
-      setWordData();
     } catch (error) {
       throw error;
     }
@@ -22,20 +20,22 @@ function Definitions({ word }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(wordData);
     handleAddWord(wordData);
+    added();
   };
 
   const handleChange = (e) => {
-    console.log("taking care of changes");
     if (e.target.name === "gradeLevel") {
-      gradeLevel = parseInt(e.target.value);
+      setGradeLevel(parseInt(e.target.value));
     } else if (e.target.name === "definition") {
       let value = e.target.value.split(",");
-      chosenDefinition = value[0];
-      partOfSpeech = value[1];
+      setChosenDefinition(value[0]);
+      setPartOfSpeech(value[1]);
     }
+    setClick(click + 1);
+  };
 
+  useEffect(() => {
     setWordData({
       name: word.word,
       word: word.word,
@@ -43,7 +43,7 @@ function Definitions({ word }) {
       partOfSpeech: partOfSpeech,
       gradeLevel: gradeLevel,
     });
-  };
+  }, [click, chosenDefinition, gradeLevel, partOfSpeech, word.word]);
 
   let definitionsList = word.definitions.map((definition, i) => {
     return (
@@ -71,12 +71,13 @@ function Definitions({ word }) {
           <label>
             <h3>Grade Level:</h3>{" "}
           </label>
-          <input type="number" name="gradeLevel" />
+          <div id="gradeLevel">
+            <input type="number" name="gradeLevel" />
+          </div>
           <div>
             <label>
               <h3>Definition: </h3>
             </label>
-
             {definitionsList}
           </div>
           <input id="submit-button" type="submit" />

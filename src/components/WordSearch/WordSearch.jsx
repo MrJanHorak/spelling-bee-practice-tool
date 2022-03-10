@@ -17,7 +17,6 @@ function WordSearch(props) {
 
   return (
     <>
-
       <form className="register-form" onSubmit={handleSubmit}>
         <label htmlFor="word">Search word:</label>
         <input
@@ -28,7 +27,6 @@ function WordSearch(props) {
         />
         <input id="submit-button" type="submit" value="Find Word Definitions" />
       </form>
-
     </>
   );
 }
