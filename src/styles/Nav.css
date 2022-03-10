@@ -3,7 +3,7 @@
   text-decoration: none;
 }
 
-.navbar {
+.nav-bar {
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -11,9 +11,11 @@
 }
 
 .nav-bar a {
+  display:flex;
+  flex-direction: column;
+  padding: 10px 35px 10px 35px;
   font-size: 14px;
   text-decoration: none;
-  margin: 0px 0px 0px 18px;
   font-family: "DM Sans", sans-serif;
 }
 
