@@ -11,6 +11,8 @@ import SignIn from '../pages/Auth/SignIn'
 import Study from '../pages/Study/Study'
 import Spellingbee from '../pages/Spellingbee/Spellingbee'
 import Admin from '../pages/Admin/Admin'
+import WordSearch from '../components/WordSearch/WordSearch';
+import Words from '../components/Words/Words';
 
 const App = () => {
   const navigate = useNavigate()
@@ -48,6 +50,8 @@ const App = () => {
         <Route path="/study" element={<Study />}/>
         <Route path="/spellingbee" element={<Spellingbee />}/>
         <Route path="/admin" element={<Admin />} />
+        <Route path="/addWords" element={<WordSearch />} />
+        <Route path="/seeAllWords" element={<Words />} />
 
       </Routes>
 
