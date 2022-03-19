@@ -100,6 +100,10 @@ function Words({ allWords }) {
             onClick={handleClick}
           />
         </div>
+        <div id="word-database-stats">
+          <b>There are {allWords.length} Words total in the Database</b>
+        </div>
+
         <input
           id="submit-button"
           type="button"

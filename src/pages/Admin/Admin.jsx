@@ -22,14 +22,11 @@ const Admin = () => {
   const getWords = async () => {
     try {
       const allWordData = await getAllWords();
-      console.log("wordData", allWordData);
       setAllWords(allWordData);
     } catch (error) {
       throw error;
     }
   };
-
-  console.log("allWords", allWords);
 
   const added = () => {
     setWordAdded(wordAdded + 1);
@@ -82,14 +79,13 @@ const Admin = () => {
             <Definitions added={added} word={wordData} />
           )}
         </div>
-        {allWords? (
-        <div className="form-container">
-          <Words allWords={allWords}/>
-        </div>
-        ):(
+        {allWords ? (
+          <div className="form-container">
+            <Words allWords={allWords} />
+          </div>
+        ) : (
           <>""</>
-          )
-        }
+        )}
       </div>
     </>
   );
