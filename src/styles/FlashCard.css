@@ -1,0 +1,85 @@
+.admin-page {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.title-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: flex-start;
+}
+
+.title-container h3 {
+  opacity: 0.5;
+  font-weight: 600;
+}
+
+.form-container {
+  margin-top: 35px;
+  margin-bottom: 35px;
+  padding: 8px;
+  width: 75%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 450px;
+  border: rgb(32, 32, 32) 2px solid;
+  border-radius: 10px;
+}
+
+.definition-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 550px;
+}
+
+.register-form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.form-container input,
+select,
+button {
+  padding: 16px;
+  font-size: 16px;
+  margin-bottom: 16px;
+  color: rgb(200, 200, 200);
+}
+
+.form-container input {
+  border: 1px solid #292934;
+  border-radius: 14px;
+}
+
+.form-container input[type="radio"] {
+  position: absolute;
+  margin-top: 6px;
+  margin-left: 10px;
+}
+
+.form-container input[type="radio"] ~ label {
+  padding-left: 2em;
+  display: inline-block;
+  padding-right: 1.4em;
+  margin-bottom: 8px;
+}
+
+#submit-button {
+  margin-top: 22px;
+  background: #7450e9;
+  border: none;
+  color: rgb(255, 255, 255);
+  font-weight: 600;
+}
+
+#gradeLevel {
+  text-align: center;
+}

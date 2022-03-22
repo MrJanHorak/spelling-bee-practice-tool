@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Routes, Route, useNavigate } from 'react-router-dom'
 
 //Services
 import { getUser, logout } from '../services/authService'
+import { getProfileById } from '../services/profileService';
 
 // Pages + Components
 import Nav from '../components/Nav/Nav'
@@ -11,17 +12,21 @@ import SignIn from '../pages/Auth/SignIn'
 import Study from '../pages/Study/Study'
 import Spellingbee from '../pages/Spellingbee/Spellingbee'
 import Admin from '../pages/Admin/Admin'
-import WordSearch from '../components/WordSearch/WordSearch';
-import Words from '../components/Words/Words';
 
 const App = () => {
   const navigate = useNavigate()
   const [user, setUser] = useState(getUser())
+  const [profile, setProfile] = useState()
+
+  let currentProfile = {}
 
   const handleSignupOrLogin = async () => {
-    const currentUser = getUser()
+    const currentUser = await getUser()
     console.log(currentUser)
     setUser(currentUser)
+    currentProfile = await  getProfileById(currentUser.profile)
+    console.log(currentProfile)
+    setProfile(currentProfile)
   }
 
   const handleLogout = () => {
@@ -47,11 +52,9 @@ const App = () => {
           element={<SignUp handleSignupOrLogin={handleSignupOrLogin} />}
         />
 
-        <Route path="/study" element={<Study />}/>
-        <Route path="/spellingbee" element={<Spellingbee />}/>
+        <Route path="/study" element={<Study user={user} profile={profile} /> } />
+        <Route path="/spellingbee" element={<Spellingbee user={user} /> } />
         <Route path="/admin" element={<Admin />} />
-        <Route path="/addWords" element={<WordSearch />} />
-        <Route path="/seeAllWords" element={<Words />} />
 
       </Routes>
 
