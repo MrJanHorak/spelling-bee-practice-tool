@@ -3,6 +3,8 @@ import React, { useState, useEffect } from "react";
 import { getAllWords } from "../../services/wordService";
 import FlashCard from "../../components/FlashCard/FlashCard";
 
+import "../../styles/Study.css";
+
 const Study = ({ user, profile }) => {
   const [allWords, setAllWords] = useState();
   const [click, setClick] = useState(0);
@@ -41,7 +43,9 @@ const Study = ({ user, profile }) => {
   return (
     <>
       <p>Study Page</p>
-      <FlashCard handleClick={handleClick} displayWord={displayWord} />
+      <div className="card-holder">
+        <FlashCard handleClick={handleClick} displayWord={displayWord} />
+      </div>
     </>
   );
 };
