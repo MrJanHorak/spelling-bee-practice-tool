@@ -10,7 +10,7 @@ const FlashCard = ({ handleClick, displayWord }) => {
             <h1> {displayWord.word} </h1>
           </div>
           <div id="definition">
-            {displayWord.partOfSpeech}
+         <b>Part of speech: </b> {displayWord.partOfSpeech}
             <br />
             <br />
             {displayWord.definition}

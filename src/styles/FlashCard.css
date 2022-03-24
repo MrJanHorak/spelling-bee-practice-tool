@@ -1,4 +1,5 @@
-.form-constainer {
+.form-container {
+  position: relative;
   align-self: center;
   justify-self: center;
 }
@@ -10,4 +11,27 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  }
+
+  #next-button {
+    position: absolute;
+    bottom: 0;
+    width: 65%;
+    height: 45px;
+    border-radius: 8px;
+    background: #7450e9;
+    border: none;
+    color: rgb(255, 255, 255);
+    font-weight: 600;
+  }
+
+  #definition {
+    width: 80%;
+    height: 100px;
+  }
+
+  #word{
+    position: absolute;
+    top: 20px;
+    align-self: center;
   }
