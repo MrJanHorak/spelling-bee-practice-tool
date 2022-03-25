@@ -58,7 +58,6 @@ const Admin = () => {
             }
           });
       };
-
       makeApiCall();
     }
     return () => {
@@ -77,9 +76,9 @@ const Admin = () => {
             </div>
           ) : (
             <div id="wordsearch-container">
-            <h2>Add Words to wordlist:</h2> 
-            <Definitions added={added} word={wordData} />
-          </div>
+              <h2>Add Words to wordlist:</h2>
+              <Definitions added={added} word={wordData} />
+            </div>
           )}
         </div>
         {allWords ? (
@@ -87,7 +86,9 @@ const Admin = () => {
             <Words allWords={allWords} />
           </div>
         ) : (
-          <>""</>
+          <>
+            <b>Loading word lists .... </b>
+          </>
         )}
       </div>
     </>
