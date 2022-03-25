@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useEffect } from "react/cjs/react.development";
 import { createWord } from "../../services/wordService.js";
-import "../../styles/Admin.css";
 
 function Definitions({ added, word }) {
   const [wordData, setWordData] = useState({});
@@ -12,7 +11,7 @@ function Definitions({ added, word }) {
 
   const handleAddWord = async (wordData) => {
     try {
-      const newWord = await createWord(wordData);
+      await createWord(wordData);
     } catch (error) {
       throw error;
     }
@@ -23,6 +22,10 @@ function Definitions({ added, word }) {
     handleAddWord(wordData);
     added();
   };
+
+  const handleClick = () => {
+    added()
+  }
 
   const handleChange = (e) => {
     if (e.target.name === "gradeLevel") {
@@ -72,7 +75,7 @@ function Definitions({ added, word }) {
             <h3>Grade Level:</h3>{" "}
           </label>
           <div id="gradeLevel">
-            <input type="number" name="gradeLevel" />
+            <input type="number" min="1" max="8" name="gradeLevel" />
           </div>
           <div>
             <label>
@@ -80,7 +83,10 @@ function Definitions({ added, word }) {
             </label>
             {definitionsList}
           </div>
+          <div id="button-container">
           <input id="submit-button" type="submit" />
+          <input id="submit-button" type="button" value="Back" onClick={handleClick} />
+          </div>
         </form>
       </div>
     </>

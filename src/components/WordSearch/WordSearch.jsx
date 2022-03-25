@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import "../../styles/Admin.css";
 
 function WordSearch(props) {
   const [wordSearch, setWordSearch] = useState("");
@@ -20,7 +19,6 @@ function WordSearch(props) {
       <form className="register-form" onSubmit={handleSubmit}>
         <label htmlFor="word">Search word:</label>
         <input
-          id="word"
           type="text"
           value={wordSearch}
           onChange={handleChange}

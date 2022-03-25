@@ -99,6 +99,12 @@ function Words({ allWords }) {
             value="8th"
             onClick={handleClick}
           />
+          <input
+            type="button"
+            className="filter-button"
+            value="none"
+            onClick={handleClick}
+          />
         </div>
         <div id="word-database-stats">
           <b>There are {allWords.length} Words total in the Database</b>

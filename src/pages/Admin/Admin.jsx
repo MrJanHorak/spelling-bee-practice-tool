@@ -71,12 +71,15 @@ const Admin = () => {
       <div className="admin-page">
         <div className="form-container">
           {!wordData.word ? (
-            <div>
+            <div id="wordsearch-container">
               <h2>Add Words to wordlist:</h2>
               <WordSearch handleSubmit={handleSubmit} />
             </div>
           ) : (
+            <div id="wordsearch-container">
+            <h2>Add Words to wordlist:</h2> 
             <Definitions added={added} word={wordData} />
+          </div>
           )}
         </div>
         {allWords ? (
