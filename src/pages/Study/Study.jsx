@@ -10,25 +10,28 @@ const Study = ({ user, profile }) => {
   const [click, setClick] = useState(0);
   let displayWord = [];
 
-  const getWords = async () => {
-    try {
-      const allWordData = await getAllWords();
-      const studyList = allWordData.filter(
-        (word) => word.gradeLevel === profile.grade
-      );
-      setAllWords(studyList);
-    } catch (error) {
-      throw error;
-    }
-  };
+
 
   const handleClick = (e) => {
     setClick(click + 1);
   };
 
   useEffect(() => {
+    const getWords = async () => {
+      try {
+        const allWordData = await getAllWords();
+        const studyList = allWordData.filter(
+          (word) => word.gradeLevel === profile.grade
+        );
+        setAllWords(studyList);
+      } catch (error) {
+        throw error;
+      }
+    };
+
     getWords();
-  }, []);
+
+  }, [profile.grade]);
 
   if (allWords) {
     if (click >= allWords.length) {
