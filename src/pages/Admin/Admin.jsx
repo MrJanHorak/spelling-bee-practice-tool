@@ -32,6 +32,7 @@ const Admin = () => {
     setWordAdded(wordAdded + 1);
     setWord("");
     setWordData("");
+    getWords();
   };
 
   useEffect(() => {
