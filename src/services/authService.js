@@ -1,6 +1,7 @@
 import * as tokenService from "./tokenService";
 const BASE_URL = "https://spelling-bee-practice-app.herokuapp.com/api/auth";
 
+//help whats going on?
 async function signup(user) {
   try {
     const res = await fetch(`${BASE_URL}/signup`, {
