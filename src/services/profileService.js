@@ -1,5 +1,5 @@
 import * as tokenService from "./tokenService";
-const BASE_URL = "/api/profiles";
+const BASE_URL = "https://spelling-bee-practice-app.herokuapp.com/api/profiles";
 
 
 export const getProfileById = async (profileId) => {
