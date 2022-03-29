@@ -43,8 +43,8 @@ const App = () => {
         <Route path="/signin" element={<SignIn handleSignupOrLogin={handleSignupOrLogin} />} />
         <Route path="/signup" element={<SignUp handleSignupOrLogin={handleSignupOrLogin} />} />
         <Route path="/study" element={<Study user={user} profile={profile} />} />
-        <Route path="/spellingbee" element={<Spellingbee user={user} />} />
-        <Route path="/admin" element={<Admin />} />
+        <Route path="/spellingbee" element={<Spellingbee user={user} profile={profile} />} />
+        <Route path="/admin" element={<Admin user={user} profile={profile}/>} />
       </Routes>
     </div>
   );

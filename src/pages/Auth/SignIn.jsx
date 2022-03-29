@@ -2,12 +2,8 @@ import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import "../../styles/Auth.css";
 
-// Assets
-
 // Services
 import { login } from "../../services/authService";
-
-//Components
 
 const SignIn = (props) => {
   const navigate = useNavigate();

@@ -19,6 +19,7 @@ const SignUp = (props) => {
     name: "",
     email: "",
     password: "",
+    grade: null,
     avatar: cat,
   });
 
@@ -89,7 +90,9 @@ const SignUp = (props) => {
           <input
             required
             name="grade"
-            type="grade"
+            type="number"
+            min="1"
+            max="8"
             autoComplete="off"
             placeholder="grade"
             onChange={handleChange}

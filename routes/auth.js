@@ -1,12 +1,12 @@
-import { Router } from "express";
-import * as authCtrl from "../controllers/auth.js";
+// import { Router } from "express";
+// import * as authCtrl from "../controllers/auth.js";
 
-const router = Router();
+// const router = Router();
 
-/*---------- Public Routes ----------*/
-router.post("/signup", authCtrl.signup);
-router.post("/login", authCtrl.login);
+// /*---------- Public Routes ----------*/
+// router.post("/signup", authCtrl.signup);
+// router.post("/login", authCtrl.login);
 
-/*---------- Protected Routes ----------*/
+// /*---------- Protected Routes ----------*/
 
-export { router };
+// export { router };
