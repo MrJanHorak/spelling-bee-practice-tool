@@ -38,8 +38,7 @@ const App = () => {
   return (
     <div className="App">
       <Nav user={user} handleLogout={handleLogout} />
-      <Routes>
-        <Route path="*" element={<Navigate to="/" replace/>} />
+      <Routes>        
         <Route path="/" element={<h1>Landing</h1>} />
         <Route path="/signin" element={<SignIn handleSignupOrLogin={handleSignupOrLogin} />} />
         <Route path="/signup" element={<SignUp handleSignupOrLogin={handleSignupOrLogin} />} />
