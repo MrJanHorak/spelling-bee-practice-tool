@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Routes, Route, useNavigate } from "react-router-dom";
+import { Routes, Route, useNavigate, Navigate } from "react-router-dom";
 
 //Services
 import { getUser, logout } from "../services/authService";
@@ -39,6 +39,7 @@ const App = () => {
     <div className="App">
       <Nav user={user} handleLogout={handleLogout} />
       <Routes>
+        <Route path="*" element={<Navigate to="/" replace/>} />
         <Route path="/" element={<h1>Landing</h1>} />
         <Route path="/signin" element={<SignIn handleSignupOrLogin={handleSignupOrLogin} />} />
         <Route path="/signup" element={<SignUp handleSignupOrLogin={handleSignupOrLogin} />} />
