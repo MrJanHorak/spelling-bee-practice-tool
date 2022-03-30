@@ -38,4 +38,4 @@ Bee Favicon from : https://favicon.io/emoji-favicons/honeybee/
 
 [Front end on Netlify](https://spelling-bee-practice-app.netlify.app/)
 
-[Back end on Heroku](https://speeling-bee-practice-app.herokuapp.com/)
+[Back end on Heroku](https://spelling-bee-practice-app.herokuapp.com/)
