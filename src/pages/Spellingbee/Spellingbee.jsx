@@ -79,6 +79,13 @@ if (allWords) {
     speak({ text: value });
   };
 
+  const nextWord = () => {
+    setMessage("Moving on to the next word");
+    setClick(click+1)
+    setValue("You have asked for the next word.");
+    speak({ text: value });
+  };
+
   const commands = [
     {
       command: "reset",
@@ -103,6 +110,10 @@ if (allWords) {
     {
       command: "clear",
       callback: () => resetTranscript(),
+    },
+    {
+      command: "next word please",
+      callback: () => nextWord(),
     },
   ];
 
@@ -157,9 +168,12 @@ if (allWords) {
             </button>
           </div>
         </div>
-        <div>{message}</div>
+        <div><b>Message set in command function: </b>{message}</div>
+        <br />
+        <div><b>Value set in command function for speach: </b>{message}</div>
+        <br />
         <div>
-          <span>{transcript}</span>
+          <b>On going transcript of all spoken words: </b><span>{transcript}</span>
         </div>
       </div>
     </>
