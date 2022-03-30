@@ -57,9 +57,14 @@ if (allWords) {
 
   const word = () => {
     setMessage("this is the next word to spell.", spellingWord);
-    setValue(spellingWord);
+    setValue(spellingWord.word);
     speak({ text: value });
-    setClick(click+1)
+  };
+
+  const definition = () => {
+    setMessage("you asked for the definition of the word.", spellingWord.definiton);
+    setValue(spellingWord.definition);
+    speak({ text: value });
   };
 
   const chris = () => {
@@ -82,6 +87,10 @@ if (allWords) {
     {
       command: "word",
       callback: () => word(),
+    },
+    {
+      command: "definition",
+      callback: () => definition(),
     },
     {
       command: "chris",
