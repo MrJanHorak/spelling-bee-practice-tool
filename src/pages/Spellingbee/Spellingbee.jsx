@@ -56,13 +56,13 @@ if (allWords) {
 }
 
   const word = () => {
-    setMessage("this is the next word to spell.", spellingWord);
+    setMessage("this is the next word to spell.", spellingWord.word);
     setValue(spellingWord.word);
     speak({ text: value });
   };
 
   const definition = () => {
-    setMessage("you asked for the definition of the word.", spellingWord.definiton);
+    setMessage('you asked for the definition of the word.');
     setValue(spellingWord.definition);
     speak({ text: value });
   };
@@ -85,11 +85,11 @@ if (allWords) {
       callback: () => resetTranscript(),
     },
     {
-      command: "word",
+      command: "repeat the word please",
       callback: () => word(),
     },
     {
-      command: "definition",
+      command: "could I have the definition please",
       callback: () => definition(),
     },
     {
@@ -119,7 +119,7 @@ if (allWords) {
     if (finalTranscript !== "") {
       console.log("Got final result:", finalTranscript);
     }
-  }, [interimTranscript, finalTranscript]);
+  }, [interimTranscript, finalTranscript, value]);
 
   if (!SpeechRecognition.browserSupportsSpeechRecognition()) {
     return null;
