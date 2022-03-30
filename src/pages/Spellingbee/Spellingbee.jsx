@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
-import SpeechRecognition, { useSpeechRecognition } from "react-speech-recognition";
+import SpeechRecognition, {
+  useSpeechRecognition,
+} from "react-speech-recognition";
 import { useSpeechSynthesis } from "react-speech-kit";
 
 // Services
 import { getAllWords } from "../../services/wordService";
 import { getProfileById } from "../../services/profileService";
-
 
 const Spellingbee = ({ user }) => {
   const [value, setValue] = useState("");
@@ -13,47 +14,48 @@ const Spellingbee = ({ user }) => {
   const [message, setMessage] = useState("");
   const [allWords, setAllWords] = useState();
   const [click, setClick] = useState(0);
-  const [profile, setProfile] = useState()
+  const [profile, setProfile] = useState();
 
   let spellingWord = [];
 
   useEffect(() => {
     const getProfile = async () => {
       try {
-      const profileData = await getProfileById(user.profile)
-      setProfile(profileData)
-    } catch (error) {
-      throw error;
-    }}
-  getProfile()
-},[user.profile])
+        const profileData = await getProfileById(user.profile);
+        setProfile(profileData);
+      } catch (error) {
+        throw error;
+      }
+    };
+    getProfile();
+  }, [user.profile]);
 
-useEffect(() => {
-  if (profile?.grade){
-  const getWords = async () => {
-    try {
-      const allWordData = await getAllWords();
-      const studyList = allWordData.filter(
-        (word) => word.gradeLevel === profile.grade
-      );
-      setAllWords(studyList);
-    } catch (error) {
-      throw error;
+  useEffect(() => {
+    if (profile?.grade) {
+      const getWords = async () => {
+        try {
+          const allWordData = await getAllWords();
+          const studyList = allWordData.filter(
+            (word) => word.gradeLevel === profile.grade
+          );
+          setAllWords(studyList);
+        } catch (error) {
+          throw error;
+        }
+      };
+      getWords();
     }
-  };
-  getWords();
-}
-}, [profile,user.profile]);
+  }, [profile, user.profile]);
 
-if (allWords) {
-  if (click >= allWords.length) {
-    spellingWord = [];
-    setClick(0);
+  if (allWords) {
+    if (click >= allWords.length) {
+      spellingWord = [];
+      setClick(0);
+    }
+    if (click < allWords.length) {
+    }
+    spellingWord = allWords[click];
   }
-  if (click < allWords.length) {
-  }
-  spellingWord = allWords[click];
-}
 
   const word = () => {
     setMessage("this is the next word to spell.", spellingWord.word);
@@ -62,7 +64,7 @@ if (allWords) {
   };
 
   const definition = () => {
-    setMessage('you asked for the definition of the word.');
+    setMessage("you asked for the definition of the word.");
     setValue(spellingWord.definition);
     speak({ text: value });
   };
@@ -81,7 +83,7 @@ if (allWords) {
 
   const nextWord = () => {
     setMessage("Moving on to the next word");
-    setClick(click+1)
+    setClick(click + 1);
     setValue("You have asked for the next word.");
     speak({ text: value });
   };
@@ -154,6 +156,24 @@ if (allWords) {
     <>
       <p>Spelling Bee Mode</p>
       <div>
+        <div id="current commands">
+          Current speach commands:
+          <br />
+          reset: resets transcript
+          <br />
+          repeat the word please: repeats the word
+          <br />
+          could I have the definition please: gives the definition of the word
+          <br />
+          chris: .. try it. It is just for fun.
+          <br />
+          hello: a test phrase that has remained in the code.
+          <br />
+          clear: same as reset.
+          <br />
+          next word please: currently acts as the next button function
+          <br />
+        </div>
         <div>
           <span>listening: {listening ? " on" : " off"}</span>
           <div>
@@ -168,12 +188,19 @@ if (allWords) {
             </button>
           </div>
         </div>
-        <div><b>Message set in command function: </b>{message}</div>
-        <br />
-        <div><b>Value set in command function for speach: </b>{message}</div>
+        <div>
+          <b>Message set in command function: </b>
+          {message}
+        </div>
         <br />
         <div>
-          <b>On going transcript of all spoken words: </b><span>{transcript}</span>
+          <b>Value set in command function for speach: </b>
+          {message}
+        </div>
+        <br />
+        <div>
+          <b>On going transcript of all spoken words: </b>
+          <span>{transcript}</span>
         </div>
       </div>
     </>
