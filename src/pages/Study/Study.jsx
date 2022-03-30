@@ -1,22 +1,38 @@
 import React, { useState, useEffect } from "react";
 
+// Services
 import { getAllWords } from "../../services/wordService";
+import { getProfileById } from "../../services/profileService";
+
+// Components
 import FlashCard from "../../components/FlashCard/FlashCard";
 
 import "../../styles/Study.css";
 
-const Study = ({ user, profile }) => {
+const Study = ({ user }) => {
   const [allWords, setAllWords] = useState();
   const [click, setClick] = useState(0);
+  const [profile, setProfile] = useState()
+
   let displayWord = [];
-
-
 
   const handleClick = (e) => {
     setClick(click + 1);
   };
 
   useEffect(() => {
+    const getProfile = async () => {
+      try {
+      const profileData = await getProfileById(user.profile)
+      setProfile(profileData)
+    } catch (error) {
+      throw error;
+    }}
+  getProfile()
+},[user.profile])
+
+  useEffect(() => {
+    if (profile?.grade){
     const getWords = async () => {
       try {
         const allWordData = await getAllWords();
@@ -28,10 +44,9 @@ const Study = ({ user, profile }) => {
         throw error;
       }
     };
-
     getWords();
-
-  }, [profile.grade]);
+  }
+  }, [profile,user.profile]);
 
   if (allWords) {
     if (click >= allWords.length) {
