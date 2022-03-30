@@ -143,17 +143,17 @@ const Spellingbee = ({ user }) => {
     console.log("use effect");
     if (finalTranscript !== "") {
       console.log("Got final result:", finalTranscript);
-      const checkSpelling = () => {
-        console.log("transcript: ", transcript)
-        if (transcript === spellingWord.word){
-          speak({ text: "Yay! That is correct!" })
-        } else {
-          speak({ text: "I am sorry, that is not correct." })
-        }
-      }
-      checkSpelling()
+      // const checkSpelling = () => {
+      //   console.log("transcript: ", transcript)
+      //   if (transcript === spellingWord.word){
+      //     speak({ text: "Yay! That is correct!" })
+      //   } else {
+      //     speak({ text: "I am sorry, that is not correct." })
+      //   }
+      // }
+      // checkSpelling()
     }
-  }, [interimTranscript, finalTranscript, value, speak, spellingWord.word, transcript])
+  }, [interimTranscript, finalTranscript, value])
 
   if (!SpeechRecognition.browserSupportsSpeechRecognition()) {
     return null;
