@@ -2,15 +2,64 @@ import React, { useEffect, useState } from "react";
 import SpeechRecognition, { useSpeechRecognition } from "react-speech-recognition";
 import { useSpeechSynthesis } from "react-speech-kit";
 
-const Spellingbee = (props) => {
+// Services
+import { getAllWords } from "../../services/wordService";
+import { getProfileById } from "../../services/profileService";
+
+
+const Spellingbee = ({ user }) => {
   const [value, setValue] = useState("");
   const { speak } = useSpeechSynthesis();
   const [message, setMessage] = useState("");
+  const [allWords, setAllWords] = useState();
+  const [click, setClick] = useState(0);
+  const [profile, setProfile] = useState()
+
+  let spellingWord = [];
+
+  useEffect(() => {
+    const getProfile = async () => {
+      try {
+      const profileData = await getProfileById(user.profile)
+      setProfile(profileData)
+    } catch (error) {
+      throw error;
+    }}
+  getProfile()
+},[user.profile])
+
+useEffect(() => {
+  if (profile?.grade){
+  const getWords = async () => {
+    try {
+      const allWordData = await getAllWords();
+      const studyList = allWordData.filter(
+        (word) => word.gradeLevel === profile.grade
+      );
+      setAllWords(studyList);
+    } catch (error) {
+      throw error;
+    }
+  };
+  getWords();
+}
+}, [profile,user.profile]);
+
+if (allWords) {
+  if (click >= allWords.length) {
+    spellingWord = [];
+    setClick(0);
+  }
+  if (click < allWords.length) {
+  }
+  spellingWord = allWords[click];
+}
 
   const word = () => {
-    setMessage("I will show/say the next word.");
-    setValue("I will show/say the next word");
+    setMessage("this is the next word to spell.", spellingWord);
+    setValue(spellingWord);
     speak({ text: value });
+    setClick(click+1)
   };
 
   const chris = () => {
