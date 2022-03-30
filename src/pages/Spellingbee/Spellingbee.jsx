@@ -61,25 +61,21 @@ const Spellingbee = ({ user }) => {
 
   const word = () => {
     setMessage("this is the next word to spell.", spellingWord.word);
-    setValue(spellingWord.word);
     speak({ text: spellingWord.word });
   };
 
   const definition = () => {
     setMessage("you asked for the definition of the word.");
-    setValue(spellingWord.definition);
     speak({ text: spellingWord.definition });
   };
 
   const chris = () => {
     setMessage("Chris, I just wanted to say, I think you are awesome!");
-    setValue("Chris, I just wanted to say, I think you are awesome!");
     speak({ text: "Chris, I just wanted to say, I think you are awesome!" });
   };
 
   const hello = () => {
     setMessage("Hi there!");
-    setValue("Hi there!");
     speak({ text: "Hi there!" });
   };
 
@@ -87,7 +83,8 @@ const Spellingbee = ({ user }) => {
     setMessage("Moving on to the next word");
     setClick(click + 1);
     setValue("You have asked for the next word.");
-    speak({ text: "You have asked for the next word." });
+    speak({ text: "You have asked for the next word. The next word is:" });
+    speak({ text: spellingWord.word });
   };
 
   const commands = [
@@ -97,15 +94,23 @@ const Spellingbee = ({ user }) => {
     },
     {
       command: "repeat the word please",
-      callback: () => word(),
+      callback: () => {
+        word()
+        resetTranscript()
+      }
     },
     {
       command: "could I have the definition please",
-      callback: () => definition(),
+      callback: () => {definition()
+      resetTranscript()
+      }
     },
     {
       command: "chris",
-      callback: () => chris(),
+      callback: () => {
+        chris()
+        resetTranscript()
+      }
     },
     {
       command: "Hello",
@@ -117,7 +122,10 @@ const Spellingbee = ({ user }) => {
     },
     {
       command: "next word please",
-      callback: () => nextWord(),
+      callback: () => {
+        nextWord()
+        resetTranscript()
+      }
     },
   ];
 
@@ -129,12 +137,23 @@ const Spellingbee = ({ user }) => {
     listening,
   } = useSpeechRecognition({ commands });
 
+
+
   useEffect(() => {
     console.log("use effect");
     if (finalTranscript !== "") {
       console.log("Got final result:", finalTranscript);
+      const checkSpelling = () => {
+        console.log("transcript: ", transcript)
+        if (transcript === spellingWord.word){
+          speak({ text: "Yay! That is correct!" })
+        } else {
+          speak({ text: "I am sorry, that is not correct." })
+        }
+      }
+      checkSpelling()
     }
-  }, [interimTranscript, finalTranscript, value]);
+  }, [interimTranscript, finalTranscript, value, speak, spellingWord.word, transcript])
 
   if (!SpeechRecognition.browserSupportsSpeechRecognition()) {
     return null;
@@ -154,6 +173,8 @@ const Spellingbee = ({ user }) => {
     });
   };
 
+
+
   return (
     <>
       <p>Spelling Bee Mode</p>
@@ -161,19 +182,23 @@ const Spellingbee = ({ user }) => {
         <div id="current commands">
           <p><b>Current speach commands:</b>
           <br /><br />
-          reset: resets transcript
+          <b> reset: </b> resets transcript
           <br />
-          repeat the word please: repeats the word
           <br />
-          could I have the definition please: gives the definition of the word
+          <b> repeat the word please: </b>repeats the word
           <br />
-          chris: .. try it. It is just for fun.
           <br />
-          hello: a test phrase that has remained in the code.
+          <b> could I have the definition please: </b>gives the definition of the word
           <br />
-          clear: same as reset.
           <br />
-          next word please: currently acts as the next button function
+          <b> hello: </b>a test phrase that has remained in the code.
+          <br />
+          <br />
+          <b> clear: </b>same as reset.
+          <br />
+          <br />
+          <b> next word please: </b>currently acts as the next button function
+          <br />
           <br />
           </p>
         </div>
@@ -196,13 +221,9 @@ const Spellingbee = ({ user }) => {
           {message}
         </div>
         <br />
-        <div>
-          <b>Value set in command function for speach: </b>
-          {message}
-        </div>
         <br />
         <div>
-          <b>On going transcript of all spoken words: </b>
+          <b>On going LIVE transcript of all spoken words: </b>
           <span>{transcript}</span>
         </div>
       </div>
