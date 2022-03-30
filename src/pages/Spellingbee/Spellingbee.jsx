@@ -9,8 +9,10 @@ import { getAllWords } from "../../services/wordService";
 import { getProfileById } from "../../services/profileService";
 
 const Spellingbee = ({ user }) => {
-  const [value, setValue] = useState("");
+
   const { speak } = useSpeechSynthesis();
+
+  const [value, setValue] = useState("");
   const [message, setMessage] = useState("");
   const [allWords, setAllWords] = useState();
   const [click, setClick] = useState(0);
@@ -60,32 +62,32 @@ const Spellingbee = ({ user }) => {
   const word = () => {
     setMessage("this is the next word to spell.", spellingWord.word);
     setValue(spellingWord.word);
-    speak({ text: value });
+    speak({ text: spellingWord.word });
   };
 
   const definition = () => {
     setMessage("you asked for the definition of the word.");
     setValue(spellingWord.definition);
-    speak({ text: value });
+    speak({ text: spellingWord.definition });
   };
 
   const chris = () => {
     setMessage("Chris, I just wanted to say, I think you are awesome!");
     setValue("Chris, I just wanted to say, I think you are awesome!");
-    speak({ text: value });
+    speak({ text: "Chris, I just wanted to say, I think you are awesome!" });
   };
 
   const hello = () => {
     setMessage("Hi there!");
     setValue("Hi there!");
-    speak({ text: value });
+    speak({ text: "Hi there!" });
   };
 
   const nextWord = () => {
     setMessage("Moving on to the next word");
     setClick(click + 1);
     setValue("You have asked for the next word.");
-    speak({ text: value });
+    speak({ text: "You have asked for the next word." });
   };
 
   const commands = [
@@ -157,8 +159,8 @@ const Spellingbee = ({ user }) => {
       <p>Spelling Bee Mode</p>
       <div>
         <div id="current commands">
-          Current speach commands:
-          <br />
+          <p><b>Current speach commands:</b>
+          <br /><br />
           reset: resets transcript
           <br />
           repeat the word please: repeats the word
@@ -173,6 +175,7 @@ const Spellingbee = ({ user }) => {
           <br />
           next word please: currently acts as the next button function
           <br />
+          </p>
         </div>
         <div>
           <span>listening: {listening ? " on" : " off"}</span>
