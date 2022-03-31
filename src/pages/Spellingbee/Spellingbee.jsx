@@ -8,6 +8,8 @@ import { useSpeechSynthesis } from "react-speech-kit";
 import { getAllWords } from "../../services/wordService";
 import { getProfileById } from "../../services/profileService";
 
+import "../../styles/SpellingBeeMode.css";
+
 const Spellingbee = ({ user }) => {
 
   const { speak } = useSpeechSynthesis();
@@ -84,7 +86,7 @@ const Spellingbee = ({ user }) => {
     setClick(click + 1);
     setValue("You have asked for the next word.");
     speak({ text: "You have asked for the next word. The next word is:" });
-    speak({ text: spellingWord.word });
+    speak({ text: allWords[click+1].word });
   };
 
   const commands = [
@@ -93,7 +95,7 @@ const Spellingbee = ({ user }) => {
       callback: () => resetTranscript(),
     },
     {
-      command: "repeat the word please",
+      command: "could you repeat the word please",
       callback: () => {
         word()
         resetTranscript()
@@ -137,8 +139,6 @@ const Spellingbee = ({ user }) => {
     listening,
   } = useSpeechRecognition({ commands });
 
-
-
   useEffect(() => {
     console.log("use effect");
     if (finalTranscript !== "") {
@@ -173,35 +173,11 @@ const Spellingbee = ({ user }) => {
     });
   };
 
-
-
   return (
-    <>
-      <p>Spelling Bee Mode</p>
-      <div>
-        <div id="current commands">
-          <p><b>Current speach commands:</b>
-          <br /><br />
-          <b> reset: </b> resets transcript
-          <br />
-          <br />
-          <b> repeat the word please: </b>repeats the word
-          <br />
-          <br />
-          <b> could I have the definition please: </b>gives the definition of the word
-          <br />
-          <br />
-          <b> hello: </b>a test phrase that has remained in the code.
-          <br />
-          <br />
-          <b> clear: </b>same as reset.
-          <br />
-          <br />
-          <b> next word please: </b>currently acts as the next button function
-          <br />
-          <br />
-          </p>
-        </div>
+    <div id="spellingBeeMode-page">
+      <h1>Spelling Bee Mode</h1>
+
+      <div className="form-container">
         <div>
           <span>listening: {listening ? " on" : " off"}</span>
           <div>
@@ -227,7 +203,20 @@ const Spellingbee = ({ user }) => {
           <span>{transcript}</span>
         </div>
       </div>
-    </>
+      <div className="form-container">
+          <h2><b>speech commands:</b></h2>
+            <div id="list">
+          <ul>
+          <li><b>Reset</b></li>
+          <li><b>Could you repeat the word please?</b></li>
+          <li><b>Could I have the definition please?</b></li>
+          <li><b>Hello!</b></li>
+          <li><b>Clear.</b></li>
+          <li><b>Next word please.</b></li>
+          </ul>
+          </div>
+        </div>
+    </div>
   );
 };
 

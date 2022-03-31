@@ -33,9 +33,13 @@ or connect with me on Linked.in: https://www.linkedin.com/in/jan-horak/
 
 Bee Favicon from : https://favicon.io/emoji-favicons/honeybee/
 
+Dyslexic friendly font: Lexend https://fonts.google.com/specimen/Lexend?query=Lexend
+for more information on this open source font project please go to: https://www.lexend.com/
 
 # Deployment links:
 
 [Front end on Netlify](https://spelling-bee-practice-app.netlify.app/)
 
 [Back end on Heroku](https://spelling-bee-practice-app.herokuapp.com/)
+
+
