@@ -117,8 +117,7 @@ function Words({ allWords }) {
           value="Show All Words"
           onClick={handleClick}
         />
-
-        {wordList}
+        <div id="word-list">{wordList}</div>
       </form>
     </>
   );

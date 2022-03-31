@@ -45,3 +45,8 @@ input[type="button"]:focus {
 #word-database-stats{
   text-align: center;
 }
+
+#word-list{
+  width: 65%;
+  text-align: left;
+}

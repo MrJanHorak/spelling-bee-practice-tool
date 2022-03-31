@@ -166,7 +166,10 @@ const Spellingbee = ({ user }) => {
   }
 
   const listenContinuously = () => {
+
     console.log("listening");
+    speak({ text: "Hello " + user.name + "welcome to the Spelling bee!" });
+    speak({ text: "The first word for tody is " + allWords[click].word });
     SpeechRecognition.startListening({
       continuous: true,
       language: "en-GB",
