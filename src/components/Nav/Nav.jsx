@@ -7,7 +7,7 @@ import LogoDesktop from "../../assets/logo/logo-desktop.png";
 const Nav = (props) => {
   return (
     <nav className="nav-bar">
-      <NavLink id="logo" to="/index">
+      <NavLink id="logo" to="/">
         <img src={LogoDesktop} alt="bee" />
       </NavLink>
       {props.user && props.user.isAdmin ? (

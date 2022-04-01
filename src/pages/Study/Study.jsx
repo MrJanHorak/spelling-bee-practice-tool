@@ -59,12 +59,12 @@ const Study = ({ user }) => {
   }
 
   return (
-    <>
-      <p>Study Page</p>
+    <div id="study-page">
+      <h1>Study Page</h1>
       <div className="card-holder">
         <FlashCard handleClick={handleClick} displayWord={displayWord} />
       </div>
-    </>
+    </div>
   );
 };
 
