@@ -61,34 +61,26 @@ const Spellingbee = ({ user }) => {
   }
 
   const word = () => {
-
     setMessage("this is the next word to spell.", spellingWord.word);
     speak({ text: spellingWord.word });
-    SpeechRecognition.start()
   };
 
   const definition = () => {
-
     setMessage("you asked for the definition of the word.");
     speak({ text: spellingWord.definition });
-    SpeechRecognition.start()
   };
 
   const hello = () => {
-
     setMessage("Hi there!");
     speak({ text: "Hi there!" });
-    SpeechRecognition.start()
   };
 
   const nextWord = () => {
-
     setMessage("Moving on to the next word");
     setClick(click + 1);
     setValue("You have asked for the next word.");
     speak({ text: "You have asked for the next word. The next word is:" });
     speak({ text: allWords[click + 1].word });
-    SpeechRecognition.start()
   };
 
   const commands = [
@@ -136,7 +128,6 @@ const Spellingbee = ({ user }) => {
   } = useSpeechRecognition({ commands });
 
   useEffect(() => {
-
     const commandList = [
       "could you repeat the word please",
       "could I have the definition please",
@@ -145,19 +136,21 @@ const Spellingbee = ({ user }) => {
       "may I have the next word please",
       "reset",
     ];
-    console.log(finalTranscript===""? "empty ": "full");
-    console.log("final transcript: ",finalTranscript);
+    console.log(finalTranscript === "" ? "empty " : "full");
+    console.log("final transcript: ", finalTranscript);
     if (finalTranscript !== "") {
       console.log("Got final result:", finalTranscript);
 
       if (!commandList.includes(finalTranscript)) {
         const checkSpelling = () => {
           console.log("transcript: ", finalTranscript);
-          if (finalTranscript === spellingWord.word) {
+          if (finalTranscript.toLowerCase() === spellingWord.word) {
             speak({ text: "Yay! That is correct!" });
+            resetTranscript();
           } else {
-            console.log("not correct!")
+            console.log("not correct!");
             // speak({ text: "I am sorry, that is not correct." });
+            resetTranscript();
           }
         };
         checkSpelling();
@@ -169,6 +162,7 @@ const Spellingbee = ({ user }) => {
     value,
     spellingWord.word,
     speak,
+    resetTranscript,
   ]);
 
   if (!SpeechRecognition.browserSupportsSpeechRecognition()) {
@@ -181,14 +175,13 @@ const Spellingbee = ({ user }) => {
     );
   }
 
-  const startSpellingBee = () =>  {
+  const startSpellingBee = () => {
     console.log("starting");
     speak({ text: "Hello " + user.name + "welcome to the Spelling bee!" });
     speak({ text: "The first word for today is: " + allWords[click].word });
-    };
-  
-  const listenContinuously = () =>  {
-    
+  };
+
+  const listenContinuously = () => {
     console.log("listening");
     SpeechRecognition.startListening({
       continuous: true,
