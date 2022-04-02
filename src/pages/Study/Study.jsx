@@ -62,7 +62,7 @@ const Study = ({ user }) => {
     <div id="study-page">
       <h1>Study Page</h1>
       <div className="card-holder">
-        <FlashCard handleClick={handleClick} displayWord={displayWord} />
+        <FlashCard handleClick = { handleClick } displayWord = { displayWord } />
       </div>
     </div>
   );

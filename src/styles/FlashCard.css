@@ -13,11 +13,12 @@
   align-items: center;
   }
 
-  #next-button {
-    position: absolute;
-    bottom: 0;
-    width: 65%;
+  #button {
+    /* position: absolute;
+    bottom: 0; */
+    width: 100px;
     height: 45px;
+    margin: 10px;
     border-radius: 8px;
     background: #7450e9;
     border: none;
@@ -39,4 +40,8 @@
 
   #word h1{
     font-size: 4em;
+  }
+
+  #letter{
+    color: yellow
   }
