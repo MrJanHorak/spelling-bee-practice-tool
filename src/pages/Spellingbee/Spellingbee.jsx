@@ -60,27 +60,55 @@ const Spellingbee = ({ user }) => {
     spellingWord = allWords[click];
   }
 
-  const word = () => {
+  const listenContinuously = () => {
+    console.log("listening");
+    setMessage("I am listening again.", spellingWord.word);
+    SpeechRecognition.startListening({
+      continuous: true,
+      language: "en-GB",
+    });
+  };
+
+  const word = async () => {
+    SpeechRecognition.stopListening();
     setMessage("this is the next word to spell.", spellingWord.word);
+    setTimeout(() => {
+      listenContinuously();
+    }, 1500);
     speak({ text: spellingWord.word });
+    resetTranscript();
   };
 
   const definition = () => {
+    SpeechRecognition.stopListening();
     setMessage("you asked for the definition of the word.");
+    setTimeout(() => {
+      listenContinuously();
+    }, 7000);
     speak({ text: spellingWord.definition });
+    resetTranscript();
   };
 
   const hello = () => {
+    SpeechRecognition.stopListening();
     setMessage("Hi there!");
+    setTimeout(() => {
+      listenContinuously();
+    }, 1500);
     speak({ text: "Hi there!" });
+    resetTranscript();
   };
 
   const nextWord = () => {
-    setMessage("Moving on to the next word");
+    SpeechRecognition.stopListening();
     setClick(click + 1);
     setValue("You have asked for the next word.");
+    setTimeout(() => {
+      listenContinuously();
+    }, 5500);
     speak({ text: "You have asked for the next word. The next word is:" });
     speak({ text: allWords[click + 1].word });
+    resetTranscript();
   };
 
   const commands = [
@@ -89,18 +117,12 @@ const Spellingbee = ({ user }) => {
       callback: () => resetTranscript(),
     },
     {
-      command: "could you repeat the word please",
-      callback: () => {
-        word();
-        resetTranscript();
-      },
+      command: "please repeat the word",
+      callback: () => word(),
     },
     {
-      command: "could I have the definition please",
-      callback: () => {
-        definition();
-        resetTranscript();
-      },
+      command: "may I have the definition please",
+      callback: () => definition(),
     },
     {
       command: "hello",
@@ -112,10 +134,7 @@ const Spellingbee = ({ user }) => {
     },
     {
       command: "may I have the next word please",
-      callback: () => {
-        nextWord();
-        resetTranscript();
-      },
+      callback: () => nextWord(),
     },
   ];
 
@@ -129,27 +148,38 @@ const Spellingbee = ({ user }) => {
 
   useEffect(() => {
     const commandList = [
-      "could you repeat the word please",
-      "could I have the definition please",
+      "please repeat the word",
+      "may I have the definition please",
+      "may I have the next word please",
       "hello",
       "clear",
-      "may I have the next word please",
       "reset",
     ];
-    console.log(finalTranscript === "" ? "empty " : "full");
-    console.log("final transcript: ", finalTranscript);
-    if (finalTranscript !== "") {
-      console.log("Got final result:", finalTranscript);
 
+    if (finalTranscript !== "") {
       if (!commandList.includes(finalTranscript)) {
         const checkSpelling = () => {
           console.log("transcript: ", finalTranscript);
           if (finalTranscript.toLowerCase() === spellingWord.word) {
+            SpeechRecognition.stopListening();
+            setTimeout(() => {
+              SpeechRecognition.startListening({
+                continuous: true,
+                language: "en-GB",
+              });
+            }, 2500);
             speak({ text: "Yay! That is correct!" });
             resetTranscript();
           } else {
+            SpeechRecognition.stopListening();
+            setTimeout(() => {
+              SpeechRecognition.startListening({
+                continuous: true,
+                language: "en-GB",
+              });
+            }, 2500);
             console.log("not correct!");
-            // speak({ text: "I am sorry, that is not correct." });
+            speak({ text: "I am sorry, that is not correct." });
             resetTranscript();
           }
         };
@@ -179,14 +209,6 @@ const Spellingbee = ({ user }) => {
     console.log("starting");
     speak({ text: "Hello " + user.name + "welcome to the Spelling bee!" });
     speak({ text: "The first word for today is: " + allWords[click].word });
-  };
-
-  const listenContinuously = () => {
-    console.log("listening");
-    SpeechRecognition.startListening({
-      continuous: true,
-      language: "en-GB",
-    });
   };
 
   return (
@@ -229,10 +251,10 @@ const Spellingbee = ({ user }) => {
         <div id="list">
           <ul>
             <li>
-              <b>Could you repeat the word please?</b>
+              <b>Please repeat the word?</b>
             </li>
             <li>
-              <b>Could I have the definition please?</b>
+              <b>May I have the definition please?</b>
             </li>
             <li>
               <b>May I have the next word please?</b>
