@@ -27,6 +27,7 @@ function Words({ allWords }) {
     } else if (filter === "S") {
       return (
         <div key={i}>
+          <button value="x" type="button"/>
           <br />
           <b>
             <h3>{word.word}</h3>

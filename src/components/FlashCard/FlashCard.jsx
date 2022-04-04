@@ -2,7 +2,6 @@ import React from "react";
 import { useSpeechSynthesis } from "react-speech-kit";
 
 
-
 import "../../styles/FlashCard.css";
 
 const FlashCard = ({ handleClick, displayWord }) => {

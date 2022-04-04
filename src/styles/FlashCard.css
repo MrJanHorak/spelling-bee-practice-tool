@@ -5,7 +5,7 @@
 }
 
 .flashcard-definition {
-  width: 100%;
+  min-width: 350px;
   height: 350px;
   display: flex;
   flex-direction: column;
@@ -14,8 +14,6 @@
   }
 
   #button {
-    /* position: absolute;
-    bottom: 0; */
     width: 100px;
     height: 45px;
     margin: 10px;
@@ -26,8 +24,13 @@
     font-weight: 600;
   }
 
+  #button-container{
+    position: absolute;
+    bottom: 0;
+  }
+
   #definition {
-    width: 95%;
+    max-width: 80%;
     height: 100px;
     margin-top: 86px;
   }
