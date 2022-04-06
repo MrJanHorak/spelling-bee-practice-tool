@@ -35,10 +35,11 @@ const Admin = () => {
     getWords();
   };
 
-  const removeWord = async (wordId) => {
+  const removeWord = async (e, wordId) => {
+    e.preventDefault()
     try {
       await deleteWord(wordId);
-      // setAllWords(allWords.filter((definition) => definition._id !== wordId));
+      setAllWords(allWords.filter((definition) => definition._id !== wordId));
       console.log('deleting',wordId)
     } catch (error) {
       throw error;

@@ -65,12 +65,12 @@ export const updateWord = async (wordId, word) => {
 
 export const deleteWord = async (wordId) => {
   try {
-    console.log('deleting from service', wordId)
-    await fetch(`${BASE_URL}${wordId}`, {
-      method: "DELETE",
-      headers: { 'Authorization': 'Bearer ' + tokenService.getToken() },
-    }, { mode: "cors" });
-  } catch (error) {
-    throw error;
-  }
+    await fetch(`${BASE_URL}/${wordId}`, {
+      method: 'DELETE',
+      headers: { 
+        'Authorization': 'Bearer ' + tokenService.getToken() }
+  })
+} catch (error) {
+  throw error
+}
 };

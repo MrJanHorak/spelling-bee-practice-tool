@@ -18,9 +18,9 @@ function Words({ removeWord, allWords }) {
           <b>
           <h3>{word.word}
           <button 
-              onClick={() => removeWord(word._id)}
+              onClick={(e) => removeWord(e, word._id)}
             >
-              Delete
+              -
             </button>
             </h3>
           </b>
@@ -40,14 +40,17 @@ function Words({ removeWord, allWords }) {
           <b>
             <h3>{word.word}
           <button 
-              onClick={() => removeWord(word._id)}
+              onClick={(e) => removeWord(e, word._id)}
             >
-              Delete
+              -
             </button>
             </h3>
           </b>
           <b>Part of Speech: </b>
           {word.partOfSpeech}
+          <br />
+          <b> Grade level: </b>
+          {word.gradeLevel}
           <br />
           <b>Definition: </b>
           {word.definition}
