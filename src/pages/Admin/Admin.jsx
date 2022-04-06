@@ -4,7 +4,7 @@ import Definitions from "../../components/Definitions/Definitions";
 
 import "../../styles/Admin.css";
 
-import { getAllWords } from "../../services/wordService";
+import { getAllWords, deleteWord } from "../../services/wordService";
 import Words from "../../components/Words/Words";
 
 const Admin = () => {
@@ -33,6 +33,16 @@ const Admin = () => {
     setWord("");
     setWordData("");
     getWords();
+  };
+
+  const removeWord = async (wordId) => {
+    try {
+      await deleteWord(wordId);
+      // setAllWords(allWords.filter((definition) => definition._id !== wordId));
+      console.log('deleting',wordId)
+    } catch (error) {
+      throw error;
+    }
   };
 
   useEffect(() => {
@@ -84,7 +94,7 @@ const Admin = () => {
         </div>
         {allWords ? (
           <div className="form-container">
-            <Words allWords={allWords} />
+            <Words removeWord={removeWord} allWords={allWords} />
           </div>
         ) : (
           <>

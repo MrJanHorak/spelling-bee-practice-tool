@@ -1,12 +1,14 @@
 import React, { useState } from "react";
+
 import "../../styles/WordList.css";
 
-function Words({ allWords }) {
+function Words({ removeWord, allWords }) {
   const [filter, setFilter] = useState();
 
   const handleClick = (e) => {
     setFilter(e.target.value[0]);
   };
+
 
   const wordList = allWords.map((word, i) => {
     if (parseInt(filter) === word.gradeLevel) {
@@ -14,8 +16,15 @@ function Words({ allWords }) {
         <div key={i}>
           <br />
           <b>
-            <h3>{word.word}</h3>
+          <h3>{word.word}
+          <button 
+              onClick={() => removeWord(word._id)}
+            >
+              Delete
+            </button>
+            </h3>
           </b>
+          
           <b>Part of Speech: </b>
           {word.partOfSpeech}
           <br />
@@ -27,10 +36,15 @@ function Words({ allWords }) {
     } else if (filter === "S") {
       return (
         <div key={i}>
-          <button value="x" type="button"/>
           <br />
           <b>
-            <h3>{word.word}</h3>
+            <h3>{word.word}
+          <button 
+              onClick={() => removeWord(word._id)}
+            >
+              Delete
+            </button>
+            </h3>
           </b>
           <b>Part of Speech: </b>
           {word.partOfSpeech}
