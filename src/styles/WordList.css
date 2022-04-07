@@ -50,3 +50,18 @@ input[type="button"]:focus {
   width: 65%;
   text-align: left;
 }
+
+#remove-button{
+  background-color: red;
+  border-radius: 50%;
+  height: 15px;
+  width: 15px;
+  margin: 0 8px 0 0;
+  display: table-cell;
+  line-height: .5px;
+}
+
+#grade-level{
+  width: 25px;
+  padding: 0;
+}

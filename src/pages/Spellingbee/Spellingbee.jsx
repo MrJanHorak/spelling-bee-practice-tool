@@ -60,17 +60,17 @@ const Spellingbee = ({ user }) => {
     spellingWord = allWords[click];
   }
 
-  const listenContinuously = () => {
+  const listenContinuously = async() => {
     console.log("listening");
     setMessage("I am listening again.", spellingWord.word);
-    SpeechRecognition.startListening({
+    await SpeechRecognition.startListening({
       continuous: true,
-      language: "en-GB",
+      language: "en-US",
     });
   };
 
-  const word = async () => {
-    SpeechRecognition.stopListening();
+  const word = () => {
+    SpeechRecognition.stopListening()
     setMessage("this is the next word to spell.", spellingWord.word);
     setTimeout(() => {
       listenContinuously();

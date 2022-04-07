@@ -49,14 +49,13 @@
   width: 100%;
 }
 
-.form-container input,
-select,
-button {
+/* .form-container input,
+select {
   padding: 16px;
   font-size: 16px;
   margin-bottom: 16px;
   color: rgb(200, 200, 200);
-}
+} */
 
 .form-container input {
   border: 1px solid #292934;
