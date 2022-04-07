@@ -49,7 +49,7 @@ function Definitions({ added, word }) {
 
   let definitionsList = word.definitions.map((definition, i) => {
     return (
-      <div key={i}>
+      <div className="definition-option" key={i}>
         <input
           type="radio"
           name="definition"
