@@ -13,6 +13,32 @@
   align-items: center;
   }
 
+  h1 span{
+    position: relative;
+    animation: move-text-color 0.75s forwards;
+    bottom: -1em;
+    opacity: 0;
+  }
+
+  @keyframes move-text-color {
+    0% {
+      bottom: 0em;
+      opacity: 1;
+      color: #057cec;
+    }
+    
+    /* 50% {
+      bottom: 0.1em;
+      color: #057cec;
+    } */
+  
+    100% {
+      bottom: 0;
+      opacity: 1;
+      color: #cb3126;
+    }
+  }
+
   #button {
     width: 100px;
     height: 45px;
