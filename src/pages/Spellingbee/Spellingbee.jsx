@@ -21,6 +21,14 @@ const Spellingbee = ({ user }) => {
 
   let spellingWord = [];
 
+  const shuffleArr = (array) => {
+    console.log("i'm shuffeling the words")
+    for (let i = array.length - 1; i > 0; i--) {
+        let rand = Math.floor(Math.random() * (i + 1));
+        [array[i], array[rand]] = [array[rand], array[i]]
+    }
+}
+
   useEffect(() => {
     const getProfile = async () => {
       try {
@@ -41,6 +49,7 @@ const Spellingbee = ({ user }) => {
           const studyList = allWordData.filter(
             (word) => word.gradeLevel === profile.grade
           );
+          shuffleArr(studyList)
           setAllWords(studyList);
         } catch (error) {
           throw error;
