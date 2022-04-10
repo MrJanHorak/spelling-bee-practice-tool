@@ -36,8 +36,8 @@ const FlashCard = ({ handleClick, displayWord }) => {
           {displayWord.definition}
         </div>
         <div id="button-container">
-          <input id="button" type="button" value="Next" onClick={handleClick} />
-          <input id="button" type="button" value="spell" onClick={spellWord} />
+          <input id="button" type="button" value="Next" {...(!speaking ? {onClick: ()=> {handleClick()}}:{})} />
+          <input id="button" type="button" value="spell" {...(!speaking ? {onClick: ()=> {spellWord()}}:{})} />
         </div>
       </div>
     </div>
