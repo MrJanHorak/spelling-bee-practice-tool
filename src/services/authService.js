@@ -33,7 +33,7 @@ async function login(credentials) {
   try {
     const res = await fetch(`${BASE_URL}/login`, {
       method: "POST",
-      headers: new Headers({ "Content-Type": "application/json"}),
+      headers: new Headers({ "Content-Type": "application/json" }),
       body: JSON.stringify(credentials),
     });
     const json = await res.json();

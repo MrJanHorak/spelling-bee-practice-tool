@@ -4,8 +4,13 @@ import Definitions from "../../components/Definitions/Definitions";
 
 import "../../styles/Admin.css";
 
-import { getAllWords, deleteWord } from "../../services/wordService";
+import {
+  getAllWords,
+  deleteWord,
+  updateWord,
+} from "../../services/wordService";
 import Words from "../../components/Words/Words";
+import e from "cors";
 
 const Admin = () => {
   const API_KEY = process.env.REACT_APP_API_KEY;
@@ -36,11 +41,26 @@ const Admin = () => {
   };
 
   const removeWord = async (e, wordId) => {
-    e.preventDefault()
+    e.preventDefault();
     try {
       await deleteWord(wordId);
       setAllWords(allWords.filter((definition) => definition._id !== wordId));
-      console.log('deleting',wordId)
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  const updateGrade = async (e, word) => {
+    let updatedWord = {
+      name: word.name,
+      word: word.word,
+      definition: word.definition,
+      partOfSpeech: word.partOfSpeech,
+      gradeLevel: e.target.value,
+    };
+    try {
+      await updateWord(word._id, updatedWord);
+      getWords()
     } catch (error) {
       throw error;
     }
@@ -95,7 +115,11 @@ const Admin = () => {
         </div>
         {allWords ? (
           <div className="form-container">
-            <Words removeWord={removeWord} allWords={allWords} />
+            <Words
+              updateGrade={updateGrade}
+              removeWord={removeWord}
+              allWords={allWords}
+            />
           </div>
         ) : (
           <>

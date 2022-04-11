@@ -2,7 +2,7 @@ import React, { useState } from "react";
 
 import "../../styles/WordList.css";
 
-function Words({ removeWord, allWords }) {
+function Words({ removeWord, allWords, updateGrade }) {
   const [filter, setFilter] = useState();
 
   const handleClick = (e) => {
@@ -55,8 +55,8 @@ function Words({ removeWord, allWords }) {
           {word.partOfSpeech}
           <br />
           <b> Grade level: </b>
-          {/* <input id="grade-Level" value={word.gradeLevel} min='1' max='8'/> */}
-          {word.gradeLevel}
+          <input id="grade-Level"  type='number' name="gradeLevel" min='1' max='8' placeholder={word.gradeLevel} onChange={(e) => updateGrade(e, word)}/>
+          {/* {word.gradeLevel} */}
           <br />
           <b>Definition: </b>
           {word.definition}
