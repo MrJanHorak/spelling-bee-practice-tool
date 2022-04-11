@@ -120,6 +120,12 @@ const Spellingbee = ({ user }) => {
     resetTranscript();
   };
 
+  const stop = () => {
+    SpeechRecognition.stopListening();
+    speak({ text: "I am no longer listening." });
+    resetTranscript();
+  };
+
   const commands = [
     {
       command: "reset",
@@ -145,6 +151,10 @@ const Spellingbee = ({ user }) => {
       command: "may I have the next word please",
       callback: () => nextWord(),
     },
+    {
+      command: "please stop listening",
+      callback: () => stop()
+    },
   ];
 
   const {
@@ -163,6 +173,7 @@ const Spellingbee = ({ user }) => {
       "hello",
       "clear",
       "reset",
+      "please stop listening",
     ];
 
     if (finalTranscript !== "") {
@@ -269,14 +280,17 @@ const Spellingbee = ({ user }) => {
               <b>May I have the next word please?</b>
             </li>
             <li>
-              <b>Hello!</b>
+              <b>Please stop listening.</b>
             </li>
-            <li>
+            {/* <li>
+              <b>Hello!</b>
+            </li> */}
+            {/* <li>
               <b>Reset</b>
             </li>
             <li>
               <b>Clear.</b>
-            </li>
+            </li> */}
           </ul>
         </div>
       </div>
