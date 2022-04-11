@@ -10,7 +10,6 @@ import {
   updateWord,
 } from "../../services/wordService";
 import Words from "../../components/Words/Words";
-import e from "cors";
 
 const Admin = () => {
   const API_KEY = process.env.REACT_APP_API_KEY;
