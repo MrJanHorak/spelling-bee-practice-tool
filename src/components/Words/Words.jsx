@@ -30,6 +30,9 @@ function Words({ removeWord, allWords, updateGrade }) {
           <b>Part of Speech: </b>
           {word.partOfSpeech}
           <br />
+          <b> Grade level: </b>
+          <input id="grade-Level"  type='number' name="gradeLevel" min='1' max='8' value={word.gradeLevel} onChange={(e) => updateGrade(e, word)}/>
+          <br />
           <b>Definition: </b>
           {word.definition}
           <br />
@@ -55,8 +58,7 @@ function Words({ removeWord, allWords, updateGrade }) {
           {word.partOfSpeech}
           <br />
           <b> Grade level: </b>
-          <input id="grade-Level"  type='number' name="gradeLevel" min='1' max='8' placeholder={word.gradeLevel} onChange={(e) => updateGrade(e, word)}/>
-          {/* {word.gradeLevel} */}
+          <input id="grade-Level"  type='number' name="gradeLevel" min='1' max='8' value={word.gradeLevel} onChange={(e) => updateGrade(e, word)}/>
           <br />
           <b>Definition: </b>
           {word.definition}
