@@ -120,6 +120,18 @@ const Spellingbee = ({ user }) => {
     resetTranscript();
   };
 
+  const guessedWord = () => {
+    SpeechRecognition.stopListening();
+    setClick(click + 1);
+    setValue("Moving on to the next word.");
+    setTimeout(() => {
+      listenContinuously();
+    }, 9500);
+    speak({ text: "You have guessed the last word correctly! Get ready for the next word! The next word is:" });
+    speak({ text: allWords[click + 1].word });
+    resetTranscript();
+  };
+
   const stop = () => {
     SpeechRecognition.stopListening();
     speak({ text: "I am no longer listening." });
@@ -182,14 +194,15 @@ const Spellingbee = ({ user }) => {
           console.log("transcript: ", finalTranscript);
           if (finalTranscript.toLowerCase() === spellingWord.word) {
             SpeechRecognition.stopListening();
-            setTimeout(() => {
-              SpeechRecognition.startListening({
-                continuous: true,
-                language: "en-GB",
-              });
-            }, 2500);
+            // setTimeout(() => {
+            //   SpeechRecognition.startListening({
+            //     continuous: true,
+            //     language: "en-GB",
+            //   });
+            // }, 500);
             speak({ text: "Yay! That is correct!" });
             resetTranscript();
+            guessedWord()
           } else {
             SpeechRecognition.stopListening();
             setTimeout(() => {
