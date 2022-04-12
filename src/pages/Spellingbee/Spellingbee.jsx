@@ -8,6 +8,7 @@ import { useSpeechSynthesis } from "react-speech-kit";
 import { getAllWords } from "../../services/wordService";
 import { getProfileById } from "../../services/profileService";
 
+//assets
 import "../../styles/SpellingBeeMode.css";
 
 const Spellingbee = ({ user }) => {

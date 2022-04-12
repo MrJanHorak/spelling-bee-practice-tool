@@ -14,6 +14,7 @@ const Nav = (props) => {
         <>
           <NavLink to="/spellingbee">Spelling Bee Mode</NavLink>
           <NavLink to="/study">Study Words</NavLink>
+          <NavLink to="/profile">Profile</NavLink>
           <NavLink to="/admin">Admin Panel</NavLink>
           <NavLink to="/" onClick={props.handleLogout}>
             Logout

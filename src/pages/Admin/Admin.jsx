@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from "react";
-import WordSearch from "../../components/WordSearch/WordSearch";
-import Definitions from "../../components/Definitions/Definitions";
 
-import "../../styles/Admin.css";
-
+// services
 import {
   getAllWords,
   deleteWord,
   updateWord,
 } from "../../services/wordService";
+
+// assets
+import WordSearch from "../../components/WordSearch/WordSearch";
+import Definitions from "../../components/Definitions/Definitions";
 import Words from "../../components/Words/Words";
+import "../../styles/Admin.css";
 
 const Admin = () => {
   const API_KEY = process.env.REACT_APP_API_KEY;

@@ -1,7 +1,9 @@
 import React from 'react';
 
-import "../../styles/Landing.css";
+//services
 
+//assets
+import "../../styles/Landing.css";
 
 const Landing = ({ user }) => {
 

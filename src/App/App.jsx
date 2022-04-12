@@ -12,6 +12,7 @@ import Study from "../pages/Study/Study";
 import Spellingbee from "../pages/Spellingbee/Spellingbee";
 import Admin from "../pages/Admin/Admin";
 import Landing from "../pages/Landing/Landing";
+import Profile from "../pages/Profile/Profile";
 
 const App = () => {
   const navigate = useNavigate();
@@ -37,6 +38,7 @@ const App = () => {
         <Route path="/signup" element={<SignUp handleSignupOrLogin={handleSignupOrLogin} />} />
         <Route path="/study" element={<Study user = { user }/>} />
         <Route path="/spellingbee" element={<Spellingbee user = { user } />} />
+        <Route path="/profile" element={<Profile user = { user } />} />
         <Route path="/admin" element={<Admin user = { user } />} />
       </Routes>
     </div>
