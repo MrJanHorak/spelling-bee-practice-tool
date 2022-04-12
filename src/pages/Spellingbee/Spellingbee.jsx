@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import SpeechRecognition, {
   useSpeechRecognition,
 } from "react-speech-recognition";
@@ -22,12 +22,12 @@ const Spellingbee = ({ user }) => {
   let spellingWord = [];
 
   const shuffleArr = (array) => {
-    console.log("i'm shuffeling the words")
+    console.log("i'm shuffeling the words");
     for (let i = array.length - 1; i > 0; i--) {
-        let rand = Math.floor(Math.random() * (i + 1));
-        [array[i], array[rand]] = [array[rand], array[i]]
+      let rand = Math.floor(Math.random() * (i + 1));
+      [array[i], array[rand]] = [array[rand], array[i]];
     }
-}
+  };
 
   useEffect(() => {
     const getProfile = async () => {
@@ -49,7 +49,7 @@ const Spellingbee = ({ user }) => {
           const studyList = allWordData.filter(
             (word) => word.gradeLevel === profile.grade
           );
-          shuffleArr(studyList)
+          shuffleArr(studyList);
           setAllWords(studyList);
         } catch (error) {
           throw error;
@@ -60,18 +60,17 @@ const Spellingbee = ({ user }) => {
   }, [profile, user.profile]);
 
   if (allWords) {
-    if (click >= allWords.length) {
-      spellingWord = [];
-      setClick(0);
+    if (click === 0) {
+      spellingWord = allWords[click];
     }
-    if (click < allWords.length) {
+    if (click > 0 && click < allWords.length) {
+      spellingWord = allWords[click];
     }
-    spellingWord = allWords[click];
   }
 
-  const listenContinuously = async() => {
+  const listenContinuously = async () => {
     console.log("listening");
-    setMessage("I am listening again.", spellingWord.word);
+    setMessage("I am listening again.");
     await SpeechRecognition.startListening({
       continuous: true,
       language: "en-US",
@@ -79,8 +78,8 @@ const Spellingbee = ({ user }) => {
   };
 
   const word = () => {
-    SpeechRecognition.stopListening()
-    setMessage("this is the next word to spell.", spellingWord.word);
+    SpeechRecognition.stopListening();
+    setMessage("this is the next word to spell. " + spellingWord.word);
     setTimeout(() => {
       listenContinuously();
     }, 1500);
@@ -110,26 +109,21 @@ const Spellingbee = ({ user }) => {
 
   const nextWord = () => {
     SpeechRecognition.stopListening();
-    setClick(click + 1);
-    setValue("You have asked for the next word.");
-    setTimeout(() => {
-      listenContinuously();
-    }, 5500);
-    speak({ text: "You have asked for the next word. The next word is:" });
-    speak({ text: allWords[click + 1].word });
-    resetTranscript();
-  };
-
-  const guessedWord = () => {
-    SpeechRecognition.stopListening();
-    setClick(click + 1);
-    setValue("Moving on to the next word.");
-    setTimeout(() => {
-      listenContinuously();
-    }, 9500);
-    speak({ text: "You have guessed the last word correctly! Get ready for the next word! The next word is:" });
-    speak({ text: allWords[click + 1].word });
-    resetTranscript();
+    if (click < allWords.length - 1) {
+      setClick(click + 1);
+      setValue("You have asked for the next word.");
+      setTimeout(() => {
+        listenContinuously();
+      }, 5500);
+      speak({ text: "You have asked for the next word. The next word is:" });
+      speak({ text: allWords[click + 1].word });
+      resetTranscript();
+    } else {
+      speak({
+        text: "That was the last word. To start over please press start!",
+      });
+      setClick(0);
+    }
   };
 
   const stop = () => {
@@ -165,7 +159,7 @@ const Spellingbee = ({ user }) => {
     },
     {
       command: "please stop listening",
-      callback: () => stop()
+      callback: () => stop(),
     },
   ];
 
@@ -176,6 +170,27 @@ const Spellingbee = ({ user }) => {
     resetTranscript,
     listening,
   } = useSpeechRecognition({ commands });
+
+  const guessedWord = useCallback(() => {
+    SpeechRecognition.stopListening();
+    if (click < allWords.length - 1) {
+      setClick(click + 1);
+      setValue("Moving on to the next word.");
+      setTimeout(() => {
+        listenContinuously();
+      }, 9500);
+      speak({
+        text: "YAY! You have spelled the last word correctly! Get ready for the next word! The next word is:",
+      });
+      speak({ text: allWords[click + 1].word });
+      resetTranscript();
+    } else {
+      setClick(0);
+      speak({
+        text: "YAAY! You have completed the spelling bee! If you want to go again, please press start!",
+      });
+    }
+  }, [allWords, click, listenContinuously, speak, resetTranscript]);
 
   useEffect(() => {
     const commandList = [
@@ -194,15 +209,8 @@ const Spellingbee = ({ user }) => {
           console.log("transcript: ", finalTranscript);
           if (finalTranscript.toLowerCase() === spellingWord.word) {
             SpeechRecognition.stopListening();
-            // setTimeout(() => {
-            //   SpeechRecognition.startListening({
-            //     continuous: true,
-            //     language: "en-GB",
-            //   });
-            // }, 500);
-            speak({ text: "Yay! That is correct!" });
             resetTranscript();
-            guessedWord()
+            guessedWord();
           } else {
             SpeechRecognition.stopListening();
             setTimeout(() => {
@@ -226,6 +234,7 @@ const Spellingbee = ({ user }) => {
     spellingWord.word,
     speak,
     resetTranscript,
+    guessedWord,
   ]);
 
   if (!SpeechRecognition.browserSupportsSpeechRecognition()) {
@@ -239,7 +248,6 @@ const Spellingbee = ({ user }) => {
   }
 
   const startSpellingBee = () => {
-    console.log("starting");
     speak({ text: "Hello " + user.name + "welcome to the Spelling bee!" });
     speak({ text: "The first word for today is: " + allWords[click].word });
   };
@@ -295,15 +303,6 @@ const Spellingbee = ({ user }) => {
             <li>
               <b>Please stop listening.</b>
             </li>
-            {/* <li>
-              <b>Hello!</b>
-            </li> */}
-            {/* <li>
-              <b>Reset</b>
-            </li>
-            <li>
-              <b>Clear.</b>
-            </li> */}
           </ul>
         </div>
       </div>
