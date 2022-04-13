@@ -1,4 +1,4 @@
-.signup-page{
+.signup-page {
   display: flex;
   margin: 0;
   position: absolute;
@@ -10,20 +10,19 @@
   justify-content: center;
 }
 
-.title-container{
+.title-container {
   display: flex;
   flex-direction: column;
   width: 100%;
   align-items: flex-start;
-  
 }
 
 .title-container h3 {
-  opacity: .5;
+  opacity: 0.5;
   font-weight: 600;
 }
 
-.avatar-container{
+.avatar-container {
   width: 100px;
   height: 100px;
   border-radius: 100%;
@@ -34,7 +33,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  max-width: 450px    
+  max-width: 450px;
 }
 
 .register-form {
@@ -43,11 +42,13 @@
   width: 100%;
 }
 
-.form-container input, select, button {
+.form-container input,
+select,
+button {
   padding: 16px;
   font-size: 16px;
   margin-bottom: 16px;
-  color: rgb(200, 200, 200);
+  color: rgb(255, 255, 255);
 }
 
 .form-container input {
@@ -58,30 +59,30 @@
 #avatar-button {
   border: 1px solid #292934;
   border-radius: 7px;
-  color: #757575;
+  color: #ffffff;
   text-align: left;
 }
 
-#submit-button{
+#submit-button {
   margin-top: 22px;
-  background: #7450E9;
+  background: #7450e9;
   border: none;
   color: rgb(255, 255, 255);
   font-weight: 600;
   border-radius: 7px;
 }
 
-.redirect-container{
+.redirect-container {
   display: flex;
-	align-items: center;
+  align-items: center;
   font-size: 14px;
   font-weight: 500;
-  opacity: .5;
+  opacity: 0.5;
   color: rgb(32, 32, 32);
 }
 
-.redirect-link{
-  color: #7450E9;
+.redirect-link {
+  color: #7450e9;
   text-decoration: none;
   padding-left: 6px;
 }
