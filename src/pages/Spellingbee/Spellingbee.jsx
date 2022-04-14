@@ -69,14 +69,14 @@ const Spellingbee = ({ user }) => {
     }
   }
 
-  const listenContinuously = async () => {
+  const listenContinuously = useCallback( async () =>  {
     console.log("listening");
     setMessage("I am listening again.");
     await SpeechRecognition.startListening({
       continuous: true,
       language: "en-US",
     });
-  };
+  },[]);
 
   const word = () => {
     SpeechRecognition.stopListening();
