@@ -52,7 +52,7 @@ const Profile = ({ user }) => {
       grade: userProfile.grade,
     };
     try {
-      await updateProfile("61f46356c4b22084d3f4ffcf", updatedProfile);
+      await updateProfile( user.profile , updatedProfile);
     } catch (error) {
       throw error;
     }
