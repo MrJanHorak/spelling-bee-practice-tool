@@ -23,7 +23,7 @@ const FlashCard = ({ handleClick, displayWord }) => {
   };
 
   return displayWord.word ? (
-    <div className="form-container">
+    <div className="flashcard-container">
       <div className="flashcard-definition">
         <div id="word">
           {speaking ? (
@@ -42,10 +42,7 @@ const FlashCard = ({ handleClick, displayWord }) => {
           {displayWord.definition}
         </div>
         <div id="button-container">
-          <input
-            id="button"
-            type="button"
-            value="Next"
+          <button
             {...(!speaking
               ? {
                   onClick: () => {
@@ -53,11 +50,10 @@ const FlashCard = ({ handleClick, displayWord }) => {
                   },
                 }
               : {})}
-          />
-          <input
-            id="button"
-            type="button"
-            value="spell"
+          >
+            NEXT
+          </button>
+          <button
             {...(!speaking
               ? {
                   onClick: () => {
@@ -65,7 +61,9 @@ const FlashCard = ({ handleClick, displayWord }) => {
                   },
                 }
               : {})}
-          />
+          >
+            SPELL
+          </button>
         </div>
       </div>
     </div>

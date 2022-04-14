@@ -61,7 +61,7 @@ const Study = ({ user }) => {
 
   return (
     <div id="study-page">
-      <h2>Study Mode</h2>
+      {/* <h2>Study Mode</h2> */}
       <div className="card-holder">
         <FlashCard handleClick={handleClick} displayWord={displayWord} />
       </div>
