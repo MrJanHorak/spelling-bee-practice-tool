@@ -1,22 +1,3 @@
-button {
-  padding: 16px;
-  font-size: 16px;
-  margin-bottom: 16px;
-  color: rgb(200, 200, 200);
-}
-
-#profile-page {
-  display: flex;
-  margin: 0;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 100%;
-  align-items: center;
-  justify-content: center;
-}
-
 .avatar-container {
   width: 100px;
   height: 100px;
@@ -24,11 +5,17 @@ button {
 }
 
 #profile-page {
-  width: 100%;
   display: flex;
   flex-direction: column;
+  position: absolute;
+  margin: 0;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
   align-items: center;
   justify-content: center;
+  width: 100%;
 }
 
 #profile-card {
@@ -40,6 +27,27 @@ button {
   flex-direction: column;
   flex-wrap: wrap;
 }
+
+#profile-card button {
+  background: #7450e9;
+  border: none;
+  color: white;
+  font-weight: 600;
+  text-align:center;
+  padding: 7px;  
+  margin: 4px;
+  border-radius: 12px;
+  height: 45px;
+  width:150px;
+}
+
+#profile-card button:hover {
+  background: blue;
+}
+
+#profile-card button:active {
+  background: red;
+} 
 
 #profile-pic {
   width: 150px;

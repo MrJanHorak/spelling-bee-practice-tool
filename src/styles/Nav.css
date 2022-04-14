@@ -40,13 +40,26 @@
 
 /* sidebar Nav */
 
+a {
+  display: block;
+  padding: 10px 20px;
+  text-decoration: none;
+  color: #000000;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+a:active {
+  color: white;
+}
+
 .logoHolder {
   display: flex;
   margin-right: auto;
   align-items: center;
 }
 
-.logoHolder img{
+.logoHolder img {
   height: 35px;
   margin: 15px;
 }
@@ -72,7 +85,7 @@
   list-style: none;
   position: fixed;
   top: 0;
-  background: rgb(113, 117, 117);
+  background: rgba(113, 117, 117, 0.95);
   left: -40px;
   bottom: 0;
   height: 310px;
@@ -85,19 +98,6 @@
 
 .menuNav.showMenu {
   width: 100%;
-}
-
-a {
-  display: block;
-  padding: 10px 20px;
-  text-decoration: none;
-  color: #000000;
-  text-transform: uppercase;
-  font-weight: bold;
-}
-
-a:active {
-  color: white;
 }
 
 .menuNav li:first-child {

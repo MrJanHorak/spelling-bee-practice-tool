@@ -52,7 +52,7 @@ const Profile = ({ user }) => {
       grade: userProfile.grade,
     };
     try {
-      await updateProfile( user.profile , updatedProfile);
+      await updateProfile(user.profile, updatedProfile);
     } catch (error) {
       throw error;
     }
@@ -67,8 +67,8 @@ const Profile = ({ user }) => {
           handlePopup={handlePopup}
         />
       )}
-      <h1>Spelling Bee Practice App</h1>
-      <div className="profile=info">
+      <h2>Profile</h2>
+      <div className="profile-info">
         {userProfile && (
           <div id="profile-card">
             <img
@@ -76,12 +76,7 @@ const Profile = ({ user }) => {
               alt="profile pictue"
               src={userProfile?.avatar}
             />
-            <button
-              type="button"
-              autoComplete="off"
-              id="avatar-button"
-              onClick={handlePopup}
-            >
+            <button type="button" autoComplete="off" onClick={handlePopup}>
               Change Avatar
             </button>
             <h1>{userProfile?.name}</h1>

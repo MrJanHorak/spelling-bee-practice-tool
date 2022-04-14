@@ -12,7 +12,7 @@ import "../../styles/Study.css";
 const Study = ({ user }) => {
   const [allWords, setAllWords] = useState();
   const [click, setClick] = useState(0);
-  const [profile, setProfile] = useState()
+  const [profile, setProfile] = useState();
 
   let displayWord = [];
 
@@ -23,30 +23,31 @@ const Study = ({ user }) => {
   useEffect(() => {
     const getProfile = async () => {
       try {
-      const profileData = await getProfileById(user.profile)
-      setProfile(profileData)
-    } catch (error) {
-      throw error;
-    }}
-  getProfile()
-},[user.profile])
-
-  useEffect(() => {
-    if (profile?.grade){
-    const getWords = async () => {
-      try {
-        const allWordData = await getAllWords();
-        const studyList = allWordData.filter(
-          (word) => word.gradeLevel === profile.grade
-        );
-        setAllWords(studyList);
+        const profileData = await getProfileById(user.profile);
+        setProfile(profileData);
       } catch (error) {
         throw error;
       }
     };
-    getWords();
-  }
-  }, [profile,user.profile]);
+    getProfile();
+  }, [user.profile]);
+
+  useEffect(() => {
+    if (profile?.grade) {
+      const getWords = async () => {
+        try {
+          const allWordData = await getAllWords();
+          const studyList = allWordData.filter(
+            (word) => word.gradeLevel === profile.grade
+          );
+          setAllWords(studyList);
+        } catch (error) {
+          throw error;
+        }
+      };
+      getWords();
+    }
+  }, [profile, user.profile]);
 
   if (allWords) {
     if (click >= allWords.length) {
@@ -60,9 +61,9 @@ const Study = ({ user }) => {
 
   return (
     <div id="study-page">
-      <h1>Study Page</h1>
+      <h2>Study Mode</h2>
       <div className="card-holder">
-        <FlashCard handleClick = { handleClick } displayWord = { displayWord } />
+        <FlashCard handleClick={handleClick} displayWord={displayWord} />
       </div>
     </div>
   );

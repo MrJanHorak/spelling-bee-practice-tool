@@ -69,14 +69,14 @@ const Spellingbee = ({ user }) => {
     }
   }
 
-  const listenContinuously = useCallback( async () =>  {
+  const listenContinuously = useCallback(async () => {
     console.log("listening");
     setMessage("I am listening again.");
     await SpeechRecognition.startListening({
       continuous: true,
       language: "en-US",
     });
-  },[]);
+  }, []);
 
   const word = () => {
     SpeechRecognition.stopListening();
@@ -255,15 +255,19 @@ const Spellingbee = ({ user }) => {
 
   return (
     <div id="spellingBeeMode-page">
-      <h1>Spelling Bee Mode</h1>
+      <h2>Spelling Bee Mode</h2>
 
       <div className="form-container">
         <div>
-          <span>listening: {listening ? " on" : " off"}</span>
+          <span>
+            <h3>
+              <b>listening: {listening ? " on" : " off"}</b>
+            </h3>
+          </span>
           <div>
-            <button type="button" onClick={resetTranscript}>
+            {/* <button type="button" onClick={resetTranscript}>
               Reset
-            </button>
+            </button> */}
             <button type="button" onClick={startSpellingBee}>
               Start
             </button>

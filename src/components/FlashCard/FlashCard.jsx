@@ -26,7 +26,13 @@ const FlashCard = ({ handleClick, displayWord }) => {
     <div className="form-container">
       <div className="flashcard-definition">
         <div id="word">
-          {speaking ? <h1><SplitText displayWord={ displayWord.word } role={"heading"}/> </h1>: <h1> {displayWord.word} </h1>}
+          {speaking ? (
+            <h1>
+              <SplitText displayWord={displayWord.word} role={"heading"} />{" "}
+            </h1>
+          ) : (
+            <h1> {displayWord.word} </h1>
+          )}
         </div>
         <div id="definition">
           <b>Part of speech: </b> {displayWord.partOfSpeech}
@@ -36,8 +42,30 @@ const FlashCard = ({ handleClick, displayWord }) => {
           {displayWord.definition}
         </div>
         <div id="button-container">
-          <input id="button" type="button" value="Next" {...(!speaking ? {onClick: ()=> {handleClick()}}:{})} />
-          <input id="button" type="button" value="spell" {...(!speaking ? {onClick: ()=> {spellWord()}}:{})} />
+          <input
+            id="button"
+            type="button"
+            value="Next"
+            {...(!speaking
+              ? {
+                  onClick: () => {
+                    handleClick();
+                  },
+                }
+              : {})}
+          />
+          <input
+            id="button"
+            type="button"
+            value="spell"
+            {...(!speaking
+              ? {
+                  onClick: () => {
+                    spellWord();
+                  },
+                }
+              : {})}
+          />
         </div>
       </div>
     </div>

@@ -1,11 +1,3 @@
-#landing-page {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
 .flashcard {
   margin-top: 35px;
   margin-bottom: 35px;
@@ -17,4 +9,12 @@
   max-width: 450px;
   border: rgb(32, 32, 32) 2px solid;
   border-radius: 10px;
+}
+
+#landing-page {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
