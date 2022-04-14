@@ -7,7 +7,6 @@ import { getProfileById, updateProfile } from "../../services/profileService";
 //Components
 import AvatarSelection from "../../pages/Auth/AvatarSelection";
 
-
 const Profile = ({ user }) => {
   const [userProfile, setUserProfile] = useState();
   const [popup, setPopup] = useState(false);
@@ -19,7 +18,7 @@ const Profile = ({ user }) => {
     grade: null,
     avatar: "",
   });
-  let updatedProfile = formData
+  let updatedProfile = formData;
 
   useEffect(() => {
     const getProfile = async () => {
@@ -30,7 +29,7 @@ const Profile = ({ user }) => {
           email: profileData.email,
           grade: profileData.grade,
           avatar: profileData.avatar,
-        })
+        });
         setUserProfile(profileData);
       } catch (error) {
         throw error;
@@ -40,26 +39,25 @@ const Profile = ({ user }) => {
   }, [user.profile, click]);
 
   const handlePopup = () => {
-    setClick(!click)
+    setClick(!click);
     setPopup(!popup);
   };
 
   const handleChange = async (e) => {
-    setFormData({'avatar':e.target.value})
+    setFormData({ avatar: e.target.value });
     updatedProfile = {
       email: userProfile.email,
       name: userProfile.name,
       avatar: e.target.value,
       grade: userProfile.grade,
-    }
+    };
     try {
-      await updateProfile('61f46356c4b22084d3f4ffcf', updatedProfile);
+      await updateProfile("61f46356c4b22084d3f4ffcf", updatedProfile);
     } catch (error) {
       throw error;
     }
   };
 
-  console.log(userProfile);
   return (
     <div id="profile-page">
       {popup && (
@@ -71,24 +69,27 @@ const Profile = ({ user }) => {
       )}
       <h1>Spelling Bee Practice App</h1>
       <div className="profile=info">
-        <div id="profile-card">
-          <img
-            id="profile-pic"
-            alt="profile pictue"
-            src={userProfile?.avatar}
-          />
-                    <button
-            type="button"
-            autoComplete="off"
-            id="avatar-button"
-            onClick={handlePopup}
-          >
-            Change Avatar
-          </button>
-          <h1>{userProfile?.name}</h1>
-          <h2>Grade: {userProfile?.grade}</h2>
-          <h3>e-mail: {userProfile?.email}</h3>
-        </div>
+        {userProfile && (
+          <div id="profile-card">
+            <img
+              id="profile-pic"
+              alt="profile pictue"
+              src={userProfile?.avatar}
+            />
+            <button
+              type="button"
+              autoComplete="off"
+              id="avatar-button"
+              onClick={handlePopup}
+            >
+              Change Avatar
+            </button>
+            <h1>{userProfile?.name}</h1>
+            <h2>Grade: {userProfile?.grade}</h2>
+            <h3>e-mail: {userProfile?.email}</h3>
+          </div>
+        )}
+        {!userProfile && <h2>Loading ... </h2>}
       </div>
     </div>
   );

@@ -30,14 +30,14 @@ button {
   border-radius: 12px;
   height: 45px;
 }
-
+/* 
 button:hover {
   background: blue;
 }
 
 button:active {
   background: red;
-}
+} */
 
 #list {
   text-align: left;

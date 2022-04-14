@@ -21,7 +21,6 @@ export const getProfileById = async (profileId) => {
 };
 
 export const updateProfile = async (profileId, updatedProfile) => {
-  console.log("ID: ", profileId, 'update Info: ',JSON.stringify(updatedProfile))
   try {
     const res = await fetch(`${BASE_URL}/${profileId}`, {
       method: "PUT",
@@ -32,7 +31,6 @@ export const updateProfile = async (profileId, updatedProfile) => {
       body: JSON.stringify(updatedProfile),
     });
     const data = await res.json();
-    console.log("data: ", data)
     return data;
   } catch (error) {
     throw error;
