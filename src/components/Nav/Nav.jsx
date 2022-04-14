@@ -19,139 +19,202 @@ const Nav = (props) => {
 
   return (
     <>
-    <div id="humburger-menu">
-      <nav className="navBar">
-        <button onClick={handleToggle}>
-          {navbarOpen ? (
-            <MdClose style={{ color: "#fff", width: "40px", height: "40px" }} />
+      <div id="humburger">
+        <nav className="navBar">
+          <button onClick={handleToggle}>
+            {navbarOpen ? (
+              <MdClose
+                style={{ color: "#fff", width: "40px", height: "40px" }}
+              />
+            ) : (
+              <FiMenu
+                style={{ color: "#7b7b7b", width: "40px", height: "40px" }}
+              />
+            )}
+          </button>
+          {props.user && props.user.isAdmin ? (
+            <ul className={`menuNav ${navbarOpen ? " showMenu" : ""}`}>
+              <li>
+                <NavLink id="logo" to="/" onClick={() => closeMenu()}>
+                  <img src={LogoDesktop} alt="bee" />
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/spellingbee" onClick={() => closeMenu()}>
+                  Spelling Bee Mode
+                </NavLink>
+              </li>
+              <li>
+                {" "}
+                <NavLink to="/study" onClick={() => closeMenu()}>
+                  Study Words
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/profile" onClick={() => closeMenu()}>
+                  Profile
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/admin" onClick={() => closeMenu()}>
+                  Admin Panel
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/"
+                  onClick={() => {
+                    props.handleLogout();
+                    closeMenu();
+                  }}
+                >
+                  Logout
+                </NavLink>
+              </li>
+            </ul>
+          ) : props.user ? (
+            <ul className={`menuNav ${navbarOpen ? " showMenu" : ""}`}>
+              <li>
+                <NavLink id="logo" to="/" onClick={() => closeMenu()}>
+                  <img src={LogoDesktop} alt="bee" />
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/spellingbee" onClick={() => closeMenu()}>
+                  Spelling Bee Mode
+                </NavLink>
+              </li>
+              <li>
+                {" "}
+                <NavLink to="/study" onClick={() => closeMenu()}>
+                  Study Words
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/profile" onClick={() => closeMenu()}>
+                  Profile
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  to="/"
+                  onClick={() => {
+                    props.handleLogout();
+                    closeMenu();
+                  }}
+                >
+                  Logout
+                </NavLink>
+              </li>
+            </ul>
           ) : (
-            <FiMenu
-              style={{ color: "#7b7b7b", width: "40px", height: "40px" }}
-            />
+            <ul className={`menuNav ${navbarOpen ? " showMenu" : ""}`}>
+              <li>
+                <div className="logoHolder">
+                  <img src={LogoDesktop} alt="bee" />
+                </div>
+              </li>
+              <li>
+                {" "}
+                <NavLink
+                  to="/signup"
+                  onClick={() => {
+                    props.handleLogout();
+                    closeMenu();
+                  }}
+                >
+                  Sign Up
+                </NavLink>{" "}
+              </li>
+              <li>
+                {" "}
+                <NavLink
+                  to="/signin"
+                  onClick={() => {
+                    props.handleLogout();
+                    closeMenu();
+                  }}
+                >
+                  Sign In
+                </NavLink>{" "}
+              </li>
+            </ul>
           )}
-        </button>
-        <ul className={`menuNav ${navbarOpen ? " showMenu" : ""}`}>
-          <li>
-            <NavLink
-              to="/spellingbee"
-              activeClassName="active-link"
-              onClick={() => closeMenu()}
-              exact
-            >
-              Spelling Bee Mode
-            </NavLink>
-          </li>
-          <li>
-            {" "}
-            <NavLink
-              to="/study"
-              activeClassName="active-link"
-              onClick={() => closeMenu()}
-              exact
-            >
-              Study Words
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/profile"
-              activeClassName="active-link"
-              onClick={() => closeMenu()}
-              exact
-            >
-              Profile
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/admin"
-              activeClassName="active-link"
-              onClick={() => closeMenu()}
-              exact
-            >
-              Admin Panel
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/"
-              activeClassName="active-link"
-              onClick={() => closeMenu() && props.handleLogout}
-              exact
-            >
-              {" "}
-              Logout
-            </NavLink>
-          </li>
-        </ul>
-      </nav>
+        </nav>
       </div>
       <div id="nav-bar">
-      <nav className="nav-bar">
-      <NavLink id="logo" to="/">
-        <img src={LogoDesktop} alt="bee" />
-      </NavLink>
-      {props.user && props.user.isAdmin ? (
-        <>
-          <NavLink
-            to="/spellingbee"
-            activeClassName="active-link"
-            onClick={() => closeMenu()}
-            exact
-          >
-            Spelling Bee Mode
+        <nav className="nav-bar">
+          <NavLink id="logo" to="/" onClick={() => closeMenu()}>
+            <img src={LogoDesktop} alt="bee" />
           </NavLink>
-          <NavLink
-            to="/study"
-            activeClassName="active-link"
-            onClick={() => closeMenu()}
-            exact
-          >
-            Study Words
-          </NavLink>
-          <NavLink
-            to="/profile"
-            activeClassName="active-link"
-            onClick={() => closeMenu()}
-            exact
-          >
-            Profile
-          </NavLink>
-          <NavLink
-            to="/admin"
-            activeClassName="active-link"
-            onClick={() => closeMenu()}
-            exact
-          >
-            Admin Panel
-          </NavLink>
-          <NavLink
-            to="/"
-            activeClassName="active-link"
-            onClick={() => closeMenu() && props.handleLogout}
-            exact
-          >
-            {" "}
-            Logout
-          </NavLink>
-        </>
-      ) : props.user ? (
-        <>
-          {" "}
-          <NavLink to="/spellingbee">Spelling Bee Mode</NavLink>
-          <NavLink to="/study">Study Words</NavLink>
-          <NavLink to="/" onClick={props.handleLogout}>
-            Logout
-          </NavLink>
-        </>
-      ) : (
-        <>
-          <NavLink to="/signup">Sign Up</NavLink>
-          <NavLink to="/signin">Sign In</NavLink>
-        </>
-      )}
-    </nav>
-    </div>
+          {props.user && props.user.isAdmin ? (
+            <>
+              <NavLink to="/spellingbee" onClick={() => closeMenu()}>
+                Spelling Bee Mode
+              </NavLink>
+              <NavLink to="/study" onClick={() => closeMenu()}>
+                Study Words
+              </NavLink>
+              <NavLink to="/profile" onClick={() => closeMenu()}>
+                Profile
+              </NavLink>
+              <NavLink to="/admin" onClick={() => closeMenu()}>
+                Admin Panel
+              </NavLink>
+              <NavLink
+                to="/"
+                onClick={() => {
+                  props.handleLogout();
+                  closeMenu();
+                }}
+              >
+                {" "}
+                Logout
+              </NavLink>
+            </>
+          ) : props.user ? (
+            <>
+              {" "}
+              <NavLink to="/spellingbee" onClick={() => closeMenu()} exact>
+                Spelling Bee Mode
+              </NavLink>
+              <NavLink to="/study" onClick={() => closeMenu()}>
+                Study Words
+              </NavLink>
+              <NavLink
+                to="/"
+                onClick={() => {
+                  props.handleLogout();
+                  closeMenu();
+                }}
+              >
+                Logout
+              </NavLink>
+            </>
+          ) : (
+            <>
+              <NavLink
+                to="/signup"
+                onClick={() => {
+                  props.handleLogout();
+                  closeMenu();
+                }}
+              >
+                Sign Up
+              </NavLink>
+              <NavLink
+                to="/signin"
+                onClick={() => {
+                  props.handleLogout();
+                  closeMenu();
+                }}
+              >
+                Sign In
+              </NavLink>
+            </>
+          )}
+        </nav>
+      </div>
     </>
   );
 };
