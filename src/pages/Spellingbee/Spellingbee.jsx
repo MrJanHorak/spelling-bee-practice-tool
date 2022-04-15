@@ -257,7 +257,7 @@ const Spellingbee = ({ user }) => {
     <div id="spellingBeeMode-page">
       <h2>Spelling Bee Mode</h2>
 
-      <div className="form-container">
+      <div className="form-container" id="speak">
         <div>
           <span>
             <h3>
@@ -290,7 +290,7 @@ const Spellingbee = ({ user }) => {
           <span>{transcript}</span>
         </div>
       </div>
-      <div className="form-container">
+      <div className="form-container" id="voice-commands">
         <h2>
           <b>speech commands:</b>
         </h2>

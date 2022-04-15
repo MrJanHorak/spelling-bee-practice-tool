@@ -1,19 +1,80 @@
-h2 {
-  margin: 0;
+@media (orientation: portrait) {
+  #spellingBeeMode-page {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .form-container {
+    margin-top: 35px;
+    margin-bottom: 5px;
+    padding: 8px;
+    width: 75%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 450px;
+    border: rgb(32, 32, 32) 2px solid;
+    border-radius: 10px;
+    text-align: center;
+  }
 }
 
-.form-container {
-  margin-top: 35px;
-  margin-bottom: 5px;
-  padding: 8px;
-  width: 75%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  max-width: 450px;
-  border: rgb(32, 32, 32) 2px solid;
-  border-radius: 10px;
-  text-align: center;
+@media (orientation: landscape) {
+  #spellingBeeMode-page {
+    width: 100%;
+    max-width: 750px;
+    display: grid;
+    grid-template-rows: 55px auto;
+    grid-template-columns: 60% 40%;
+    grid-template-areas:
+      "header header"
+      "main sidebar";
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  #speak {
+    grid-area: main;
+    margin-left: 10%;
+  }
+
+  #voice-commands {
+    align-items: center;
+    grid-area: sidebar;
+  }
+
+  #spellingBeeMode-page h2 {
+    vertical-align: middle;
+    text-align: center;
+    grid-area: header;
+    margin-top: 8px;
+  }
+
+  .form-container {
+    margin-top: 0px;
+    padding: 8px;
+    height: 75%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    max-width: 450px;
+    border: rgb(32, 32, 32) 2px solid;
+    border-radius: 10px;
+    text-align: center;
+  }
 }
 
 .form-container button {
@@ -39,17 +100,4 @@ h2 {
 
 #list {
   text-align: left;
-}
-
-#spellingBeeMode-page {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  margin: 0;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
 }

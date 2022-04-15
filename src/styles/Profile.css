@@ -15,19 +15,31 @@
   width: 100%;
   align-items: center;
   justify-content: center;
-  width: 100%;
 }
 
+@media (orientation: portrait){
 #profile-card {
   border: 2px solid black;
   padding: 12px;
-  width: 350px;
+  width: 95%;
   border-radius: 12px;
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
 }
+}
 
+@media (orientation: landscape){
+  #profile-card {
+    border: 2px solid black;
+    padding: 12px;
+    width: 90%;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+}
 #profile-card button {
   background: #7450e9;
   border: none;
