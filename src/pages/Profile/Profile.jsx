@@ -67,21 +67,33 @@ const Profile = ({ user }) => {
           handlePopup={handlePopup}
         />
       )}
-      {/* <h2>Profile</h2> */}
       <div className="profile-info">
         {userProfile && (
           <div id="profile-card">
-            <img
-              id="profile-pic"
-              alt="profile pictue"
-              src={userProfile?.avatar}
-            />
-            <button type="button" autoComplete="off" onClick={handlePopup}>
-              Change Avatar
-            </button>
-            <h1>{userProfile?.name}</h1>
-            <h2>Grade: {userProfile?.grade}</h2>
-            <h3>e-mail: {userProfile?.email}</h3>
+            <div id="profile-image">
+              <img
+                id="profile-pic"
+                alt="profile pictue"
+                src={userProfile?.avatar}
+              />
+            </div>
+            <div id="update-avater">
+              {" "}
+              <button type="button" autoComplete="off" onClick={handlePopup}>
+                Change Avatar
+              </button>
+            </div>
+            <div id="bio-info">
+              <div id="user-name">
+                <h1>{userProfile?.name}</h1>
+              </div>
+              <div id="user-grade">
+                <h2>Grade: {userProfile?.grade}</h2>
+              </div>
+            </div>
+            <div id="user-email">
+              <h3>e-mail: {userProfile?.email}</h3>
+            </div>
           </div>
         )}
         {!userProfile && <h2>Loading ... </h2>}

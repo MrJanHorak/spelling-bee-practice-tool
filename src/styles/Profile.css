@@ -17,40 +17,81 @@
   justify-content: center;
 }
 
-@media (orientation: portrait){
-#profile-card {
-  border: 2px solid black;
-  padding: 12px;
-  width: 95%;
-  border-radius: 12px;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-}
+@media (orientation: portrait) {
+  #profile-card {
+    border: 2px solid black;
+    padding: 12px;
+    width: 95%;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+  }
+
+  #profile-card button {
+    background: #7450e9;
+    border: none;
+    color: white;
+    font-weight: 600;
+    text-align: center;
+    padding: 7px;
+    margin: 4px;
+    border-radius: 12px;
+    height: 45px;
+    width: 150px;
+  }
 }
 
-@media (orientation: landscape){
+@media (orientation: landscape) {
   #profile-card {
     border: 2px solid black;
     padding: 12px;
     width: 90%;
+    height: 250px;
     border-radius: 12px;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-rows: 70% 30%;
+    grid-template-columns: 40% 60%;
+    grid-template-areas:
+      "main bio"
+      "button contact";
   }
-}
-#profile-card button {
-  background: #7450e9;
-  border: none;
-  color: white;
-  font-weight: 600;
-  text-align:center;
-  padding: 7px;  
-  margin: 4px;
-  border-radius: 12px;
-  height: 45px;
-  width:150px;
+
+  #profil-image {
+    grid-area: main;
+  }
+
+  #bio-info {
+    grid-area: bio;
+  }
+
+  #update-avatar {
+    grid-area: button;
+  }
+  #update-avatar button {
+    margin-top: 16px;
+  }
+
+  #user-email {
+    grid-area: contact;
+  }
+  #user-email h3 {
+    margin-top: 10px;
+  }
+
+  #profile-card button {
+    background: #7450e9;
+    border: none;
+    color: white;
+    font-weight: 600;
+    text-align: center;
+    padding: 7px;
+    margin-left: 8px;
+    margin-top: 16px;
+    border-radius: 12px;
+    height: 45px;
+    width: 150px;
+  }
 }
 
 #profile-card button:hover {
@@ -59,7 +100,7 @@
 
 #profile-card button:active {
   background: red;
-} 
+}
 
 #profile-pic {
   width: 150px;
