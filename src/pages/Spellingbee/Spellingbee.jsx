@@ -255,8 +255,6 @@ const Spellingbee = ({ user }) => {
 
   return (
     <div id="spellingBeeMode-page">
-      <h2>Spelling Bee Mode</h2>
-
       <div className="form-container" id="speak">
         <div>
           <span>

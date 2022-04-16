@@ -18,7 +18,7 @@ function Words({ removeWord, allWords, updateGrade }) {
             <h3>
               <button
                 id="remove-button"
-                title="remove word" 
+                title="remove word"
                 onClick={(e) => removeWord(e, word._id)}
               >
                 x
@@ -31,7 +31,15 @@ function Words({ removeWord, allWords, updateGrade }) {
           {word.partOfSpeech}
           <br />
           <b> Grade level: </b>
-          <input id="grade-Level"  type='number' name="gradeLevel" min='1' max='8' value={word.gradeLevel} onChange={(e) => updateGrade(e, word)}/>
+          <input
+            id="grade-Level"
+            type="number"
+            name="gradeLevel"
+            min="1"
+            max="8"
+            value={word.gradeLevel}
+            onChange={(e) => updateGrade(e, word)}
+          />
           <br />
           <b>Definition: </b>
           {word.definition}
@@ -46,7 +54,7 @@ function Words({ removeWord, allWords, updateGrade }) {
             <h3>
               <button
                 id="remove-button"
-                title="remove word" 
+                title="remove word"
                 onClick={(e) => removeWord(e, word._id)}
               >
                 x
@@ -58,7 +66,15 @@ function Words({ removeWord, allWords, updateGrade }) {
           {word.partOfSpeech}
           <br />
           <b> Grade level: </b>
-          <input id="grade-Level"  type='number' name="gradeLevel" min='1' max='8' value={word.gradeLevel} onChange={(e) => updateGrade(e, word)}/>
+          <input
+            id="grade-Level"
+            type="number"
+            name="gradeLevel"
+            min="1"
+            max="8"
+            value={word.gradeLevel}
+            onChange={(e) => updateGrade(e, word)}
+          />
           <br />
           <b>Definition: </b>
           {word.definition}
@@ -77,82 +93,102 @@ function Words({ removeWord, allWords, updateGrade }) {
 
       <form className="register-form">
         <div id="filter-button-container">
-          <input
+          <button
             type="button"
             className="filter-button"
             title="1st grade words"
             value="1st"
             onClick={handleClick}
-          />
-          <input
+          >
+            1st
+          </button>
+          <button
             type="button"
             className="filter-button"
             title="2nd grade words"
             value="2nd"
             onClick={handleClick}
-          />
-          <input
+          >
+            2nd
+          </button>
+          <button
             type="button"
             className="filter-button"
             title="3rd grade words"
             value="3rd"
             onClick={handleClick}
-          />
-          <input
+          >
+            3rd
+          </button>
+          <button
             type="button"
             className="filter-button"
             title="4th grade words"
             value="4th"
             onClick={handleClick}
-          />
-          <input
+          >
+            4th
+          </button>
+          <button
             type="button"
             className="filter-button"
             title="5th grade words"
             value="5th"
             onClick={handleClick}
-          />
-          <input
+          >
+            5th
+          </button>
+          <button
             type="button"
             className="filter-button"
             title="6th grade words"
             value="6th"
             onClick={handleClick}
-          />
-          <input
+          >
+            6th
+          </button>
+          <button
             type="button"
             className="filter-button"
             title="7th grade words"
             value="7th"
             onClick={handleClick}
-          />
-          <input
+          >
+            7th
+          </button>
+          <button
             type="button"
             className="filter-button"
             title="8th grade words"
             value="8th"
             onClick={handleClick}
-          />
-          <input
+          >
+            8th
+          </button>
+          <button
             type="button"
             className="filter-button"
             title="hide all words"
             value="none"
             onClick={handleClick}
-          />
+          >
+            none
+          </button>
         </div>
 
         <div id="word-database-stats">
           <b>There are {allWords.length} Words total in the Database</b>
         </div>
 
-        <input
-          id="submit-button"
+        <button
+          id="all-words-button"
           type="button"
           title="Show all words"
           value="Show All Words"
           onClick={handleClick}
-        />
+        >
+          Show All Words
+        </button>
         <div id="word-list">{wordList}</div>
       </form>
     </>

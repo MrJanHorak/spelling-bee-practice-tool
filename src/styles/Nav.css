@@ -1,5 +1,4 @@
 .navOption {
-  /* margin: 0 10px 0 10px; */
   text-decoration: none;
 }
 
@@ -38,9 +37,7 @@
   margin-right: 8px;
 }
 
-/* sidebar Nav */
-
-a {
+.nav-bar a {
   display: block;
   padding: 10px 20px;
   text-decoration: none;
@@ -49,8 +46,23 @@ a {
   font-weight: bold;
 }
 
-a:active {
-  color: white;
+.nav-bar a:hover {
+  color: rgb(209, 209, 209);
+}
+
+.nav-bar a:focus {
+  color: rgb(41, 70, 199);
+}
+
+/* sidebar Nav */
+
+.menuNav a {
+  display: block;
+  padding: 10px 20px;
+  text-decoration: none;
+  color: #000000;
+  text-transform: uppercase;
+  font-weight: bold;
 }
 
 .logoHolder {
@@ -72,9 +84,8 @@ a:active {
 .navBar button {
   position: fixed;
   left: -5px;
-  top: -5px;
+  top: 0;
   z-index: 10;
-  cursor: pointer;
   background: transparent;
   border: none;
 }

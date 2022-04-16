@@ -24,19 +24,6 @@ h1 span {
   }
 }
 
-  
-/* .flashcard-container {
-  width: 550px;
-  height: 250px;
-  padding: 8px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 75%;
-  border: rgb(32, 32, 32) 2px solid;
-  border-radius: 10px;
-} */
-
 .flashcard-container button {
   width: 100px;
   height: 45px;
@@ -62,7 +49,7 @@ h1 span {
 }
 
 @media (orientation: landscape) {
-  h1{
+  h1 {
     margin-top: 30px;
   }
 
@@ -77,7 +64,7 @@ h1 span {
     border: rgb(32, 32, 32) 2px solid;
     border-radius: 10px;
   }
-  
+
   .flashcard-definition {
     display: flex;
     flex-direction: column;
@@ -104,7 +91,7 @@ h1 span {
 }
 
 @media (orientation: portrait) {
-  h1{
+  h1 {
     margin-top: 40px;
   }
 
@@ -119,7 +106,7 @@ h1 span {
     border: rgb(32, 32, 32) 2px solid;
     border-radius: 10px;
   }
-  
+
   .flashcard-definition {
     width: 90%;
     display: flex;

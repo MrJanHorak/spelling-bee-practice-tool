@@ -1,67 +1,77 @@
-input[type="button"] {
-  margin-top: 8px;
-  border: 0;
-  border-radius: 50%;
-  padding: 0;
-  font-weight: 600;
-  color: rgb(255, 255, 255);
-}
-
-input[type="button"]:hover {
-  background: blue;
-}
-
-input[type="button"]:focus {
-  background: red;
-}
-
-.filter-button {
-  width: 38px;
-  height: 38px;
-  margin: 0 4px 0 4px;
-  border: 0;
-  border-radius: 50%;
-  background: #7450e9;
-}
-
 #filter-button-container {
   text-align: center;
 }
 
-#submit-button {
+#all-words-button {
   width: 88%;
   height: 40px;
   align-self: center;
+  border: 0;
+  margin-top: 8px;
+  border: 10px;
+  border-radius: 12px;
+  padding: 0;
+  font-weight: 600;
+  color: rgb(255, 255, 255);
+  margin: 0 4px 0 4px;
+  background: #7450e9;
 }
 
-#submit-button:hover {
+#all-words-button:hover {
   background: blue;
 }
 
-#submit-button:focus {
+#all-words-button:focus {
   background: red;
 }
 
-#word-database-stats{
+#word-database-stats {
   text-align: center;
 }
 
-#word-list{
+#word-list {
   width: 65%;
   text-align: left;
 }
 
-#remove-button{
+#remove-button {
   background-color: red;
+  border: none;
   border-radius: 50%;
   height: 15px;
   width: 15px;
+  padding: 0;
   margin: 0 8px 0 0;
   display: table-cell;
-  line-height: .5px;
+  line-height: 0.5px;
 }
 
-#grade-level{
+#word-list input {
+  border: 0px solid #292934;
+  border-radius: 14px;
+  color: black;
+  text-align: center;
   width: 25px;
+  padding: 4px;
+}
+
+.filter-button {
+  margin-top: 8px;
+  border: 10px;
+  border-radius: 50%;
   padding: 0;
+  font-weight: 600;
+  color: rgb(255, 255, 255);
+  width: 38px;
+  height: 38px;
+  margin: 0 4px 0 4px;
+  background: #7450e9;
+}
+
+.filter-button:hover {
+  background: blue;
+}
+
+.filter-button:focus {
+  background: red;
 }

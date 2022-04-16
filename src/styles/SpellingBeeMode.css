@@ -31,12 +31,8 @@
   #spellingBeeMode-page {
     width: 100%;
     max-width: 750px;
-    display: grid;
-    grid-template-rows: 55px auto;
-    grid-template-columns: 60% 40%;
-    grid-template-areas:
-      "header header"
-      "main sidebar";
+    display: flex;
+    flex-direction: row;
     align-items: center;
     justify-content: center;
     margin: 0;
@@ -48,19 +44,15 @@
 
   #speak {
     grid-area: main;
-    margin-left: 10%;
+    margin: 0 5% 0 5%;
+    height: 225px;
   }
 
   #voice-commands {
     align-items: center;
     grid-area: sidebar;
-  }
-
-  #spellingBeeMode-page h2 {
-    vertical-align: middle;
-    text-align: center;
-    grid-area: header;
-    margin-top: 8px;
+    margin: 0 5% 0 5%;
+    height: 225px;
   }
 
   .form-container {
@@ -77,7 +69,7 @@
   }
 }
 
-.form-container button {
+#spellingBeeMode-page button {
   background: #7450e9;
   border: none;
   color: white;

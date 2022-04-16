@@ -1,16 +1,69 @@
-.admin-page {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-family: 'Lexend', sans-serif;;
+@media (orientation: portrait) {
+  .admin-page {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: "Lexend", sans-serif;
+  }
+
+  .definition-container {
+    display: flex;
+    flex-direction: column;
+    max-width: 550px;
+    padding-bottom: 45px;
+  }
+
+  .form-container {
+    margin-top: 55px;
+    margin-bottom: 0px;
+    padding: 8px;
+    width: 75%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 450px;
+    border: rgb(32, 32, 32) 2px solid;
+    border-radius: 10px;
+  }
+}
+
+@media (orientation: landscape) {
+  .admin-page {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: "Lexend", sans-serif;
+  }
+
+  .definition-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    max-width: 650px;
+    padding-bottom: 45px;
+  }
+
+  .form-container {
+    margin-top: 25px;
+    margin-bottom: 5px;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 650px;
+    border: rgb(32, 32, 32) 2px solid;
+    border-radius: 10px;
+  }
 }
 
 .title-container {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  max-width: 100%;
   align-items: flex-start;
 }
 
@@ -19,29 +72,12 @@
   font-weight: 600;
 }
 
-.form-container {
-  margin-top: 35px;
-  margin-bottom: 35px;
-  padding: 8px;
-  width: 75%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  max-width: 450px;
-  border: rgb(32, 32, 32) 2px solid;
-  border-radius: 10px;
-}
-
-.definition-container {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  max-width: 550px;
-  padding-bottom: 45px;
-}
-
 .definition-container #submit-button {
-  width: 134px;
+  max-width: 134px;
+}
+
+.definition-container input {
+  color: black;
 }
 
 .register-form {
@@ -50,13 +86,30 @@
   width: 100%;
 }
 
-.definition-option{
+.register-form input {
+  color: rgb(32, 32, 32);
+  text-align: center;
+}
+
+.definition-option {
   text-align: left;
 }
 
-.form-container input {
+.wordsearch-container input {
   border: 1px solid #292934;
   border-radius: 14px;
+  color: black;
+  text-align: center;
+  width: auto;
+}
+
+.wordsearch-container button {
+  position: absolute;
+  bottom: 0;
+}
+
+.form-container button {
+  color: rgb(255, 255, 255);
 }
 
 .form-container input[type="radio"] {
@@ -72,10 +125,11 @@
   margin-bottom: 10px;
 }
 
-
-#submit-button {
+#find-button {
   margin-top: 22px;
   background: #7450e9;
+  height: 45px;
+  max-width: 95%;
   border: none;
   color: rgb(255, 255, 255);
   font-weight: 600;
@@ -83,13 +137,8 @@
   padding: 4px;
 }
 
-#gradeLevel {
-  text-align: center;
-}
-
 #gradeLevel input {
-  text-align: center;
-  width: 45%;
+  max-width: 45%;
 }
 
 #wordsearch-container {
@@ -101,7 +150,15 @@
   margin: 8px;
 }
 
-#button-container {
-  width: 100%;
+#definition-button-container {
+  position: relative;
+  bottom: 0;
+  max-width: 100%;
   text-align: center;
+  margin-bottom: 0;
+}
+
+#definition-button-container button {
+  width: 97px;
+  margin: 10px;
 }

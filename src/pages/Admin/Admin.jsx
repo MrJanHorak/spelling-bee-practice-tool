@@ -61,7 +61,7 @@ const Admin = () => {
     };
     try {
       await updateWord(word._id, updatedWord);
-      getWords()
+      getWords();
     } catch (error) {
       throw error;
     }
@@ -115,7 +115,7 @@ const Admin = () => {
           )}
         </div>
         {allWords ? (
-          <div className="form-container">
+          <div className="form-container" id="word-lists">
             <Words
               updateGrade={updateGrade}
               removeWord={removeWord}

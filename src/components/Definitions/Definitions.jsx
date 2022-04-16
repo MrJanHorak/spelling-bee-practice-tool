@@ -23,8 +23,8 @@ function Definitions({ added, word }) {
   };
 
   const handleClick = () => {
-    added()
-  }
+    added();
+  };
 
   const handleChange = (e) => {
     if (e.target.name === "gradeLevel") {
@@ -82,9 +82,18 @@ function Definitions({ added, word }) {
             </label>
             {definitionsList}
           </div>
-          <div id="button-container">
-          <input id="submit-button" type="submit" />
-          <input id="submit-button" type="button" value="Back" onClick={handleClick} />
+          <div id="definition-button-container">
+            <button id="submit-button" type="submit">
+              SUBMIT
+            </button>
+            <button
+              id="submit-button"
+              type="button"
+              value="Back"
+              onClick={handleClick}
+            >
+              BACK
+            </button>
           </div>
         </form>
       </div>
