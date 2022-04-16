@@ -25,6 +25,19 @@
     border-radius: 10px;
     text-align: center;
   }
+
+  #spellingBeeMode-page button {
+    background: #7450e9;
+    border: none;
+    color: white;
+    font-weight: 600;
+    text-align: center;
+    padding: 7px;
+    margin: 4px;
+    border-radius: 12px;
+    height: 45px;
+    width: 75px;
+  }
 }
 
 @media (orientation: landscape) {
@@ -67,20 +80,22 @@
     border-radius: 10px;
     text-align: center;
   }
+
+  #spellingBeeMode-page button {
+    background: #7450e9;
+    border: none;
+    color: white;
+    font-weight: 600;
+    text-align: center;
+    padding: 7px;
+    margin: 4px;
+    border-radius: 12px;
+    height: 45px;
+    width: 65px;
+  }
 }
 
-#spellingBeeMode-page button {
-  background: #7450e9;
-  border: none;
-  color: white;
-  font-weight: 600;
-  text-align: center;
-  padding: 7px;
-  margin: 4px;
-  border-radius: 12px;
-  height: 45px;
-  width: 75px;
-}
+
 
 .form-container button:hover {
   background: blue;
