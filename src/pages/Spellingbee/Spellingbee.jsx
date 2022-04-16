@@ -166,7 +166,6 @@ const Spellingbee = ({ user }) => {
   ];
 
   const {
-    transcript,
     interimTranscript,
     finalTranscript,
     resetTranscript,
