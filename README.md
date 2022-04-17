@@ -83,6 +83,10 @@ I struggled to figure out how to animate the letters on the flashcard in study m
 https://fossheim.io/writing/posts/react-text-splitting/ <br/>
 https://fossheim.io/writing/posts/react-text-splitting-animations/ 
 
+Grade level words were found through google searches for Scripps Spelling Bee word lists all over the internet.
+
+Word definitions have been pulled in using the [WordsAPI](https://www.wordsapi.com/) in the Admin wordsearch function. I have free usage with a 500 word a day limit.
+
 Avatars: 
 All individually downloaded for free from flaticon. The entire pack can be found at: [Icon Pack: Animals | Flat](https://www.flaticon.com/packs/animals-3)
 * <a href="https://www.flaticon.com/free-icons/octopus" title="octopus icons">Octopus icons created by Freepik - Flaticon</a>
