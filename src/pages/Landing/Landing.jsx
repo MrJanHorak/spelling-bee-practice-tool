@@ -22,6 +22,7 @@ const Landing = ({ user }) => {
           <br />
           This is not a finished product. There are still several things being
           worked on and bugs that need to be figured out. Here a list of items I hope to cover in a the next few weeks:
+          </p>
           <ul>
             <li>graphical display of progress</li>
             <li>settings to change the voice</li>
@@ -30,6 +31,7 @@ const Landing = ({ user }) => {
             <li>parent/teacher access</li>
             <li>QR-code login for younger children</li>
           </ul>
+          <p>
           Please give it a try, send me feedback, or feel free to join in and colaborate and code along.
           <br/><br/>
           <b>test user:</b><br/>
@@ -37,7 +39,7 @@ const Landing = ({ user }) => {
           <br/>
           <b>test admin user:</b><br/>
           <b>login: </b> testadmin@testuser.test <b>Password: </b>testadmin
-        </p>
+          </p>
       </div>
     </div>
   );

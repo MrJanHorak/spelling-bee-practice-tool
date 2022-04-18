@@ -2,6 +2,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import SpeechRecognition, {
   useSpeechRecognition,
 } from "react-speech-recognition";
+import { createSpeechlySpeechRecognition } from "@speechly/speech-recognition-polyfill";
 import { useSpeechSynthesis } from "react-speech-kit";
 
 // Services
@@ -11,10 +12,13 @@ import { getProfileById } from "../../services/profileService";
 //assets
 import "../../styles/SpellingBeeMode.css";
 
+const appId = process.env.REACT_APP_SPEECHLY_API_KEY;
+const SpeechlySpeechRecognition = createSpeechlySpeechRecognition(appId);
+SpeechRecognition.applyPolyfill(SpeechlySpeechRecognition);
+
 const Spellingbee = ({ user }) => {
   const { speak } = useSpeechSynthesis();
 
-  // const [value, setValue] = useState("");
   const [message, setMessage] = useState("");
   const [allWords, setAllWords] = useState();
   const [click, setClick] = useState(0);
@@ -136,37 +140,37 @@ const Spellingbee = ({ user }) => {
 
   const commands = [
     {
-      command: "reset",
+      command: "RESET",
       callback: () => resetTranscript(),
     },
     {
-      command: "please repeat the word",
+      command: "PLEASE REPEAT THE WORD",
       callback: () => word(),
     },
     {
-      command: "may I have the definition please",
+      command: "MAY I HAVE THE DEFINITION PLEASE",
       callback: () => definition(),
     },
     {
-      command: "hello",
+      command: "HELLO",
       callback: () => hello(),
     },
     {
-      command: "clear",
+      command: "CLEAR",
       callback: () => resetTranscript(),
     },
     {
-      command: "may I have the next word please",
+      command: "MAY I HAVE THE NEXT WORD PLEASE",
       callback: () => nextWord(),
     },
     {
-      command: "please stop listening",
+      command: "PLEASE STOP LISTENING",
       callback: () => stop(),
     },
   ];
 
   const {
-    interimTranscript,
+    // interimTranscript,
     finalTranscript,
     resetTranscript,
     listening,
@@ -195,21 +199,28 @@ const Spellingbee = ({ user }) => {
   }, [allWords, click, listenContinuously, speak, resetTranscript]);
 
   useEffect(() => {
+    console.log("transcript: ", finalTranscript.toLowerCase());
     const commandList = [
-      "please repeat the word",
-      "may I have the definition please",
-      "may I have the next word please",
-      "hello",
-      "clear",
-      "reset",
-      "please stop listening",
+      "PLEASE REPEAT THE WORD",
+      "MAY I HAVE THE DEFINITION PLEASE",
+      "MAY I HAVE THE NEXT WORD PLEASE",
+      "HELLO",
+      "CLEAR",
+      "RESET",
+      "PLEASE STOP LISTENING",
     ];
 
     if (finalTranscript !== "") {
       if (!commandList.includes(finalTranscript)) {
         const checkSpelling = () => {
-          console.log("transcript: ", finalTranscript);
-          if (finalTranscript.toLowerCase() === spellingWord.word) {
+          console.log(
+            "transcript: ",
+            finalTranscript.toLowerCase().replace(/\s+/g, "")
+          );
+          if (
+            finalTranscript.toLowerCase().replace(/\s+/g, "") ===
+            spellingWord.word
+          ) {
             SpeechRecognition.stopListening();
             resetTranscript();
             guessedWord();
@@ -231,7 +242,7 @@ const Spellingbee = ({ user }) => {
       }
     }
   }, [
-    interimTranscript,
+    // interimTranscript,
     finalTranscript,
     spellingWord.word,
     speak,
@@ -239,9 +250,9 @@ const Spellingbee = ({ user }) => {
     guessedWord,
   ]);
 
-  if (!SpeechRecognition.browserSupportsSpeechRecognition()) {
-    return null;
-  }
+  // if (!SpeechRecognition.browserSupportsSpeechRecognition()) {
+  //   return null;
+  // }
 
   if (!SpeechRecognition.browserSupportsSpeechRecognition()) {
     console.log(
