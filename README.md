@@ -4,6 +4,8 @@ My elementary school daughter recently came home after competing in her schools 
 
 That inspired me to see if I could design a tool to help her prepare. 
 
+This app makes use of React-Speech-Kit. It functions on Chrome Desktop and Chrome Android. It is currently not supported on IOS devices. I will be attempting to use a polyfill from Speechly to enable support across all modern browsers.
+
 ### At the moment the app includes: 
 ---
 
