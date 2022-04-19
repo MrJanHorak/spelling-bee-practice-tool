@@ -12,7 +12,7 @@ const FlashCard = ({ handleClick, displayWord }) => {
 
   const spellWord = (e) => {
     toSpell = displayWord.word.split("");
-    let time = toSpell.length * 1000 + 1000;
+    let time = toSpell.length * 250 + 1000;
     setTimeout(() => {
       setSpeaking(false);
     }, [time]);
