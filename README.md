@@ -4,7 +4,7 @@ My elementary school daughter recently came home after competing in her schools 
 
 That inspired me to see if I could design a tool to help her prepare. 
 
-This app makes use of React-Speech-Kit. It functions on Chrome Desktop and Chrome Android. It is currently not supported on IOS devices. I will be attempting to use a polyfill from Speechly to enable support across all modern browsers.
+This app makes use of React-Speech-Kit in combination with a speech recognition polyfill to help it function on other browsers and IOS devices.
 
 ### At the moment the app includes: 
 ---
@@ -88,6 +88,8 @@ https://fossheim.io/writing/posts/react-text-splitting-animations/
 Grade level words were found through google searches for Scripps Spelling Bee word lists all over the internet.
 
 Word definitions have been pulled in using the [WordsAPI](https://www.wordsapi.com/) in the Admin wordsearch function. I have free usage with a 500 word a day limit.
+
+Speech recognition is implemented using [react-speech-recognition](https://github.com/JamesBrill/react-speech-recognition) in combination with a [speech recognition polyfill](https://github.com/JamesBrill/react-speech-recognition/blob/master/docs/POLYFILLS.md) usinging [Speechly's](https://www.speechly.com/) free tier.
 
 Avatars: 
 All individually downloaded for free from flaticon. The entire pack can be found at: [Icon Pack: Animals | Flat](https://www.flaticon.com/packs/animals-3)
