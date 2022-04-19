@@ -4,7 +4,7 @@ function SplitText({ displayWord, role }) {
   return (
     <span aria-label={displayWord} role={role}>
       {displayWord.split("").map(function (char, index) {
-        let style = {"animationDelay": (0 + index + 1 ) + "s"}
+        let style = {"animationDelay": (index /2 ) + "s"}
         return (
           <span aria-hidden="true" key={index} style={style}>
             {char}
