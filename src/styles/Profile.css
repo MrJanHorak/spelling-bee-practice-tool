@@ -9,9 +9,9 @@
   flex-direction: column;
   position: absolute;
   margin: 0;
-  top: 50%;
+  /* top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%); */
   width: 100%;
   align-items: center;
   justify-content: center;
@@ -44,6 +44,7 @@
 
 @media (orientation: landscape) {
   #profile-card {
+    margin-top: 10px;
     border: 2px solid black;
     padding: 12px;
     width: 90%;
@@ -106,4 +107,41 @@
   width: 150px;
   position: relative;
   margin: 8px;
+}
+
+#voice-setting {
+  border: 2px solid black;
+  border-radius: 12px;
+  width: 90%;
+  padding: 12px;
+  margin-top: 1em;
+  margin-bottom: 0.3em;
+  text-align: center;
+}
+
+#voice-setting p {
+  margin-left: 12px;
+  text-align: left;
+}
+
+#voice-setting select {
+  padding: 0;
+  color: black;
+  font-family: inherit;
+  margin-left: 5px;
+}
+
+#voice-setting button {
+  align-self: center;
+  background: #7450e9;
+  border: none;
+  color: white;
+  font-weight: 600;
+  text-align: center;
+  padding: 7px;
+  margin-left: 8px;
+  margin-top: 16px;
+  border-radius: 12px;
+  height: 45px;
+  width: 150px;
 }

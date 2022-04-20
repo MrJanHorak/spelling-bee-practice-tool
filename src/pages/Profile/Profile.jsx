@@ -6,6 +6,7 @@ import { getProfileById, updateProfile } from "../../services/profileService";
 
 //Components
 import AvatarSelection from "../../pages/Auth/AvatarSelection";
+import VoiceSettings from "../../components/VoiceSettings/VoiceSettings";
 
 const Profile = ({ user }) => {
   const [userProfile, setUserProfile] = useState();
@@ -97,6 +98,9 @@ const Profile = ({ user }) => {
           </div>
         )}
         {!userProfile && <h2>Loading ... </h2>}
+      <div id="voice-setting">
+        <VoiceSettings />
+      </div>
       </div>
     </div>
   );
