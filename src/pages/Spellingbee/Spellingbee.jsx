@@ -98,7 +98,7 @@ const Spellingbee = ({ user }) => {
     setMessage("You asked to hear the word again.");
     setTimeout(() => {
       listenContinuously();
-    }, 1500);
+    }, 1500/(rate/2));
     speak({ text: spellingWord.word, voice:voice, pitch:pitch, rate:rate });
     resetTranscript();
   };
@@ -108,7 +108,7 @@ const Spellingbee = ({ user }) => {
     setMessage("You asked for the definition of the word.");
     setTimeout(() => {
       listenContinuously();
-    }, 7000);
+    }, 7000/(rate/2));
     speak({ text: spellingWord.definition, voice:voice, pitch:pitch, rate:rate });
     resetTranscript();
   };
@@ -118,7 +118,7 @@ const Spellingbee = ({ user }) => {
     setMessage("Hi there!");
     setTimeout(() => {
       listenContinuously();
-    }, 1500);
+    }, 1500/(rate/2));
     speak({ text: "Hi there!", voice:voice, pitch:pitch, rate:rate });
     resetTranscript();
   };
@@ -130,7 +130,7 @@ const Spellingbee = ({ user }) => {
       setClick(click + 1);
       setTimeout(() => {
         listenContinuously();
-      }, 5500);
+      }, 5500/(rate/2));
       speak({ text: "You have asked for the next word. The next word is:", voice:voice, pitch:pitch, rate:rate });
       speak({ text: allWords[click + 1].word , voice:voice, pitch:pitch, rate:rate});
       resetTranscript();
@@ -194,7 +194,7 @@ const Spellingbee = ({ user }) => {
       setMessage("Congratulations! \n That was correct!");
       setTimeout(() => {
         listenContinuously();
-      }, 9500);
+      }, 9500/(rate/2));
       speak({
         text: `Congratulations!! You have spelled ${allWords[click].word} correctly! Get ready for the next word. The next word is:`, voice:voice, pitch:pitch, rate:rate
       });
@@ -242,7 +242,7 @@ const Spellingbee = ({ user }) => {
                 continuous: true,
                 language: "en-GB",
               });
-            }, 2500);
+            }, 2500/(rate/2));
             console.log("not correct!");
             setMessage("I am sorry.\n That is not correct.");
             speak({ text: "I am sorry, that is not correct.", voice:voice, pitch:pitch, rate:rate });
@@ -281,7 +281,7 @@ const Spellingbee = ({ user }) => {
         continuous: true,
         language: "en-GB",
       });
-    }, 6000);
+    }, 6000/(rate/2));
     speak({ text: "Hello " + user.name + "welcome to the Spelling bee!" , voice:voice, pitch:pitch, rate:rate});
     speak({ text: "The first word for today is: " + allWords[click].word, voice:voice, pitch:pitch, rate:rate });
   };
