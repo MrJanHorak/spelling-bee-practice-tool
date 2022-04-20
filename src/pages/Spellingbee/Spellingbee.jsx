@@ -17,12 +17,16 @@ const SpeechlySpeechRecognition = createSpeechlySpeechRecognition(appId);
 SpeechRecognition.applyPolyfill(SpeechlySpeechRecognition);
 
 const Spellingbee = ({ user }) => {
-  const { speak } = useSpeechSynthesis();
+  const { speak, voices } = useSpeechSynthesis();
 
   const [message, setMessage] = useState("");
   const [allWords, setAllWords] = useState();
   const [click, setClick] = useState(0);
   const [profile, setProfile] = useState();
+
+  let voice = null
+  let pitch = null
+  let rate = null
 
   let spellingWord = [];
 
@@ -64,6 +68,13 @@ const Spellingbee = ({ user }) => {
     }
   }, [profile, user.profile]);
 
+
+  if(profile){
+    voice = voices[profile.voice]
+    pitch = profile.pitch
+    rate = profile.rate
+  }
+
   if (allWords) {
     if (click === 0) {
       spellingWord = allWords[click];
@@ -88,7 +99,7 @@ const Spellingbee = ({ user }) => {
     setTimeout(() => {
       listenContinuously();
     }, 1500);
-    speak({ text: spellingWord.word });
+    speak({ text: spellingWord.word, voice:voice, pitch:pitch, rate:rate });
     resetTranscript();
   };
 
@@ -98,7 +109,7 @@ const Spellingbee = ({ user }) => {
     setTimeout(() => {
       listenContinuously();
     }, 7000);
-    speak({ text: spellingWord.definition });
+    speak({ text: spellingWord.definition, voice:voice, pitch:pitch, rate:rate });
     resetTranscript();
   };
 
@@ -108,7 +119,7 @@ const Spellingbee = ({ user }) => {
     setTimeout(() => {
       listenContinuously();
     }, 1500);
-    speak({ text: "Hi there!" });
+    speak({ text: "Hi there!", voice:voice, pitch:pitch, rate:rate });
     resetTranscript();
   };
 
@@ -120,12 +131,12 @@ const Spellingbee = ({ user }) => {
       setTimeout(() => {
         listenContinuously();
       }, 5500);
-      speak({ text: "You have asked for the next word. The next word is:" });
-      speak({ text: allWords[click + 1].word });
+      speak({ text: "You have asked for the next word. The next word is:", voice:voice, pitch:pitch, rate:rate });
+      speak({ text: allWords[click + 1].word , voice:voice, pitch:pitch, rate:rate});
       resetTranscript();
     } else {
       speak({
-        text: "That was the last word. To start over please press start!",
+        text: "That was the last word. To start over please press start!", voice:voice, pitch:pitch, rate:rate
       });
       setClick(0);
     }
@@ -134,7 +145,7 @@ const Spellingbee = ({ user }) => {
   const stop = () => {
     SpeechRecognition.stopListening();
     setMessage("I am no longer listening.");
-    speak({ text: "I am no longer listening." });
+    speak({ text: "I am no longer listening.", voice:voice, pitch:pitch, rate:rate });
     resetTranscript();
   };
 
@@ -185,18 +196,18 @@ const Spellingbee = ({ user }) => {
         listenContinuously();
       }, 9500);
       speak({
-        text: `Congratulations!! You have spelled ${allWords[click].word} correctly! Get ready for the next word. The next word is:`,
+        text: `Congratulations!! You have spelled ${allWords[click].word} correctly! Get ready for the next word. The next word is:`, voice:voice, pitch:pitch, rate:rate
       });
-      speak({ text: allWords[click + 1].word });
+      speak({ text: allWords[click + 1].word, voice:voice, pitch:pitch, rate:rate });
       resetTranscript();
     } else {
       setClick(0);
       setMessage("You have finished the spelling bee!");
       speak({
-        text: "Congratulations!! You have completed the spelling bee! If you want to go again, please press start!",
+        text: "Congratulations!! You have completed the spelling bee! If you want to go again, please press start!", voice:voice, pitch:pitch, rate:rate
       });
     }
-  }, [allWords, click, listenContinuously, speak, resetTranscript]);
+  }, [allWords, click, listenContinuously, speak, resetTranscript, pitch, rate, voice]);
 
   useEffect(() => {
     console.log("transcript: ", finalTranscript.toLowerCase());
@@ -234,7 +245,7 @@ const Spellingbee = ({ user }) => {
             }, 2500);
             console.log("not correct!");
             setMessage("I am sorry.\n That is not correct.");
-            speak({ text: "I am sorry, that is not correct." });
+            speak({ text: "I am sorry, that is not correct.", voice:voice, pitch:pitch, rate:rate });
             resetTranscript();
           }
         };
@@ -248,6 +259,9 @@ const Spellingbee = ({ user }) => {
     speak,
     resetTranscript,
     guessedWord,
+    pitch,
+    rate,
+    voice,
   ]);
 
   // if (!SpeechRecognition.browserSupportsSpeechRecognition()) {
@@ -268,8 +282,8 @@ const Spellingbee = ({ user }) => {
         language: "en-GB",
       });
     }, 6000);
-    speak({ text: "Hello " + user.name + "welcome to the Spelling bee!" });
-    speak({ text: "The first word for today is: " + allWords[click].word });
+    speak({ text: "Hello " + user.name + "welcome to the Spelling bee!" , voice:voice, pitch:pitch, rate:rate});
+    speak({ text: "The first word for today is: " + allWords[click].word, voice:voice, pitch:pitch, rate:rate });
   };
 
   return (

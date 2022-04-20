@@ -52,17 +52,11 @@ const Profile = ({ user }) => {
 
   const handleChange = async (toChange, e) => {
     const value = e.target.value;
-    console.log('change', toChange + value)
-    setFormData({...formData,[toChange]: value });
-    // updatedProfile = {
-    //   email: userProfile.email,
-    //   name: userProfile.name,
-    //   avatar: e.target.value,
-    //   grade: userProfile.grade,
-    // };
-    console.log("Form Data", formData)
+    console.log("change", toChange + value);
+    setFormData({ ...formData, [toChange]: value });
+    console.log("Form Data", formData);
     try {
-      await updateProfile(user.profile, {...formData,[toChange]: value });
+      await updateProfile(user.profile, { ...formData, [toChange]: value });
     } catch (error) {
       throw error;
     }
@@ -107,9 +101,9 @@ const Profile = ({ user }) => {
           </div>
         )}
         {!userProfile && <h2>Loading ... </h2>}
-      <div id="voice-setting">
-        <VoiceSettings handleChange={handleChange}/>
-      </div>
+        <div id="voice-setting">
+          <VoiceSettings handleChange={handleChange} />
+        </div>
       </div>
     </div>
   );
