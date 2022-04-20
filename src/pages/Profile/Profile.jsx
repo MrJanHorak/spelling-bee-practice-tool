@@ -18,8 +18,11 @@ const Profile = ({ user }) => {
     password: "",
     grade: null,
     avatar: "",
+    pitch: null,
+    rate: null,
+    voice: null,
   });
-  let updatedProfile = formData;
+  // let updatedProfile = formData;
 
   useEffect(() => {
     const getProfile = async () => {
@@ -30,6 +33,9 @@ const Profile = ({ user }) => {
           email: profileData.email,
           grade: profileData.grade,
           avatar: profileData.avatar,
+          pitch: profileData.pitch,
+          rate: profileData.rate,
+          voice: profileData.voice,
         });
         setUserProfile(profileData);
       } catch (error) {
@@ -44,16 +50,19 @@ const Profile = ({ user }) => {
     setPopup(!popup);
   };
 
-  const handleChange = async (e) => {
-    setFormData({ avatar: e.target.value });
-    updatedProfile = {
-      email: userProfile.email,
-      name: userProfile.name,
-      avatar: e.target.value,
-      grade: userProfile.grade,
-    };
+  const handleChange = async (toChange, e) => {
+    const value = e.target.value;
+    console.log('change', toChange + value)
+    setFormData({...formData,[toChange]: value });
+    // updatedProfile = {
+    //   email: userProfile.email,
+    //   name: userProfile.name,
+    //   avatar: e.target.value,
+    //   grade: userProfile.grade,
+    // };
+    console.log("Form Data", formData)
     try {
-      await updateProfile(user.profile, updatedProfile);
+      await updateProfile(user.profile, {...formData,[toChange]: value });
     } catch (error) {
       throw error;
     }
@@ -99,7 +108,7 @@ const Profile = ({ user }) => {
         )}
         {!userProfile && <h2>Loading ... </h2>}
       <div id="voice-setting">
-        <VoiceSettings />
+        <VoiceSettings handleChange={handleChange}/>
       </div>
       </div>
     </div>

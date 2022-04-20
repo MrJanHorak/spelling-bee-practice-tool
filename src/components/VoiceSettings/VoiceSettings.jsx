@@ -1,7 +1,7 @@
 import React, {  useState } from "react";
 import { useSpeechSynthesis } from "react-speech-kit";
 
-const VoiceSettings = () => {
+const VoiceSettings = ({handleChange}) => {
 const text ='Welcome to the spelling bee!'
 const [pitch, setPitch] = useState(1);
 const [rate, setRate] = useState(1);
@@ -45,6 +45,7 @@ return (
             value={voiceIndex || ''}
             onChange={(event) => {
               setVoiceIndex(event.target.value);
+              handleChange('voice', event)
             }}
           >
             <option value="">Default</option>
@@ -68,6 +69,7 @@ return (
               id="rate"
               onChange={(event) => {
                 setRate(event.target.value);
+                handleChange('rate', event)
               }}
             />
           </div>
@@ -85,6 +87,7 @@ return (
               id="pitch"
               onChange={(event) => {
                 setPitch(event.target.value);
+                handleChange('pitch', event)
               }}
             />
           </div>
