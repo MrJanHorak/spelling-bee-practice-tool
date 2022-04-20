@@ -102,7 +102,7 @@ const Profile = ({ user }) => {
         )}
         {!userProfile && <h2>Loading ... </h2>}
         <div id="voice-setting">
-          <VoiceSettings handleChange={handleChange} />
+          <VoiceSettings formData={formData} handleChange={handleChange} />
         </div>
       </div>
     </div>

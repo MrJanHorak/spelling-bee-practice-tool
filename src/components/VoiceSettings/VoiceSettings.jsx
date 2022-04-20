@@ -1,7 +1,7 @@
-import React, {  useState } from "react";
+import React, {  useEffect, useState } from "react";
 import { useSpeechSynthesis } from "react-speech-kit";
 
-const VoiceSettings = ({handleChange}) => {
+const VoiceSettings = ({formData, handleChange}) => {
 const text ='Welcome to the spelling bee!'
 const [pitch, setPitch] = useState(1);
 const [rate, setRate] = useState(1);
@@ -22,8 +22,22 @@ const styleContainerRatePitch = {
   marginBottom: 12,
 };
 
+useEffect(() =>{
+if(formData.voice){
+  setPitch(formData.pitch)
+  setRate(formData.rate)
+  setVoiceIndex(formData.voice)
+}
+},[formData.pitch, formData.rate, formData.voice])
+
 return (
   <>
+      {!formData.voice && (
+        <div>
+          <h2>Loading ...</h2>
+        </div>
+      )}
+    {formData.voice && (
     <form>
       <h2>Choose Voice</h2>
       {!supported && (
@@ -42,7 +56,7 @@ return (
           <select
             id="voice"
             name="voice"
-            value={voiceIndex || ''}
+            value={voiceIndex || ""}
             onChange={(event) => {
               setVoiceIndex(event.target.value);
               handleChange('voice', event)
@@ -64,7 +78,7 @@ return (
               type="range"
               min="0.5"
               max="2"
-              defaultValue="1"
+              defaultValue={rate}
               step="0.1"
               id="rate"
               onChange={(event) => {
@@ -82,7 +96,7 @@ return (
               type="range"
               min="0"
               max="2"
-              defaultValue="1"
+              defaultValue={pitch}
               step="0.1"
               id="pitch"
               onChange={(event) => {
@@ -106,6 +120,7 @@ return (
         </React.Fragment>
       )}
     </form>
+          )}
   </>
 );
 };

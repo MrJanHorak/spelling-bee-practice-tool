@@ -40,6 +40,16 @@
     height: 45px;
     width: 150px;
   }
+
+  #voice-setting {
+    border: 2px solid black;
+    border-radius: 12px;
+    width: 95%;
+    padding: 12px;
+    margin-top: 1em;
+    margin-bottom: 0.3em;
+    text-align: center;
+  }
 }
 
 @media (orientation: landscape) {
@@ -93,6 +103,16 @@
     height: 45px;
     width: 150px;
   }
+
+  #voice-setting {
+    border: 2px solid black;
+    border-radius: 12px;
+    width: 90%;
+    padding: 12px;
+    margin-top: 1em;
+    margin-bottom: 0.3em;
+    text-align: center;
+  }
 }
 
 #profile-card button:hover {
@@ -107,16 +127,6 @@
   width: 150px;
   position: relative;
   margin: 8px;
-}
-
-#voice-setting {
-  border: 2px solid black;
-  border-radius: 12px;
-  width: 90%;
-  padding: 12px;
-  margin-top: 1em;
-  margin-bottom: 0.3em;
-  text-align: center;
 }
 
 #voice-setting p {
