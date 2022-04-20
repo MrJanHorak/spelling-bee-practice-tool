@@ -91,6 +91,8 @@ Word definitions have been pulled in using the [WordsAPI](https://www.wordsapi.c
 
 Speech recognition is implemented using [react-speech-recognition](https://github.com/JamesBrill/react-speech-recognition) in combination with a [speech recognition polyfill](https://github.com/JamesBrill/react-speech-recognition/blob/master/docs/POLYFILLS.md) usinging [Speechly's](https://www.speechly.com/) free tier.
 
+The voice selection option in the profile view is adapted from the react-speech-kit [Github repository from MikeyParten](https://github.com/MikeyParton/react-speech-kit/blob/master/examples/src/useSpeechRecognition.jsx) 
+
 Avatars: 
 All individually downloaded for free from flaticon. The entire pack can be found at: [Icon Pack: Animals | Flat](https://www.flaticon.com/packs/animals-3)
 * <a href="https://www.flaticon.com/free-icons/octopus" title="octopus icons">Octopus icons created by Freepik - Flaticon</a>
