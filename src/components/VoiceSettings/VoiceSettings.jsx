@@ -2,7 +2,7 @@ import React, {  useState } from "react";
 import { useSpeechSynthesis } from "react-speech-kit";
 
 const VoiceSettings = () => {
-const [text, setText] = useState('Welcome to the spelling bee!');
+const text ='Welcome to the spelling bee!'
 const [pitch, setPitch] = useState(1);
 const [rate, setRate] = useState(1);
 const [voiceIndex, setVoiceIndex] = useState(null);
