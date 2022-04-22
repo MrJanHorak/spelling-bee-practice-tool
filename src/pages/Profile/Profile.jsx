@@ -100,10 +100,12 @@ const Profile = ({ user }) => {
             </div>
           </div>
         )}
-        {!userProfile && <h2>Loading ... </h2>}
+        {userProfile && (
         <div id="voice-setting">
           <VoiceSettings formData={formData} handleChange={handleChange}/>
         </div>
+        )}
+        {!userProfile && <h2>Loading ... </h2>}
       </div>
     </div>
   );

@@ -4,21 +4,27 @@ import { useSpeechSynthesis } from "react-speech-kit";
 import "../../styles/FlashCard.css";
 import SplitText from "./SplitText";
 
-const FlashCard = ({ handleClick, displayWord }) => {
+const FlashCard = ({ profile, handleClick, displayWord }) => {
   const [speaking, setSpeaking] = useState(false);
-  const { speak } = useSpeechSynthesis();
+  const { speak, voices } = useSpeechSynthesis();
 
   let toSpell = [];
 
   const spellWord = (e) => {
     toSpell = displayWord.word.split("");
-    let time = toSpell.length * 250 + 1000;
+    let time = (toSpell.length * 1000  +  1000 )/ (profile.rate);
+    console.log('time',time)
     setTimeout(() => {
       setSpeaking(false);
     }, [time]);
     setSpeaking(true);
     toSpell.forEach((letter) => {
-      speak({ text: letter });
+      speak({
+        text: letter,
+        voice: voices[profile.voice],
+        rate: profile.rate,
+        pitch: profile.pitch,
+      });
     });
   };
 
@@ -28,7 +34,7 @@ const FlashCard = ({ handleClick, displayWord }) => {
         <div id="word">
           {speaking ? (
             <h1>
-              <SplitText displayWord={displayWord.word} role={"heading"} />{" "}
+              <SplitText rate={profile.rate} displayWord={displayWord.word} role={"heading"} />{" "}
             </h1>
           ) : (
             <h1> {displayWord.word} </h1>
