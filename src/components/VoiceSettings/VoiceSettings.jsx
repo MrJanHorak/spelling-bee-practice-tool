@@ -77,10 +77,10 @@ const VoiceSettings = ({ formData, handleChange }) => {
                 </div>
                 <input
                   type="range"
-                  min="0.5"
-                  max="2"
+                  min="0.7"
+                  max="1.2"
                   defaultValue={rate}
-                  step="0.1"
+                  step="0.01"
                   id="rate"
                   onChange={(event) => {
                     setRate(event.target.value);
@@ -95,10 +95,10 @@ const VoiceSettings = ({ formData, handleChange }) => {
                 </div>
                 <input
                   type="range"
-                  min="0"
-                  max="2"
+                  min="0.5"
+                  max="1.5"
                   defaultValue={pitch}
-                  step="0.1"
+                  step="0.01"
                   id="pitch"
                   onChange={(event) => {
                     setPitch(event.target.value);
