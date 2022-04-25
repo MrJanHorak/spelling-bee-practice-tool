@@ -7,7 +7,7 @@ import { useSpeechSynthesis } from "react-speech-kit";
 
 // Services
 import { getAllWords } from "../../services/wordService";
-import { getProfileById } from "../../services/profileService";
+import { getProfileById, updateProfile } from "../../services/profileService";
 
 //assets
 import "../../styles/SpellingBeeMode.css";
@@ -23,6 +23,7 @@ const Spellingbee = ({ user }) => {
   const [allWords, setAllWords] = useState();
   const [click, setClick] = useState(0);
   const [profile, setProfile] = useState();
+  // const [userData, setUserData] = useState()
 
   let voice = null
   let pitch = null
@@ -82,6 +83,17 @@ const Spellingbee = ({ user }) => {
       spellingWord = allWords[click];
     }
   }
+
+  const correct = async (word) => {
+    console.log("record correct word", word);
+    setProfile({ ...profile, word: profile.word + 1 });
+    console.log("Form Data", profile);
+    try {
+      await updateProfile(user.profile, { ...profile, [word]: profile.word + 1 });
+    } catch (error) {
+      throw error;
+    }
+  };
 
   const listenContinuously = useCallback(async () => {
     console.log("listening");

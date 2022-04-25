@@ -4,7 +4,7 @@ My elementary school daughter recently came home after competing in her schools 
 
 That inspired me to see if I could design a tool to help her prepare. 
 
-This app makes use of React-Speech-Kit in combination with a speech recognition polyfill to help it function on other browsers and IOS devices.
+This app makes use of React-Speech-Kit in combination with a speech recognition polyfill to help it function on most modern browsers, desktop computers, Android and IOS devices.
 
 ### At the moment the app includes: 
 ---
@@ -13,14 +13,13 @@ This app makes use of React-Speech-Kit in combination with a speech recognition 
 * Grade level based Spelling Bee mode with voice recognition
 * Admin mode to add/update words, definitions and grade levels
 * "Lexend" font to help remove cognitive noise in character recognition
-* Visual ad audio aid in study mode
+* Visual and audio aid in study mode
 * Use of default speech synthesis
 * Use of Speech recognition
 
 ### Current challenges: 
 ---
-* Speech Synthesis operates differently on different devices (to include different speeds)
-* Speech recognition doesn't automatically recognise every word spelled out. 
+* Speech Synthesis operates differently on different devices (to include different speeds) which creates a challenge synchronizing the flash cards in study mode as well as the timeOut's needed to turn off the mic while the computer is speaking.
 
 # Try it here!
 
@@ -28,7 +27,7 @@ This app makes use of React-Speech-Kit in combination with a speech recognition 
 
 ## Screenshots
 
-### Full screren browser view
+### Full screen browser view
 ![Imgur](https://i.imgur.com/VlUdP4Fl.png)
 ### Landscape Mobile view
 ![Imgur](https://i.imgur.com/hldxRJBm.png)
