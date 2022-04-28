@@ -36,3 +36,20 @@ export const updateProfile = async (profileId, updatedProfile) => {
     throw error;
   }
 };
+
+export const createPracticedWordRecord = async (profileId, word) => {
+  try {
+    const res = await fetch(`${BASE_URL}${profileId}/practicedWords`, {
+      method: "POST",
+      headers: {
+        'content-type': 'application/json',
+        'Authorization': `Bearer ${tokenService.getToken()}`
+      },
+      body: JSON.stringify(word)
+    })
+    const data = await res.json()
+    return data
+  } catch (error) {
+    throw error
+  }
+}

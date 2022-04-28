@@ -7,7 +7,11 @@ import { useSpeechSynthesis } from "react-speech-kit";
 
 // Services
 import { getAllWords } from "../../services/wordService";
-import { getProfileById, updateProfile } from "../../services/profileService";
+import {
+  getProfileById,
+  updateProfile,
+  createPracticedWordRecord,
+} from "../../services/profileService";
 
 //assets
 import "../../styles/SpellingBeeMode.css";
@@ -25,9 +29,9 @@ const Spellingbee = ({ user }) => {
   const [profile, setProfile] = useState();
   // const [userData, setUserData] = useState()
 
-  let voice = null
-  let pitch = null
-  let rate = null
+  let voice = null;
+  let pitch = null;
+  let rate = null;
 
   let spellingWord = [];
 
@@ -68,11 +72,10 @@ const Spellingbee = ({ user }) => {
     }
   }, [profile, user.profile]);
 
-
-  if(profile){
-    voice = voices[profile.voice]
-    pitch = profile.pitch
-    rate = profile.rate
+  if (profile) {
+    voice = voices[profile.voice];
+    pitch = profile.pitch;
+    rate = profile.rate;
   }
 
   if (allWords) {
@@ -83,17 +86,6 @@ const Spellingbee = ({ user }) => {
       spellingWord = allWords[click];
     }
   }
-
-  const correct = async (word) => {
-    console.log("record correct word", word);
-    setProfile({ ...profile, word: profile.word + 1 });
-    console.log("Form Data", profile);
-    try {
-      await updateProfile(user.profile, { ...profile, [word]: profile.word + 1 });
-    } catch (error) {
-      throw error;
-    }
-  };
 
   const listenContinuously = useCallback(async () => {
     console.log("listening");
@@ -109,19 +101,24 @@ const Spellingbee = ({ user }) => {
     setMessage("You asked to hear the word again.");
     setTimeout(() => {
       listenContinuously();
-    }, 1500/rate);
-    speak({ text: spellingWord.word, voice:voice, pitch:pitch, rate:rate });
+    }, 1500 / rate);
+    speak({ text: spellingWord.word, voice: voice, pitch: pitch, rate: rate });
     resetTranscript();
   };
 
   const definition = () => {
     SpeechRecognition.stopListening();
-    let definition = spellingWord.definition.split(" ")
+    let definition = spellingWord.definition.split(" ");
     setMessage("You asked for the definition of the word.");
     setTimeout(() => {
       listenContinuously();
-    }, (definition.length * 500)/rate);
-    speak({ text: spellingWord.definition, voice:voice, pitch:pitch, rate:rate });
+    }, (definition.length * 500) / rate);
+    speak({
+      text: spellingWord.definition,
+      voice: voice,
+      pitch: pitch,
+      rate: rate,
+    });
     resetTranscript();
   };
 
@@ -130,8 +127,8 @@ const Spellingbee = ({ user }) => {
     setMessage("Hi there!");
     setTimeout(() => {
       listenContinuously();
-    }, 1500/rate);
-    speak({ text: "Hi there!", voice:voice, pitch:pitch, rate:rate });
+    }, 1500 / rate);
+    speak({ text: "Hi there!", voice: voice, pitch: pitch, rate: rate });
     resetTranscript();
   };
 
@@ -142,13 +139,26 @@ const Spellingbee = ({ user }) => {
       setClick(click + 1);
       setTimeout(() => {
         listenContinuously();
-      }, 5500/rate);
-      speak({ text: "You have asked for the next word. The next word is:", voice:voice, pitch:pitch, rate:rate });
-      speak({ text: allWords[click + 1].word , voice:voice, pitch:pitch, rate:rate});
+      }, 5500 / rate);
+      speak({
+        text: "You have asked for the next word. The next word is:",
+        voice: voice,
+        pitch: pitch,
+        rate: rate,
+      });
+      speak({
+        text: allWords[click + 1].word,
+        voice: voice,
+        pitch: pitch,
+        rate: rate,
+      });
       resetTranscript();
     } else {
       speak({
-        text: "That was the last word. To start over please press start!", voice:voice, pitch:pitch, rate:rate
+        text: "That was the last word. To start over please press start!",
+        voice: voice,
+        pitch: pitch,
+        rate: rate,
       });
       setClick(0);
     }
@@ -157,7 +167,12 @@ const Spellingbee = ({ user }) => {
   const stop = () => {
     SpeechRecognition.stopListening();
     setMessage("I am no longer listening.");
-    speak({ text: "I am no longer listening.", voice:voice, pitch:pitch, rate:rate });
+    speak({
+      text: "I am no longer listening.",
+      voice: voice,
+      pitch: pitch,
+      rate: rate,
+    });
     resetTranscript();
   };
 
@@ -201,25 +216,77 @@ const Spellingbee = ({ user }) => {
 
   const guessedWord = useCallback(() => {
     SpeechRecognition.stopListening();
+    const correct = async (word) => {
+      console.log("record correct word", word);
+      setProfile({
+        ...profile,
+        practicedWords: {
+          word: word,
+          timesPracticed: profile.practicedWords.timesPracticed + 1,
+          timesCorrect: profile.practicedWords.timesCorrect + 1,
+          timesIncorrect: profile.practicedWords.timesIncorrect,
+          recordOfWrongs: profile.practicedWords.recordOfWrongs,
+        },
+      });
+      console.log("Form Data", profile);
+      try {
+        await updateProfile(user.profile, {
+          ...profile,
+          practicedWords: {
+            word: word,
+            timesPracticed: profile.practicedWords.timesPracticed + 1,
+            timesCorrect: profile.practicedWords.timesCorrect + 1,
+            timesIncorrect: profile.practicedWords.timesIncorrect,
+            recordOfWrongs: profile.practicedWords.recordOfWrongs,
+          },
+        });
+      } catch (error) {
+        throw error;
+      }
+    };
+
     if (click < allWords.length - 1) {
       setClick(click + 1);
+      correct(allWords[click].word);
       setMessage("Congratulations! \n That was correct!");
       setTimeout(() => {
         listenContinuously();
-      }, 9500/rate);
+      }, 9500 / rate);
       speak({
-        text: `Congratulations!! You have spelled ${allWords[click].word} correctly! Get ready for the next word. The next word is:`, voice:voice, pitch:pitch, rate:rate
+        text: `Congratulations!! You have spelled ${allWords[click].word} correctly! Get ready for the next word. The next word is:`,
+        voice: voice,
+        pitch: pitch,
+        rate: rate,
       });
-      speak({ text: allWords[click + 1].word, voice:voice, pitch:pitch, rate:rate });
+      speak({
+        text: allWords[click + 1].word,
+        voice: voice,
+        pitch: pitch,
+        rate: rate,
+      });
       resetTranscript();
     } else {
       setClick(0);
       setMessage("You have finished the spelling bee!");
       speak({
-        text: "Congratulations!! You have completed the spelling bee! If you want to go again, please press start!", voice:voice, pitch:pitch, rate:rate
+        text: "Congratulations!! You have completed the spelling bee! If you want to go again, please press start!",
+        voice: voice,
+        pitch: pitch,
+        rate: rate,
       });
     }
-  }, [allWords, click, listenContinuously, speak, resetTranscript, pitch, rate, voice]);
+  }, [
+    allWords,
+    click,
+    listenContinuously,
+    speak,
+    resetTranscript,
+    pitch,
+    rate,
+    voice,
+    profile,
+    user.profile,
+  ]);
 
   useEffect(() => {
     console.log("transcript: ", finalTranscript.toLowerCase());
@@ -234,6 +301,34 @@ const Spellingbee = ({ user }) => {
     ];
 
     if (finalTranscript !== "") {
+      const inCorrect = async (word, finalTranscript) => {
+        console.log("record incorrect word", word);
+        setProfile({
+          ...profile,
+          practicedWords: {
+            word: word,
+            timesPracticed: profile.practicedWords.timesPracticed + 1,
+            timesCorrect: profile.practicedWords.timesCorrect,
+            timesIncorrect: profile.practicedWords.timesIncorrect + 1,
+            recordOfWrongs: finalTranscript,
+          },
+        });
+        console.log("Form Data", profile);
+        try {
+          await createPracticedWordRecord(user.profile, {
+            practicedWords: {
+              word: word,
+              timesPracticed: profile.practicedWords.timesPracticed + 1,
+              timesCorrect: profile.practicedWords.timesCorrect,
+              timesIncorrect: profile.practicedWords.timesIncorrect + 1,
+              recordOfWrongs: finalTranscript,
+            },
+          });
+        } catch (error) {
+          throw error;
+        }
+      };
+
       if (!commandList.includes(finalTranscript)) {
         const checkSpelling = () => {
           console.log(
@@ -248,16 +343,22 @@ const Spellingbee = ({ user }) => {
             resetTranscript();
             guessedWord();
           } else {
+            inCorrect(allWords[click].word, finalTranscript);
             SpeechRecognition.stopListening();
             setTimeout(() => {
               SpeechRecognition.startListening({
                 continuous: true,
                 language: "en-GB",
               });
-            }, 2500/rate);
+            }, 2500 / rate);
             console.log("not correct!");
             setMessage("I am sorry.\n That is not correct.");
-            speak({ text: "I am sorry, that is not correct.", voice:voice, pitch:pitch, rate:rate });
+            speak({
+              text: "I am sorry, that is not correct.",
+              voice: voice,
+              pitch: pitch,
+              rate: rate,
+            });
             resetTranscript();
           }
         };
@@ -274,6 +375,10 @@ const Spellingbee = ({ user }) => {
     pitch,
     rate,
     voice,
+    allWords,
+    click,
+    user.profile,
+    profile,
   ]);
 
   // if (!SpeechRecognition.browserSupportsSpeechRecognition()) {
@@ -293,9 +398,19 @@ const Spellingbee = ({ user }) => {
         continuous: true,
         language: "en-GB",
       });
-    }, 6000/rate);
-    speak({ text: "Hello " + user.name + "welcome to the Spelling bee!" , voice:voice, pitch:pitch, rate:rate});
-    speak({ text: "The first word for today is: " + allWords[click].word, voice:voice, pitch:pitch, rate:rate });
+    }, 6000 / rate);
+    speak({
+      text: "Hello " + user.name + "welcome to the Spelling bee!",
+      voice: voice,
+      pitch: pitch,
+      rate: rate,
+    });
+    speak({
+      text: "The first word for today is: " + allWords[click].word,
+      voice: voice,
+      pitch: pitch,
+      rate: rate,
+    });
   };
 
   return (
