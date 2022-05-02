@@ -22,7 +22,6 @@ const Profile = ({ user }) => {
     rate: null,
     voice: null,
   });
-  // let updatedProfile = formData;
 
   useEffect(() => {
     const getProfile = async () => {
@@ -52,9 +51,7 @@ const Profile = ({ user }) => {
 
   const handleChange = async (toChange, e) => {
     const value = e.target.value;
-    console.log("change", toChange + value);
     setFormData({ ...formData, [toChange]: value });
-    console.log("Form Data", formData);
     try {
       await updateProfile(user.profile, { ...formData, [toChange]: value });
     } catch (error) {

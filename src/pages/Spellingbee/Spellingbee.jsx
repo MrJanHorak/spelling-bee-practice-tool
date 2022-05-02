@@ -9,8 +9,8 @@ import { useSpeechSynthesis } from "react-speech-kit";
 import { getAllWords } from "../../services/wordService";
 import {
   getProfileById,
-  updateProfile,
   createPracticedWordRecord,
+  updatePracticedWord,
 } from "../../services/profileService";
 
 //assets
@@ -42,20 +42,21 @@ const Spellingbee = ({ user }) => {
     }
   };
 
-  useEffect(() => {
-    const getProfile = async () => {
-      try {
-        const profileData = await getProfileById(user.profile);
-        setProfile(profileData);
-      } catch (error) {
-        throw error;
-      }
-    };
-    getProfile();
+  const getProfile = useCallback(async () => {
+    try {
+      const profileData = await getProfileById(user.profile);
+      setProfile(profileData);
+    } catch (error) {
+      throw error;
+    }
   }, [user.profile]);
 
   useEffect(() => {
-    if (profile?.grade) {
+    getProfile();
+  }, [user.profile, getProfile])
+  
+  useEffect(() => {
+    if (profile?.grade && click===0) {
       const getWords = async () => {
         try {
           const allWordData = await getAllWords();
@@ -70,7 +71,7 @@ const Spellingbee = ({ user }) => {
       };
       getWords();
     }
-  }, [profile, user.profile]);
+  }, [profile, click]);
 
   if (profile) {
     voice = voices[profile.voice];
@@ -79,16 +80,12 @@ const Spellingbee = ({ user }) => {
   }
 
   if (allWords) {
-    if (click === 0) {
-      spellingWord = allWords[click];
-    }
-    if (click > 0 && click < allWords.length) {
+    if (click === 0 || (click > 0 && click < allWords.length)) {
       spellingWord = allWords[click];
     }
   }
 
   const listenContinuously = useCallback(async () => {
-    console.log("listening");
     setMessage("I am listening again.");
     await SpeechRecognition.startListening({
       continuous: true,
@@ -207,46 +204,47 @@ const Spellingbee = ({ user }) => {
     },
   ];
 
-  const {
-    // interimTranscript,
-    finalTranscript,
-    resetTranscript,
-    listening,
-  } = useSpeechRecognition({ commands });
+  const { finalTranscript, resetTranscript, listening } = useSpeechRecognition({
+    commands,
+  });
 
   const guessedWord = useCallback(() => {
     SpeechRecognition.stopListening();
     const correct = async (word) => {
-      console.log("record correct word", word);
-      setProfile({
-        ...profile,
-        practicedWords: {
-          word: word,
-          timesPracticed: profile.practicedWords.timesPracticed + 1,
-          timesCorrect: profile.practicedWords.timesCorrect + 1,
-          timesIncorrect: profile.practicedWords.timesIncorrect,
-          recordOfWrongs: profile.practicedWords.recordOfWrongs,
-        },
-      });
-      console.log("Form Data", profile);
-      try {
-        await updateProfile(user.profile, {
-          ...profile,
-          practicedWords: {
+      const isWordPresent = profile.practicedWords.find(
+        (obj) => obj.word === word
+      );
+      if (!isWordPresent) {
+        try {
+          await createPracticedWordRecord(user.profile, {
             word: word,
-            timesPracticed: profile.practicedWords.timesPracticed + 1,
-            timesCorrect: profile.practicedWords.timesCorrect + 1,
+            timesPracticed: 1,
+            timesCorrect: 1,
             timesIncorrect: profile.practicedWords.timesIncorrect,
-            recordOfWrongs: profile.practicedWords.recordOfWrongs,
-          },
-        });
-      } catch (error) {
-        throw error;
+            recordOfWrongs: [],
+          });
+          getProfile();
+        } catch (error) {
+          throw error;
+        }
+      } else {
+        // let addPracticed = isWordPresent.timesPracticed + 1;
+        // let addCorrect = isWordPresent.timesCorrect + 1;
+        try {
+          await updatePracticedWord(user.profile, isWordPresent._id, {
+            word: isWordPresent.word,
+            timesPracticed: isWordPresent.timesPracticed + 1,
+            timesCorrect: isWordPresent.timesCorrect + 1,
+            timesIncorrect: isWordPresent.timesIncorrect,
+            recordOfWrongs: isWordPresent.recordOfWrongs,
+          });
+          getProfile();
+        } catch (error) {
+          throw error;
+        }
       }
     };
-
     if (click < allWords.length - 1) {
-      setClick(click + 1);
       correct(allWords[click].word);
       setMessage("Congratulations! \n That was correct!");
       setTimeout(() => {
@@ -265,6 +263,7 @@ const Spellingbee = ({ user }) => {
         rate: rate,
       });
       resetTranscript();
+      setClick(click + 1);
     } else {
       setClick(0);
       setMessage("You have finished the spelling bee!");
@@ -284,8 +283,9 @@ const Spellingbee = ({ user }) => {
     pitch,
     rate,
     voice,
-    profile,
     user.profile,
+    profile,
+    getProfile,
   ]);
 
   useEffect(() => {
@@ -301,31 +301,40 @@ const Spellingbee = ({ user }) => {
     ];
 
     if (finalTranscript !== "") {
+      let wrongSpelling = finalTranscript.toLowerCase().replace(/\s+/g, "");
       const inCorrect = async (word, finalTranscript) => {
-        console.log("record incorrect word", word);
-        setProfile({
-          ...profile,
-          practicedWords: {
-            word: word,
-            timesPracticed: profile.practicedWords.timesPracticed + 1,
-            timesCorrect: profile.practicedWords.timesCorrect,
-            timesIncorrect: profile.practicedWords.timesIncorrect + 1,
-            recordOfWrongs: finalTranscript,
-          },
-        });
-        console.log("Form Data", profile);
-        try {
-          await createPracticedWordRecord(user.profile, {
-            practicedWords: {
+        const isWordPresent = profile.practicedWords.find(
+          (obj) => obj.word === word
+        );
+        if (!isWordPresent) {
+          try {
+            await createPracticedWordRecord(user.profile, {
               word: word,
-              timesPracticed: profile.practicedWords.timesPracticed + 1,
-              timesCorrect: profile.practicedWords.timesCorrect,
-              timesIncorrect: profile.practicedWords.timesIncorrect + 1,
-              recordOfWrongs: finalTranscript,
-            },
-          });
-        } catch (error) {
-          throw error;
+              timesPracticed: 1,
+              timesCorrect: 0,
+              timesIncorrect: 1,
+              recordOfWrongs: [wrongSpelling],
+            });
+            getProfile();
+          } catch (error) {
+            throw error;
+          }
+        } else {
+          let practiced = isWordPresent.timesPracticed + 1;
+          let incorrect = isWordPresent.timesIncorrect + 1;
+          let recordOfWrong = [...isWordPresent.recordOfWrongs, wrongSpelling];
+          try {
+            await updatePracticedWord(user.profile, isWordPresent._id, {
+              word: word,
+              timesPracticed: practiced,
+              timesCorrect: isWordPresent.timesCorrect,
+              timesIncorrect: incorrect,
+              recordOfWrongs: recordOfWrong,
+            });
+            getProfile();
+          } catch (error) {
+            throw error;
+          }
         }
       };
 
@@ -342,6 +351,7 @@ const Spellingbee = ({ user }) => {
             SpeechRecognition.stopListening();
             resetTranscript();
             guessedWord();
+            // getProfile()
           } else {
             inCorrect(allWords[click].word, finalTranscript);
             SpeechRecognition.stopListening();
@@ -351,7 +361,6 @@ const Spellingbee = ({ user }) => {
                 language: "en-GB",
               });
             }, 2500 / rate);
-            console.log("not correct!");
             setMessage("I am sorry.\n That is not correct.");
             speak({
               text: "I am sorry, that is not correct.",
@@ -360,13 +369,13 @@ const Spellingbee = ({ user }) => {
               rate: rate,
             });
             resetTranscript();
+            // getProfile()
           }
         };
         checkSpelling();
       }
     }
   }, [
-    // interimTranscript,
     finalTranscript,
     spellingWord.word,
     speak,
@@ -379,14 +388,15 @@ const Spellingbee = ({ user }) => {
     click,
     user.profile,
     profile,
+    getProfile,
   ]);
 
-  // if (!SpeechRecognition.browserSupportsSpeechRecognition()) {
-  //   return null;
-  // }
+  if (!SpeechRecognition.browserSupportsSpeechRecognition()) {
+    return null;
+  }
 
   if (!SpeechRecognition.browserSupportsSpeechRecognition()) {
-    console.log(
+    console.alert(
       "Your browser does not support speech recognition software! Try Chrome desktop, maybe?"
     );
   }
