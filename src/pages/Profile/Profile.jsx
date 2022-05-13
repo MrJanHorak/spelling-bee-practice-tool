@@ -7,6 +7,7 @@ import { getProfileById, updateProfile } from "../../services/profileService";
 //Components
 import AvatarSelection from "../../pages/Auth/AvatarSelection";
 import VoiceSettings from "../../components/VoiceSettings/VoiceSettings";
+import WordStats from "../../components/WordStats/WordStats"
 
 const Profile = ({ user }) => {
   const [userProfile, setUserProfile] = useState();
@@ -102,6 +103,12 @@ const Profile = ({ user }) => {
           <VoiceSettings formData={formData} handleChange={handleChange}/>
         </div>
         )}
+        {userProfile && (
+        <div className="word-stats">
+          <WordStats userProfile={userProfile} />
+        </div>
+        )}
+
         {!userProfile && <h2>Loading ... </h2>}
       </div>
     </div>
