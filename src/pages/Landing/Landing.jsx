@@ -35,10 +35,10 @@ const Landing = ({ user }) => {
           Please give it a try, send me feedback, or feel free to join in and colaborate and code along.
           <br/><br/>
           <b>test user:</b><br/>
-          <b>login: </b> firstgrader@testuser.test <b>Password: </b>firstgrader<br/>
+          <b>login: </b> first grader <b>Password: </b>firstgrader<br/>
           <br/>
           <b>test admin user:</b><br/>
-          <b>login: </b> testadmin@testuser.test <b>Password: </b>testadmin
+          <b>login: </b> testAdmin <b>Password: </b>testadmin
           </p>
       </div>
     </div>

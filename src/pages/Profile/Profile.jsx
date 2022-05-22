@@ -7,7 +7,8 @@ import { getProfileById, updateProfile } from "../../services/profileService";
 //Components
 import AvatarSelection from "../../pages/Auth/AvatarSelection";
 import VoiceSettings from "../../components/VoiceSettings/VoiceSettings";
-import WordStats from "../../components/WordStats/WordStats"
+import WordStats from "../../components/WordStats/WordStats";
+import AddStudent from "../../components/AddStudent/AddStudent";
 
 const Profile = ({ user }) => {
   const [userProfile, setUserProfile] = useState();
@@ -21,7 +22,7 @@ const Profile = ({ user }) => {
     avatar: "",
     pitch: null,
     rate: null,
-    voice: null,
+    voice: 0,
   });
 
   useEffect(() => {
@@ -50,16 +51,19 @@ const Profile = ({ user }) => {
     setPopup(!popup);
   };
 
-  const handleChange = async ( e) => {
+  const handleChange = async (e) => {
     const value = e.target.value;
     setFormData({ ...formData, [e.target.name]: value });
     try {
-      await updateProfile(user.profile, { ...formData, [e.target.name]: value });
+      await updateProfile(user.profile, {
+        ...formData,
+        [e.target.name]: value,
+      });
     } catch (error) {
       throw error;
     }
   };
-
+  console.log(userProfile);
   return (
     <div id="profile-page">
       {popup && (
@@ -70,43 +74,51 @@ const Profile = ({ user }) => {
         />
       )}
       <div className="profile-info">
-        {userProfile && (
-          <div id="profile-card">
-            <div id="profile-image">
-              <img
-                id="profile-pic"
-                alt="profile pictue"
-                src={userProfile?.avatar}
-              />
+        <div id="profile-card">
+          <div id="profile-image">
+            <img
+              id="profile-pic"
+              alt="profile pictue"
+              src={userProfile?.avatar}
+            />
+          </div>
+          <div id="update-avater">
+            {" "}
+            <button type="button" autoComplete="off" onClick={handlePopup}>
+              Change Avatar
+            </button>
+          </div>
+          <div id="bio-info">
+            <div id="user-name">
+              <h1>{userProfile?.name}</h1>
             </div>
-            <div id="update-avater">
-              {" "}
-              <button type="button" autoComplete="off" onClick={handlePopup}>
-                Change Avatar
-              </button>
-            </div>
-            <div id="bio-info">
-              <div id="user-name">
-                <h1>{userProfile?.name}</h1>
-              </div>
-              <div id="user-grade">
-                <h2>Grade: {userProfile?.grade}</h2>
-              </div>
-            </div>
-            <div id="user-email">
-              <h3>e-mail: {userProfile?.email}</h3>
+            <div id="user-grade">
+              <h2>Grade: {userProfile?.grade}</h2>
             </div>
           </div>
-        )}
-        {userProfile && (
-        <div id="voice-setting">
-          <VoiceSettings formData={formData} handleChange={handleChange}/>
+          <div id="user-email">
+            <h3>e-mail: {userProfile?.email}</h3>
+          </div>
         </div>
-        )}
+
         {userProfile && (
-        <div className="word-stats">
-          <WordStats userProfile={userProfile} />
-        </div>
+          <div id="voice-setting">
+            <VoiceSettings formData={formData} handleChange={handleChange} />
+          </div>
+        )}
+
+        {userProfile &&
+          (userProfile?.role === "parent" ||
+            userProfile?.role === "teacher") && (
+            <div className="addChild">
+              <AddStudent formData={formData} user={userProfile} />
+            </div>
+          )}
+
+        {userProfile && (
+          <div className="word-stats">
+            <WordStats userProfile={userProfile} />
+          </div>
         )}
 
         {!userProfile && <h2>Loading ... </h2>}

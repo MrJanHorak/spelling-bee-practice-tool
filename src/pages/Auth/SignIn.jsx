@@ -9,7 +9,7 @@ const SignIn = (props) => {
   const navigate = useNavigate();
   const [msg, setMsg] = useState("");
   const [formData, setFormData] = useState({
-    email: "",
+    name: "",
     pw: "",
   });
 
@@ -40,12 +40,12 @@ const SignIn = (props) => {
         <form className="register-form" onSubmit={handleSubmit}>
           <input
             required
-            name="email"
-            type="email"
+            name="name"
+            type="String"
             autoComplete="off"
-            placeholder="Email"
+            placeholder="user name"
             onChange={handleChange}
-            value={formData.email}
+            value={formData.name}
           />
           <input
             required
