@@ -50,11 +50,11 @@ const Profile = ({ user }) => {
     setPopup(!popup);
   };
 
-  const handleChange = async (toChange, e) => {
+  const handleChange = async ( e) => {
     const value = e.target.value;
-    setFormData({ ...formData, [toChange]: value });
+    setFormData({ ...formData, [e.target.name]: value });
     try {
-      await updateProfile(user.profile, { ...formData, [toChange]: value });
+      await updateProfile(user.profile, { ...formData, [e.target.name]: value });
     } catch (error) {
       throw error;
     }

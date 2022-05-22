@@ -59,7 +59,7 @@ const VoiceSettings = ({ formData, handleChange }) => {
                 value={voiceIndex || ""}
                 onChange={(event) => {
                   setVoiceIndex(event.target.value);
-                  handleChange("voice", event);
+                  handleChange( event);
                 }}
               >
                 <option value="">Default</option>
@@ -81,9 +81,10 @@ const VoiceSettings = ({ formData, handleChange }) => {
                   defaultValue={rate}
                   step="0.01"
                   id="rate"
+                  name="rate"
                   onChange={(event) => {
                     setRate(event.target.value);
-                    handleChange("rate", event);
+                    handleChange(event);
                   }}
                 />
               </div>
@@ -99,9 +100,10 @@ const VoiceSettings = ({ formData, handleChange }) => {
                   defaultValue={pitch}
                   step="0.01"
                   id="pitch"
+                  name="pitch"
                   onChange={(event) => {
                     setPitch(event.target.value);
-                    handleChange("pitch", event);
+                    handleChange(event);
                   }}
                 />
               </div>

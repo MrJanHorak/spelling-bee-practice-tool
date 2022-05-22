@@ -181,6 +181,9 @@ const Nav = (props) => {
               <NavLink to="/study" onClick={() => closeMenu()}>
                 Study Words
               </NavLink>
+              <NavLink to="/profile" onClick={() => closeMenu()}>
+                Profile
+              </NavLink>
               <NavLink
                 to="/"
                 onClick={() => {
