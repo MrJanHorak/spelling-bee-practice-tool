@@ -38,7 +38,6 @@ const AddStudent = (props) => {
     try {
       await signup(formData);
       props.handleSignupOrLogin();
-      navigate("/posts");
     } catch (error) {
       setMsg(error.message);
     }
