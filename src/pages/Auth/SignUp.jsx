@@ -20,6 +20,7 @@ const SignUp = (props) => {
     email: "",
     password: "",
     grade: null,
+    role: "",
     avatar: cat,
   });
 
@@ -107,6 +108,38 @@ const SignUp = (props) => {
           >
             Select Avatar
           </button>
+
+          <form>
+            <input
+              name="role"
+              type="radio"
+              value="teacher"
+              id="teacher"
+              onChange={handleChange}
+            />
+
+            <label for="teacher">Teacher</label>
+
+            <input
+              name="role"
+              type="radio"
+              value="parent"
+              id="parent"
+              onChange={handleChange}
+            />
+
+            <label for="parent">Parent</label>
+
+            <input
+              name="role"
+              type="radio"
+              value="student"
+              id="student"
+              onChange={handleChange}
+            />
+
+            <label for="Student">Student</label>
+          </form>
 
           <button autoComplete="off" id="submit-button" type="submit">
             SIGN UP
