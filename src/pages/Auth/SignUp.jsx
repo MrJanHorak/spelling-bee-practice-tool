@@ -118,7 +118,7 @@ const SignUp = (props) => {
               onChange={handleChange}
             />
 
-            <label for="teacher">Teacher</label>
+            <label htmlFor="teacher">Teacher</label>
 
             <input
               name="role"
@@ -128,7 +128,7 @@ const SignUp = (props) => {
               onChange={handleChange}
             />
 
-            <label for="parent">Parent</label>
+            <label htmlFor="parent">Parent</label>
 
             <input
               name="role"
@@ -138,7 +138,7 @@ const SignUp = (props) => {
               onChange={handleChange}
             />
 
-            <label for="Student">Student</label>
+            <label htmlFor="Student">Student</label>
           </form>
 
           <button autoComplete="off" id="submit-button" type="submit">
