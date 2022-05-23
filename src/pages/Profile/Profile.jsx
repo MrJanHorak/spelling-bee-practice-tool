@@ -111,7 +111,7 @@ const Profile = ({ user }) => {
           (userProfile?.role === "parent" ||
             userProfile?.role === "teacher") && (
             <div className="addChild">
-              <AddStudent formData={formData} user={userProfile} />
+              <AddStudent user={userProfile} />
             </div>
           )}
 

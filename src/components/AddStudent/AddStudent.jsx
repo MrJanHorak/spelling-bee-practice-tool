@@ -1,32 +1,24 @@
 import React, { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
 import "../../styles/Auth.css";
 
 // Assets
 import cat from "../../assets/avatars/cat.png"; //<= included in starter code
 
 // Services
-import { signup } from "../../services/authService";
+import { addStudent } from "../../services/authService";
 
 //Components
-import AvatarSelection from "../../pages/Auth/AvatarSelection";
 
-const AddStudent = (props) => {
-  const navigate = useNavigate();
-  const [popup, setPopup] = useState(false);
+const AddStudent = ({user}) => {
   const [msg, setMsg] = useState("");
   const [formData, setFormData] = useState({
     name: "",
-    email: "",
-    password: "",
-    grade: null,
-    role: "",
+    email: user.email,
+    // password: "",
+    grade: 1,
+    role: "student",
     avatar: cat,
   });
-
-  const handlePopup = () => {
-    setPopup(!popup);
-  };
 
   const handleChange = (e) => {
     setMsg("");
@@ -36,8 +28,8 @@ const AddStudent = (props) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await signup(formData);
-      props.handleSignupOrLogin();
+      await addStudent(formData);
+      // props.handleSignupOrLogin();
     } catch (error) {
       setMsg(error.message);
     }
@@ -45,14 +37,6 @@ const AddStudent = (props) => {
 
   return (
     <div className="add-student-page">
-      {popup && (
-        <AvatarSelection
-          formData={formData}
-          handleChange={handleChange}
-          handlePopup={handlePopup}
-        />
-      )}
-
       <div className="form-container">
         <div className="title-container">
           <h1>Add a Student</h1>
@@ -65,10 +49,11 @@ const AddStudent = (props) => {
             name="name"
             type="text"
             autoComplete="off"
-            placeholder="Username"
+            placeholder="name"
             onChange={handleChange}
             value={formData.name}
           />
+          {/*
           <input
             required
             name="email"
@@ -86,7 +71,7 @@ const AddStudent = (props) => {
             placeholder="Password"
             onChange={handleChange}
             value={formData.password}
-          />
+          /> */}
           <input
             required
             name="grade"
@@ -99,57 +84,10 @@ const AddStudent = (props) => {
             value={formData.grade}
           />
 
-          <button
-            type="button"
-            autoComplete="off"
-            id="avatar-button"
-            onClick={handlePopup}
-          >
-            Select Avatar
-          </button>
-
-          <form>
-            <input
-              name="role"
-              type="radio"
-              value="teacher"
-              id="teacher"
-              onChange={handleChange}
-            />
-
-            <label htmlFor="teacher">Teacher</label>
-
-            <input
-              name="role"
-              type="radio"
-              value="parent"
-              id="parent"
-              onChange={handleChange}
-            />
-
-            <label htmlFor="parent">Parent</label>
-
-            <input
-              name="role"
-              type="radio"
-              value="student"
-              id="student"
-              onChange={handleChange}
-            />
-
-            <label htmlFor="Student">Student</label>
-          </form>
-
           <button autoComplete="off" id="submit-button" type="submit">
-            SIGN UP
+            ADD STUDENT
           </button>
         </form>
-        <div className="redirect-container">
-          <p>Already have an account?</p>
-          <Link className="redirect-link" to="/signin">
-            Sign In
-          </Link>
-        </div>
       </div>
     </div>
   );

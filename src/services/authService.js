@@ -21,6 +21,27 @@ async function signup(user) {
   }
 }
 
+async function addStudent(user) {
+  console.log('inside addStudent', user)
+  try {
+    const res = await fetch(`${BASE_URL}/addStudent`, {
+      method: "POST",
+      headers: new Headers({ "Content-Type": "application/json" }),
+      body: JSON.stringify(user),
+    });
+    const json = await res.json();
+    if (json.token) {
+      tokenService.setToken(json.token);
+    }
+    if (json.err) {
+      throw new Error(json.err);
+    }
+  } catch (err) {
+    console.log(err);
+    throw err;
+  }
+}
+
 function getUser() {
   return tokenService.getUserFromToken();
 }
@@ -48,4 +69,4 @@ async function login(credentials) {
   }
 }
 
-export { signup, getUser, logout, login };
+export { signup, getUser, logout, login, addStudent };
