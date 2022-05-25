@@ -6,6 +6,7 @@ import cat from "../../assets/avatars/cat.png"; //<= included in starter code
 
 // Services
 import { addStudent } from "../../services/authService";
+import Collapsible from "react-collapsible";
 
 //Components
 
@@ -37,6 +38,7 @@ const AddStudent = ({user}) => {
   return (
     <div className="add-student-page">
       <div className="add-student-container">
+      <Collapsible trigger={user.role==="parent"? "Add Child": "Add Student"}>
         <div className="title-container">
           <h1>Add a {user.role==="parent"? "Child": "Student"}</h1>
           {msg ? <h3>{msg}</h3> : ""}
@@ -70,6 +72,7 @@ const AddStudent = ({user}) => {
             ADD STUDENT
           </button>
         </form>
+      </Collapsible>
       </div>
     </div>
   );

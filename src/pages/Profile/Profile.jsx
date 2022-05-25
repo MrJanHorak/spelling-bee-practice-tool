@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Collapsible from "react-collapsible";
 import "../../styles/Profile.css";
 
 //services
@@ -105,24 +106,31 @@ const Profile = ({ user }) => {
             </div>
 
             <div id="voice-setting">
-              <VoiceSettings formData={formData} handleChange={handleChange} />
+              <Collapsible trigger="Choose Voice">
+                <VoiceSettings
+                  formData={formData}
+                  handleChange={handleChange}
+                />
+              </Collapsible>
             </div>
 
             {(userProfile?.role === "parent" ||
               userProfile?.role === "teacher") && (
-                <>
-              <div className="indexChilden">
-                <ShowStudents user={userProfile} />
-              </div>
-              <div className="addChild">
-                <AddStudent user={userProfile} />
-              </div>
+              <>
+                <div className="indexChilden">
+                  <ShowStudents user={userProfile} />
+                </div>
+                <div className="addChild">
+                  <AddStudent user={userProfile} />
+                </div>
               </>
             )}
           </div>
 
           <div className="word-stats">
-            <WordStats userProfile={userProfile} />
+            <Collapsible trigger="Words you have practiced">
+              <WordStats userProfile={userProfile} />
+            </Collapsible>
           </div>
         </div>
       )}
