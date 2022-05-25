@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "../../styles/Auth.css";
+import "../../styles/AddStudent.css";
 
 // Assets
 import cat from "../../assets/avatars/cat.png"; //<= included in starter code
@@ -14,7 +14,6 @@ const AddStudent = ({user}) => {
   const [formData, setFormData] = useState({
     name: "",
     email: user.email,
-    // password: "",
     grade: 1,
     role: "student",
     avatar: cat,
@@ -37,13 +36,14 @@ const AddStudent = ({user}) => {
 
   return (
     <div className="add-student-page">
-      <div className="form-container">
+      <div className="add-student-container">
         <div className="title-container">
-          <h1>Add a Student</h1>
+          <h1>Add a {user.role==="parent"? "Child": "Student"}</h1>
           {msg ? <h3>{msg}</h3> : ""}
         </div>
 
         <form className="register-form" onSubmit={handleSubmit}>
+  
           <input
             required
             name="name"
@@ -53,25 +53,7 @@ const AddStudent = ({user}) => {
             onChange={handleChange}
             value={formData.name}
           />
-          {/*
-          <input
-            required
-            name="email"
-            type="email"
-            autoComplete="off"
-            placeholder="Email"
-            onChange={handleChange}
-            value={formData.email}
-          />
-          <input
-            required
-            name="password"
-            type="password"
-            autoComplete="off"
-            placeholder="Password"
-            onChange={handleChange}
-            value={formData.password}
-          /> */}
+
           <input
             required
             name="grade"

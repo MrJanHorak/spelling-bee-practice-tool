@@ -9,6 +9,7 @@ import AvatarSelection from "../../pages/Auth/AvatarSelection";
 import VoiceSettings from "../../components/VoiceSettings/VoiceSettings";
 import WordStats from "../../components/WordStats/WordStats";
 import AddStudent from "../../components/AddStudent/AddStudent";
+import ShowStudents from "../../components/ShowStudents/ShowStudents";
 
 const Profile = ({ user }) => {
   const [userProfile, setUserProfile] = useState();
@@ -65,66 +66,73 @@ const Profile = ({ user }) => {
   };
   console.log(userProfile);
   return (
-    <div id="profile-page">
-      {popup && (
-        <AvatarSelection
-          formData={formData}
-          handleChange={handleChange}
-          handlePopup={handlePopup}
-        />
-      )}
-      <div className="profile-info">
-        <div id="profile-card">
-          <div id="profile-image">
-            <img
-              id="profile-pic"
-              alt="profile pictue"
-              src={userProfile?.avatar}
+    <>
+      {userProfile && (
+        <div id="profile-page">
+          {popup && (
+            <AvatarSelection
+              formData={formData}
+              handleChange={handleChange}
+              handlePopup={handlePopup}
             />
-          </div>
-          <div id="update-avater">
-            {" "}
-            <button type="button" autoComplete="off" onClick={handlePopup}>
-              Change Avatar
-            </button>
-          </div>
-          <div id="bio-info">
-            <div id="user-name">
-              <h1>{userProfile?.name}</h1>
-            </div>
-            <div id="user-grade">
-              <h2>Grade: {userProfile?.grade}</h2>
-            </div>
-          </div>
-          <div id="user-email">
-            <h3>e-mail: {userProfile?.email}</h3>
-          </div>
-        </div>
-
-        {userProfile && (
-          <div id="voice-setting">
-            <VoiceSettings formData={formData} handleChange={handleChange} />
-          </div>
-        )}
-
-        {userProfile &&
-          (userProfile?.role === "parent" ||
-            userProfile?.role === "teacher") && (
-            <div className="addChild">
-              <AddStudent user={userProfile} />
-            </div>
           )}
+          <div className="profile-info">
+            <div id="profile-card">
+              <div id="profile-image">
+                <img
+                  id="profile-pic"
+                  alt="profile pictue"
+                  src={userProfile?.avatar}
+                />
+              </div>
+              <div id="update-avater">
+                {" "}
+                <button type="button" autoComplete="off" onClick={handlePopup}>
+                  Change Avatar
+                </button>
+              </div>
+              <div id="bio-info">
+                <div id="user-name">
+                  <h1>{userProfile?.name}</h1>
+                </div>
+                <div id="user-grade">
+                  <h2>Grade: {userProfile?.grade}</h2>
+                </div>
+              </div>
+              <div id="user-email">
+                <h3>e-mail: {userProfile?.email}</h3>
+              </div>
+            </div>
 
-        {userProfile && (
+            <div id="voice-setting">
+              <VoiceSettings formData={formData} handleChange={handleChange} />
+            </div>
+
+            {(userProfile?.role === "parent" ||
+              userProfile?.role === "teacher") && (
+                <>
+              <div className="indexChilden">
+                <ShowStudents user={userProfile} />
+              </div>
+              <div className="addChild">
+                <AddStudent user={userProfile} />
+              </div>
+              </>
+            )}
+          </div>
+
           <div className="word-stats">
             <WordStats userProfile={userProfile} />
           </div>
-        )}
+        </div>
+      )}
 
-        {!userProfile && <h2>Loading ... </h2>}
-      </div>
-    </div>
+      {!userProfile && (
+        <div id="profile-page">
+          <h2>Loading ... </h2>
+        </div>
+      )}
+    </>
   );
 };
-
 export default Profile;

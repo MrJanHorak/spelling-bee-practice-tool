@@ -25,14 +25,16 @@ async function addStudent(user) {
   console.log('inside addStudent', user)
   try {
     const res = await fetch(`${BASE_URL}/addStudent`, {
+      // mode: 'no-cors',
       method: "POST",
-      headers: new Headers({ "Content-Type": "application/json" }),
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify(user),
     });
+    console.log(JSON.stringify(user))
     const json = await res.json();
-    if (json.token) {
-      tokenService.setToken(json.token);
-    }
+    // if (json.token) {
+    //   tokenService.setToken(json.token);
+    // }
     if (json.err) {
       throw new Error(json.err);
     }
