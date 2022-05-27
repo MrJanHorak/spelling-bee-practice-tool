@@ -1,3 +1,6 @@
+h1{
+  margin-left: 5px;
+}
 .add-student-container {
   width: 100%;
   display: flex;
@@ -17,6 +20,14 @@
   padding: 16px;
   font-size: 16px;
   margin-bottom: 16px;
+  margin-right: 5px;
   border: 1px solid #292934;
   border-radius: 7px;
+}
+
+@media (orientation: portrait) {
+  .add-student-container {
+    display: flex;
+    flex-direction: column;
+  }
 }
