@@ -26,6 +26,10 @@ const Profile = ({ user }) => {
     rate: null,
     voice: 0,
   });
+  const [studentAdded, setStudentAdded] = useState(0);
+  const added = () => {
+    setStudentAdded(studentAdded + 1)
+  }
 
   useEffect(() => {
     const getProfile = async () => {
@@ -46,8 +50,8 @@ const Profile = ({ user }) => {
       }
     };
     getProfile();
-  }, [user.profile, click]);
-
+  }, [user.profile, click, studentAdded]);
+  console.log('In profile component',studentAdded)
   const handlePopup = () => {
     setClick(!click);
     setPopup(!popup);
@@ -65,7 +69,7 @@ const Profile = ({ user }) => {
       throw error;
     }
   };
-  console.log(userProfile);
+
   return (
     <>
       {userProfile && (
@@ -121,7 +125,7 @@ const Profile = ({ user }) => {
                   <ShowStudents user={userProfile} />
                 </div>
                 <div className="addChild">
-                  <AddStudent user={userProfile} />
+                  <AddStudent added={added} user={userProfile} />
                 </div>
                 </Collapsible>
               </>

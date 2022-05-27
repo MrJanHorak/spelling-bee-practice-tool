@@ -8,9 +8,10 @@ import cat from "../../assets/avatars/cat.png"; //<= included in starter code
 import { addStudent } from "../../services/authService";
 import Collapsible from "react-collapsible";
 
+
 //Components
 
-const AddStudent = ({user}) => {
+const AddStudent = ({added, user}) => {
   const [msg, setMsg] = useState("");
   const [formData, setFormData] = useState({
     name: "",
@@ -29,8 +30,8 @@ const AddStudent = ({user}) => {
     e.preventDefault();
     try {
       await addStudent(formData);
-      // props.handleSignupOrLogin();
-      setFormData({ ...formData, name: "", grade: 1 })
+      console.log('In Add Student component')
+      added()
     } catch (error) {
       setMsg(error.message);
     }
