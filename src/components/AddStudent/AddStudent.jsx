@@ -30,6 +30,7 @@ const AddStudent = ({user}) => {
     try {
       await addStudent(formData);
       // props.handleSignupOrLogin();
+      setFormData({ ...formData, name: "", grade: 1 })
     } catch (error) {
       setMsg(error.message);
     }
@@ -37,8 +38,8 @@ const AddStudent = ({user}) => {
 
   return (
     <div className="add-student-page">
-      <div className="add-student-container">
       <Collapsible trigger={user.role==="parent"? "Add Child": "Add Student"}>
+      <div className="add-student-container">
         <div className="title-container">
           <h1>Add a {user.role==="parent"? "Child": "Student"}</h1>
           {msg ? <h3>{msg}</h3> : ""}
@@ -72,8 +73,8 @@ const AddStudent = ({user}) => {
             ADD STUDENT
           </button>
         </form>
-      </Collapsible>
       </div>
+      </Collapsible>
     </div>
   );
 };

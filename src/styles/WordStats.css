@@ -1,8 +1,7 @@
 @media (orientation: portrait) {
   .practiced-words {
     border: 2px solid black;
-    padding: 12px;
-    width: 100%;
+    width: 95%;
     border-radius: 12px;
     display: flex;
     flex-direction: column;
@@ -11,6 +10,12 @@
     margin-bottom: 7px;
     justify-content: center;
     align-items: center;
+  }
+
+  #stats-container {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
   }
 }
 
@@ -26,6 +31,12 @@
     margin-bottom: 7px;
     justify-content: center;
     align-items: center;
+    width: 75%;
+  }
+
+  #stats-container {
+    display: flex;
+    text-align: center;
   }
 }
 
@@ -99,7 +110,4 @@ progress::-webkit-progress-bar {
   align-items: center;
 }
 
-#stats-container {
-  display: flex;
-  text-align: center;
-}
+

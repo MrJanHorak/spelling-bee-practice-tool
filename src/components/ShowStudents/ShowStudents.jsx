@@ -11,7 +11,7 @@ const ShowStudents = ({ user }) =>
     return(
       <div className="student-container" key={student._id}>
         <Collapsible trigger=
-        {<div className="student-collapsable-title"><img id="student-profile-pic" alt="small student pic" src={student.avatar}/><span className="student-name">{student.name}</span></div>}>
+        {<div className="student-collapsable-title"><img id="student-profile-pic" alt="small student pic" src={student.avatar}/>{student.name}</div>}>
                   {<WordStats userProfile={student}/>}
       </Collapsible>
       </div>

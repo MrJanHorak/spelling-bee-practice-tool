@@ -105,31 +105,32 @@ const Profile = ({ user }) => {
               </div>
             </div>
 
-            <div id="voice-setting">
-              <Collapsible trigger="Choose Voice">
+            <Collapsible trigger="Voice Settings">
+              <div id="voice-setting">
                 <VoiceSettings
                   formData={formData}
                   handleChange={handleChange}
                 />
-              </Collapsible>
-            </div>
+              </div>
+            </Collapsible>
 
             {(userProfile?.role === "parent" ||
               userProfile?.role === "teacher") && (
-              <>
+              <><Collapsible trigger={user.role === "parent" ? <h3>Your Child</h3> : <h3>Your Students</h3>}>
                 <div className="indexChilden">
                   <ShowStudents user={userProfile} />
                 </div>
                 <div className="addChild">
                   <AddStudent user={userProfile} />
                 </div>
+                </Collapsible>
               </>
             )}
-          </div>
 
-          <div className="word-stats">
             <Collapsible trigger="Words you have practiced">
-              <WordStats userProfile={userProfile} />
+              <div className="word-stats">
+                <WordStats userProfile={userProfile} />
+              </div>
             </Collapsible>
           </div>
         </div>

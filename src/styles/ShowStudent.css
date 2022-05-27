@@ -1,4 +1,4 @@
-.student-container {
+/* .student-container {
   border: 2px solid black;
   padding: 12px;
   width: 100%;
@@ -8,12 +8,14 @@
   align-content: space-around;
   justify-content: center;
   margin: 12px 0 0 0;
-}
+} */
 
-.student-name{
+
+
+/* .student-name{
   margin: 10px;
   width: 100px;
-}
+} */
 
 #student-profile-pic{
   width: 35px;
