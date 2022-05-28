@@ -15,6 +15,14 @@
   flex-direction: column;
   width: 100%;
   align-items: flex-start;
+  text-align: center;
+}
+
+.signin-title-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  text-align: center;
 }
 
 .title-container h3 {
@@ -34,6 +42,23 @@
   flex-direction: column;
   align-items: center;
   max-width: 450px;
+}
+
+.sign-in-container {
+  width: 80%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  /* max-width: 450px; */
+}
+
+.QrCode-signin{
+  width: 100%;
+  margin-left: 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
 }
 
 .register-form {
