@@ -30,7 +30,6 @@ const AddStudent = ({added, user}) => {
     e.preventDefault();
     try {
       await addStudent(formData);
-      console.log('In Add Student component')
       added()
     } catch (error) {
       setMsg(error.message);

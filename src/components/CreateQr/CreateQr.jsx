@@ -5,7 +5,6 @@ import "../../styles/QrPage.css";
 const CreateQr = ({ user, pw }) => {
   const qrCard = user.students.map((student) => {
     let qrValue = [student.name, pw].join(",");
-    console.log(qrValue);
     return (
       <div
         key={student._id}

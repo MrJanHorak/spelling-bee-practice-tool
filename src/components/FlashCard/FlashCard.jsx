@@ -13,7 +13,7 @@ const FlashCard = ({ profile, handleClick, displayWord }) => {
   const spellWord = (e) => {
     toSpell = displayWord.word.split("");
     let time = (toSpell.length * 1000  +  1000 )/ (profile.rate);
-    console.log('time',time)
+
     setTimeout(() => {
       setSpeaking(false);
     }, [time]);
