@@ -23,8 +23,6 @@ const ReadQr = ({ handleSignupOrLogin }) => {
                 let resultTextSplit = result?.text.split(",");
                 let qrName = resultTextSplit[0];
                 let qrPw = resultTextSplit[1];
-                console.log("NAME: ", qrName);
-                console.log("PW: ", qrPw);
                 setData(result?.text);
                 try {
                   await login({ name: qrName, pw: qrPw });
@@ -59,8 +57,7 @@ const ReadQr = ({ handleSignupOrLogin }) => {
             </button>
           </div>
         )}
-        <p>data: {data}</p>
-        <p>msg: {msg}</p>
+        <p>{msg}</p>
       </div>
     </>
   );
