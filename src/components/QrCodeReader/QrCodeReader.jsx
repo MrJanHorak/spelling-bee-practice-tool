@@ -9,7 +9,6 @@ import { login } from "../../services/authService";
 const ReadQr = ({ handleSignupOrLogin }) => {
   const navigate = useNavigate();
   const [msg, setMsg] = useState("");
-  const [data, setData] = useState("No result");
   const [showScanner, setShowScanner] = useState(false);
 
   return (
@@ -19,11 +18,9 @@ const ReadQr = ({ handleSignupOrLogin }) => {
           <QrReader
             onResult={async (result, error) => {
               if (!!result) {
-                console.log("RESULT.TEXT: ", result?.text.split(","));
                 let resultTextSplit = result?.text.split(",");
                 let qrName = resultTextSplit[0];
                 let qrPw = resultTextSplit[1];
-                setData(result?.text);
                 try {
                   await login({ name: qrName, pw: qrPw });
                   handleSignupOrLogin();
@@ -44,7 +41,7 @@ const ReadQr = ({ handleSignupOrLogin }) => {
               className="submit-button"
               onClick={() => {
                 setShowScanner(true);
-                setData("Make sure your QrCode is visible!");
+                setMsg("Make sure your QrCode is visible!");
               }}
             >
               <img
