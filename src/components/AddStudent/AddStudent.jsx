@@ -70,7 +70,7 @@ const AddStudent = ({added, user}) => {
             value={formData.grade}
           />
 
-          <button autoComplete="off" id="submit-button" type="submit">
+          <button autoComplete="off" className="submit-button" type="submit">
             ADD STUDENT
           </button>
         </form>

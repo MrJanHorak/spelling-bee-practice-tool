@@ -103,7 +103,7 @@ button {
   text-align: left;
 }
 
-#submit-button {
+.submit-button {
   margin-top: 22px;
   background: #7450e9;
   border: none;

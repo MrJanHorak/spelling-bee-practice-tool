@@ -25,6 +25,7 @@ h1{
   border-radius: 7px;
 }
 
+
 @media (orientation: portrait) {
   .add-student-container {
     display: flex;

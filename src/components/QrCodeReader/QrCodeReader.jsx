@@ -43,7 +43,7 @@ const ReadQr = ({ handleSignupOrLogin }) => {
         ) : (
           <div>
             <button
-              id="submit-button"
+              className="submit-button"
               onClick={() => {
                 setShowScanner(true);
                 setData("Make sure your QrCode is visible!");

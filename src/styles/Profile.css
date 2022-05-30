@@ -94,6 +94,30 @@
   padding: 0;
   border: 3px solid blue;
 }
+
+.qr-code-generation-form{
+  align-items: center;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.qr-code-generation-form button{
+  margin-top: 0;
+  width: 150px;
+}
+
+#password{
+  width: 250px;
+  padding: 16px;
+  font-size: 16px;
+  margin-bottom: 16px;
+  margin-right: 5px;
+  border: 1px solid #292934;
+  border-radius: 7px;
+}
+
 @media (orientation: portrait) {
   select {
     width: 90%;

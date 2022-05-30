@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import Collapsible from "react-collapsible";
 import "../../styles/Profile.css";
 
@@ -11,6 +12,7 @@ import VoiceSettings from "../../components/VoiceSettings/VoiceSettings";
 import WordStats from "../../components/WordStats/WordStats";
 import AddStudent from "../../components/AddStudent/AddStudent";
 import ShowStudents from "../../components/ShowStudents/ShowStudents";
+import CreateQr from "../../components/CreateQr/CreateQr";
 
 const Profile = ({ user }) => {
   const [userProfile, setUserProfile] = useState();
@@ -27,9 +29,12 @@ const Profile = ({ user }) => {
     voice: 0,
   });
   const [studentAdded, setStudentAdded] = useState(0);
+  const [open, setOpen] = useState();
+  const [qr, setQr] = useState("");
+
   const added = () => {
-    setStudentAdded(studentAdded + 1)
-  }
+    setStudentAdded(studentAdded + 1);
+  };
 
   useEffect(() => {
     const getProfile = async () => {
@@ -51,7 +56,6 @@ const Profile = ({ user }) => {
     };
     getProfile();
   }, [user.profile, click, studentAdded]);
-  console.log('In profile component',studentAdded)
   const handlePopup = () => {
     setClick(!click);
     setPopup(!popup);
@@ -68,6 +72,36 @@ const Profile = ({ user }) => {
     } catch (error) {
       throw error;
     }
+  };
+
+  const handleQrChange = (e) => {
+    const value = e.target.value;
+    setQr(value);
+  };
+
+  const RenderInWindow = (props) => {
+    const [container, setContainer] = useState(null);
+    const newWindow = useRef(window);
+
+    useEffect(() => {
+      const div = document.createElement("div");
+      setContainer(div);
+    }, []);
+
+    useEffect(() => {
+      if (container) {
+        newWindow.current = window.open(
+          "",
+          "",
+          "width=738,height=526,left=200,top=200"
+        );
+        newWindow.current.document.body.appendChild(container);
+        const curWindow = newWindow.current;
+        return () => curWindow.close();
+      }
+    }, [container]);
+
+    return container && createPortal(props.children, container);
   };
 
   return (
@@ -120,13 +154,54 @@ const Profile = ({ user }) => {
 
             {(userProfile?.role === "parent" ||
               userProfile?.role === "teacher") && (
-              <><Collapsible trigger={user.role === "parent" ? <h3>Your Child</h3> : <h3>Your Students</h3>}>
-                <div className="indexChilden">
-                  <ShowStudents user={userProfile} />
-                </div>
-                <div className="addChild">
-                  <AddStudent added={added} user={userProfile} />
-                </div>
+              <>
+                <Collapsible trigger="Create QR-Codes">
+                  <div className="generate-QrCodes">
+                    <form className="qr-code-generation-form">
+                      <label htmlFor="password">
+                        Please enter your password:
+                      </label>
+                      <input
+                        required
+                        type="password"
+                        autoComplete="off"
+                        name="password"
+                        id="password"
+                        onChange={handleQrChange}
+                        value={qr}
+                      />
+                      <button
+                        type="submit"
+                        className="submit-button"
+                        onClick={(e) => {
+                          setOpen(true);
+                        }}
+                      >
+                        create
+                      </button>
+                      {open && (
+                        <RenderInWindow>
+                          <CreateQr user={userProfile} pw={qr} />
+                        </RenderInWindow>
+                      )}
+                    </form>
+                  </div>
+                </Collapsible>
+                <Collapsible
+                  trigger={
+                    user.role === "parent" ? (
+                      <h3>Your Child</h3>
+                    ) : (
+                      <h3>Your Students</h3>
+                    )
+                  }
+                >
+                  <div className="indexChilden">
+                    <ShowStudents user={userProfile} />
+                  </div>
+                  <div className="addChild">
+                    <AddStudent added={added} user={userProfile} />
+                  </div>
                 </Collapsible>
               </>
             )}
