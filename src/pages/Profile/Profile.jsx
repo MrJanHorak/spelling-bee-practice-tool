@@ -16,6 +16,7 @@ import CreateQr from "../../components/CreateQr/CreateQr";
 
 const Profile = ({ user }) => {
   const CryptoJS = require("crypto-js");
+  const encryptKey = process.env.REACT_APP_ENCRYPTKEY;
   const [userProfile, setUserProfile] = useState();
   const [popup, setPopup] = useState(false);
   const [click, setClick] = useState(false);
@@ -33,7 +34,6 @@ const Profile = ({ user }) => {
   const [open, setOpen] = useState();
   const [qr, setQr] = useState("");
 
-  const encryptKey = process.env.REACT_APP_ENCRYPTKEY;
 
   const added = () => {
     setStudentAdded(studentAdded + 1);

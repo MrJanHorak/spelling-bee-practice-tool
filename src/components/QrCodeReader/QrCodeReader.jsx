@@ -7,9 +7,12 @@ import qrcode from "../../assets/qrcode.png";
 import { login } from "../../services/authService";
 
 const ReadQr = ({ handleSignupOrLogin }) => {
+  const CryptoJS = require("crypto-js");
+  const encryptKey = process.env.REACT_APP_ENCRYPTKEY;
   const navigate = useNavigate();
   const [msg, setMsg] = useState("");
   const [showScanner, setShowScanner] = useState(false);
+
 
   return (
     <>
@@ -19,8 +22,8 @@ const ReadQr = ({ handleSignupOrLogin }) => {
             onResult={async (result, error) => {
               if (!!result) {
                 let resultTextSplit = result?.text.split(",");
-                let qrName = resultTextSplit[0];
-                let qrPw = resultTextSplit[1];
+                let qrName = JSON.parse(CryptoJS.AES.decrypt(resultTextSplit[0],encryptKey).toString(CryptoJS.enc.Utf8))
+                let qrPw = JSON.parse(CryptoJS.AES.decrypt(resultTextSplit[1],encryptKey).toString(CryptoJS.enc.Utf8))
                 try {
                   await login({ name: qrName, pw: qrPw });
                   handleSignupOrLogin();
