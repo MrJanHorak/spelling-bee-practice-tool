@@ -15,6 +15,7 @@ import ShowStudents from "../../components/ShowStudents/ShowStudents";
 import CreateQr from "../../components/CreateQr/CreateQr";
 
 const Profile = ({ user }) => {
+  const CryptoJS = require("crypto-js");
   const [userProfile, setUserProfile] = useState();
   const [popup, setPopup] = useState(false);
   const [click, setClick] = useState(false);
@@ -31,6 +32,8 @@ const Profile = ({ user }) => {
   const [studentAdded, setStudentAdded] = useState(0);
   const [open, setOpen] = useState();
   const [qr, setQr] = useState("");
+
+  const encryptKey = process.env.REACT_APP_ENCRYPTKEY;
 
   const added = () => {
     setStudentAdded(studentAdded + 1);
@@ -76,7 +79,10 @@ const Profile = ({ user }) => {
 
   const handleQrChange = (e) => {
     const value = e.target.value;
-    setQr(value);
+    setQr(CryptoJS.AES.encrypt(
+      JSON.stringify(value),
+      encryptKey
+    ).toString());
   };
 
   const RenderInWindow = (props) => {
@@ -158,22 +164,22 @@ const Profile = ({ user }) => {
                 <Collapsible trigger="Create QR-Codes">
                   <div className="generate-QrCodes">
                     <form className="qr-code-generation-form">
-                      <label htmlFor="password">
+                      <label htmlFor="generateQr">
                         Please enter your password:
                       </label>
                       <input
                         required
                         type="password"
                         autoComplete="off"
-                        name="password"
-                        id="password"
+                        name="generateQr"
+                        id="generateQr"
                         onChange={handleQrChange}
-                        value={qr}
+                        
                       />
                       <button
                         type="submit"
                         className="submit-button"
-                        onClick={(e) => {
+                        onClick={() => {
                           setOpen(true);
                         }}
                       >
@@ -181,7 +187,10 @@ const Profile = ({ user }) => {
                       </button>
                       {open && (
                         <RenderInWindow>
-                          <CreateQr user={userProfile} pw={qr} />
+                          <CreateQr
+                            user={userProfile}
+                            pw={qr}
+                          />
                         </RenderInWindow>
                       )}
                     </form>

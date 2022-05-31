@@ -3,8 +3,13 @@ import QRCode from "react-qr-code";
 import "../../styles/QrPage.css";
 
 const CreateQr = ({ user, pw }) => {
+  const CryptoJS = require("crypto-js");
+  const encryptKey = process.env.REACT_APP_ENCRYPTKEY;
   const qrCard = user.students.map((student) => {
-    let qrValue = [student.name, pw].join(",");
+    let qrValue = [CryptoJS.AES.encrypt(
+      JSON.stringify(student.name),
+      encryptKey
+    ).toString(), pw].join(",");
     return (
       <div
         key={student._id}
