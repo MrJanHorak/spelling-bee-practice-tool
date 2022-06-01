@@ -16,10 +16,18 @@ This app makes use of React-Speech-Kit in combination with a speech recognition 
 * Visual and audio aid in study mode
 * Use of default speech synthesis
 * Use of Speech recognition
+* Parent/Teacher/Student roles
+* Parent and Teachers can create Student/Child Profiles
+* Parent and Teachers can create QrCode cards for student/children
+* QrCode Login to help students/children login without adult assistance
+* Parents/Teachers can see students progress in an overview
+* All users can see spelling results in profile view
 
 ### Current challenges: 
 ---
 * Speech Synthesis operates differently on different devices (to include different speeds) which creates a challenge synchronizing the flash cards in study mode as well as the timeOut's needed to turn off the mic while the computer is speaking.
+* QrCode login works when running the frontend on a local server. When deployed to Netlify it causes an error.
+* Layout of elements is not ideal
 
 # Try it here!
 
@@ -50,8 +58,6 @@ This app makes use of React-Speech-Kit in combination with a speech recognition 
 * enlarge vocabulary to practice as student progresses
 * setting for practicing 'older' already learned words for review
 * setting for learning just new words
-* graphical display of progress
-* create way of tracking how well a word has been learned
 
 ## Next steps:
 * grade level appropriate word lists to practice
@@ -66,6 +72,11 @@ This app makes use of React-Speech-Kit in combination with a speech recognition 
 * spelling bee mode
 * admin panel to add words
 * have app listen (and recognise) spelling
+* graphical display of progress
+* create way of tracking how well a word has been learned
+* teacher/parent/child roles
+* qr-code generation
+* qr-code login
 
 
 # Interested in helping? Reach out!
@@ -91,6 +102,10 @@ Word definitions have been pulled in using the [WordsAPI](https://www.wordsapi.c
 Speech recognition is implemented using [react-speech-recognition](https://github.com/JamesBrill/react-speech-recognition) in combination with a [speech recognition polyfill](https://github.com/JamesBrill/react-speech-recognition/blob/master/docs/POLYFILLS.md) usinging [Speechly's](https://www.speechly.com/) free tier.
 
 The voice selection option in the profile view is adapted from the react-speech-kit [Github repository from MikeyParten](https://github.com/MikeyParton/react-speech-kit/blob/master/examples/src/useSpeechRecognition.jsx) 
+
+[React-qr-code](https://www.npmjs.com/package/react-qr-code) and [react-qr-reader](https://www.npmjs.com/package/react-qr-reader) NPM libraries were used to assist in the qr-code generation and login.
+
+I use [crypto-js](https://www.npmjs.com/package/crypto-js) to encrypt and decrypt the user login information for the Qr code. 
 
 Avatars: 
 All individually downloaded for free from flaticon. The entire pack can be found at: [Icon Pack: Animals | Flat](https://www.flaticon.com/packs/animals-3)
