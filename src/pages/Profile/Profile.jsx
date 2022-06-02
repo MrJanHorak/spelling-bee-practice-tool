@@ -86,6 +86,7 @@ const Profile = ({ user }) => {
   };
 
   const RenderInWindow = (props) => {
+    console.log('props: ',props)
     const [container, setContainer] = useState(null);
     const newWindow = useRef(window);
 
@@ -103,6 +104,11 @@ const Profile = ({ user }) => {
         );
         newWindow.current.document.body.appendChild(container);
         const curWindow = newWindow.current;
+        var uri = window.location.toString();
+if (uri.indexOf("?") > 0) {
+    var clean_uri = uri.substring(0, uri.indexOf("?"));
+    window.history.replaceState({}, document.title, clean_uri);
+}
         return () => curWindow.close();
       }
     }, [container]);
@@ -163,7 +169,6 @@ const Profile = ({ user }) => {
               <>
                 <Collapsible trigger="Create QR-Codes">
                   <div className="generate-QrCodes">
-                    <form className="qr-code-generation-form">
                       <label htmlFor="generateQr">
                         Please enter your password:
                       </label>
@@ -174,6 +179,16 @@ const Profile = ({ user }) => {
                         name="generateQr"
                         id="generateQr"
                         onChange={handleQrChange}
+                        
+                      />
+                    <form className="qr-code-generation-form">
+                      <input
+                        required
+                        type="text"
+                        name="$#SJFK@!kd!"
+                        id="S$C%Rjsd@$sfsdjask"
+                        value="#Hi$d%@nDHJAS*SHGHHkh#@4k1kFj532"
+                        hidden
                         
                       />
                       <button
