@@ -34,7 +34,6 @@ const Profile = ({ user }) => {
   const [open, setOpen] = useState();
   const [qr, setQr] = useState("");
 
-
   const added = () => {
     setStudentAdded(studentAdded + 1);
   };
@@ -79,14 +78,11 @@ const Profile = ({ user }) => {
 
   const handleQrChange = (e) => {
     const value = e.target.value;
-    setQr(CryptoJS.AES.encrypt(
-      JSON.stringify(value),
-      encryptKey
-    ).toString());
+    setQr(CryptoJS.AES.encrypt(JSON.stringify(value), encryptKey).toString());
   };
 
   const RenderInWindow = (props) => {
-    console.log('props: ',props)
+    console.log("props: ", props);
     const [container, setContainer] = useState(null);
     const newWindow = useRef(window);
 
@@ -105,10 +101,10 @@ const Profile = ({ user }) => {
         newWindow.current.document.body.appendChild(container);
         const curWindow = newWindow.current;
         var uri = window.location.toString();
-if (uri.indexOf("?") > 0) {
-    var clean_uri = uri.substring(0, uri.indexOf("?"));
-    window.history.replaceState({}, document.title, clean_uri);
-}
+        if (uri.indexOf("?") > 0) {
+          var clean_uri = uri.substring(0, uri.indexOf("?"));
+          window.history.replaceState({}, document.title, clean_uri);
+        }
         return () => curWindow.close();
       }
     }, [container]);
@@ -168,29 +164,19 @@ if (uri.indexOf("?") > 0) {
               userProfile?.role === "teacher") && (
               <>
                 <Collapsible trigger="Create QR-Codes">
-                  <div className="generate-QrCodes">
-                      <label htmlFor="generateQr">
-                        Please enter your password:
-                      </label>
-                      <input
-                        required
-                        type="password"
-                        autoComplete="off"
-                        name="generateQr"
-                        id="generateQr"
-                        onChange={handleQrChange}
-                        
-                      />
+                  <div className="generate-QrCodes qr-code-generation-form">
+                    <label htmlFor="generateQr">
+                      Please enter your password:
+                    </label>
+                    <input
+                      required
+                      type="password"
+                      autoComplete="off"
+                      name="generateQr"
+                      id="generateQr"
+                      onChange={handleQrChange}
+                    />
                     <form className="qr-code-generation-form">
-                      <input
-                        required
-                        type="text"
-                        name="$#SJFK@!kd!"
-                        id="S$C%Rjsd@$sfsdjask"
-                        value="#Hi$d%@nDHJAS*SHGHHkh#@4k1kFj532"
-                        hidden
-                        
-                      />
                       <button
                         type="submit"
                         className="submit-button"
@@ -202,10 +188,7 @@ if (uri.indexOf("?") > 0) {
                       </button>
                       {open && (
                         <RenderInWindow>
-                          <CreateQr
-                            user={userProfile}
-                            pw={qr}
-                          />
+                          <CreateQr user={userProfile} pw={qr} />
                         </RenderInWindow>
                       )}
                     </form>
