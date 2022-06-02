@@ -24,9 +24,11 @@ const ReadQr = ({ handleSignupOrLogin }) => {
                 let resultTextSplit = result?.text.split(",");
                 console.log("after split:", resultTextSplit);
                 let qrNameDecrypt = CryptoJS.AES.decrypt(resultTextSplit[0], encryptKey)
+                console.log("qrNameDecrypt: ", qrNameDecrypt)
                 let qrName = await JSON.parse(qrNameDecrypt.toString(CryptoJS.enc.Utf8));
                 console.log("qrName: ", qrName);
                 let qrPwDecrypt = CryptoJS.AES.decrypt(resultTextSplit[1], encryptKey)
+                console.log("qrPwDecrypt: ", qrPwDecrypt)
                 let qrPw = await JSON.parse(qrPwDecrypt.toString(CryptoJS.enc.Utf8));
                 console.log("qrPw: ", qrPw);
                 try {
