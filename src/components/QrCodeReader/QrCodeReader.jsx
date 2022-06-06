@@ -23,16 +23,16 @@ const ReadQr = ({ handleSignupOrLogin }) => {
                 console.log("result", result);
                 let resultTextSplit = result?.text.split(",");
                 console.log("after split:", resultTextSplit);
-                let qrNameDecrypt = CryptoJS.AES.decrypt(resultTextSplit[0], encryptKey)
+                let qrNameDecrypt = JSON.parse(CryptoJS.AES.decrypt(resultTextSplit[0], encryptKey).toString(CryptoJS.enc.Utf8))
                 console.log("qrNameDecrypt: ", qrNameDecrypt)
-                let qrName = (qrNameDecrypt.toString(CryptoJS.enc.Utf8));
-                console.log("qrName: ", qrName);
-                let qrPwDecrypt = CryptoJS.AES.decrypt(resultTextSplit[1], encryptKey)
+                // let qrName = (qrNameDecrypt.toString(CryptoJS.enc.Utf8));
+                // console.log("qrName: ", qrName);
+                let qrPwDecrypt = JSON.parse(CryptoJS.AES.decrypt(resultTextSplit[1], encryptKey).toString(CryptoJS.enc.Utf8))
                 console.log("qrPwDecrypt: ", qrPwDecrypt)
-                let qrPw = (qrPwDecrypt.toString(CryptoJS.enc.Utf8));
-                console.log("qrPw: ", qrPw);
+                // let qrPw = (qrPwDecrypt.toString(CryptoJS.enc.Utf8));
+                // console.log("qrPw: ", qrPw);
                 try {
-                  await login({ name: qrName, pw: qrPw });
+                  await login({ name: qrNameDecrypt, pw: qrPwDecrypt });
                   handleSignupOrLogin();
                   navigate("/");
                 } catch (error) {
