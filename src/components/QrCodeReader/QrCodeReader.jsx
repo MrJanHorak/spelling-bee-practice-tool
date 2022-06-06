@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { QrReader } from "react-qr-reader";
 import { useNavigate } from "react-router-dom";
 import qrcode from "../../assets/qrcode.png";
+import CryptoJS from "crypto-js";
 
 
 // Services
@@ -9,7 +10,7 @@ import { login } from "../../services/authService";
 
 
 const ReadQr = ({ handleSignupOrLogin }) => {
-  const CryptoJS = require("crypto-js");
+  // const CryptoJS = require("crypto-js");
   const encryptKey = process.env.REACT_APP_ENCRYPTKEY;
   const navigate = useNavigate();
   const [msg, setMsg] = useState("");
@@ -27,7 +28,7 @@ const ReadQr = ({ handleSignupOrLogin }) => {
                 console.log("after split:", resultTextSplit);
                 let qrNameDecrypt = CryptoJS.AES.decrypt(resultTextSplit[0], encryptKey)
                 console.log("qrNameDecrypt: ", qrNameDecrypt)
-                let qrName = await JSON.parse(qrNameDecrypt.toString(CryptoJS.enc.Utf8));
+                let qrName = await JSON.parse(qrNameDecrypt.toString(CryptoJS.enc.Utf8))
                 console.log("qrName: ", qrName);
                 let qrPwDecrypt = CryptoJS.AES.decrypt(resultTextSplit[1], encryptKey)
                 console.log("qrPwDecrypt: ", qrPwDecrypt)
