@@ -3,8 +3,10 @@ import { QrReader } from "react-qr-reader";
 import { useNavigate } from "react-router-dom";
 import qrcode from "../../assets/qrcode.png";
 
+
 // Services
 import { login } from "../../services/authService";
+
 
 const ReadQr = ({ handleSignupOrLogin }) => {
   const CryptoJS = require("crypto-js");
@@ -23,16 +25,16 @@ const ReadQr = ({ handleSignupOrLogin }) => {
                 console.log("result", result);
                 let resultTextSplit = result?.text.split(",");
                 console.log("after split:", resultTextSplit);
-                let qrNameDecrypt = await JSON.parse(CryptoJS.AES.decrypt(resultTextSplit[0], encryptKey).toString(CryptoJS.enc.Utf8))
+                let qrNameDecrypt = CryptoJS.AES.decrypt(resultTextSplit[0], encryptKey)
                 console.log("qrNameDecrypt: ", qrNameDecrypt)
-                // let qrName = (qrNameDecrypt.toString(CryptoJS.enc.Utf8));
-                // console.log("qrName: ", qrName);
-                let qrPwDecrypt = await JSON.parse(CryptoJS.AES.decrypt(resultTextSplit[1], encryptKey).toString(CryptoJS.enc.Utf8))
+                let qrName = await JSON.parse(qrNameDecrypt.toString(CryptoJS.enc.Utf8));
+                console.log("qrName: ", qrName);
+                let qrPwDecrypt = CryptoJS.AES.decrypt(resultTextSplit[1], encryptKey)
                 console.log("qrPwDecrypt: ", qrPwDecrypt)
-                // let qrPw = (qrPwDecrypt.toString(CryptoJS.enc.Utf8));
-                // console.log("qrPw: ", qrPw);
+                let qrPw = await JSON.parse(qrPwDecrypt.toString(CryptoJS.enc.Utf8));
+                console.log("qrPw: ", qrPw);
                 try {
-                  await login({ name: qrNameDecrypt, pw: qrPwDecrypt });
+                  await login({ name: qrName, pw: qrPw });
                   handleSignupOrLogin();
                   navigate("/");
                 } catch (error) {
