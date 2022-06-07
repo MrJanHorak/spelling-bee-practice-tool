@@ -82,7 +82,6 @@ const Profile = ({ user }) => {
   };
 
   const RenderInWindow = (props) => {
-    console.log("props: ", props);
     const [container, setContainer] = useState(null);
     const newWindow = useRef(window);
 
