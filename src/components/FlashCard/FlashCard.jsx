@@ -63,6 +63,22 @@ const FlashCard = ({ profile, handleClick, displayWord }) => {
             {...(!speaking
               ? {
                   onClick: () => {
+                    speak({
+                      text: displayWord.word,
+                      voice: voices[profile.voice],
+                      rate: profile.rate,
+                      pitch: profile.pitch,
+                    });;
+                  },
+                }
+              : {})}
+          >
+            PRONOUNCE
+          </button>
+          <button
+            {...(!speaking
+              ? {
+                  onClick: () => {
                     spellWord();
                   },
                 }
