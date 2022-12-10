@@ -1,5 +1,5 @@
 import * as tokenService from "./tokenService";
-const BASE_URL = process.env.BASE_URL;
+const BASE_URL = process.env.REACT_APP_BASE_URL;
 
 export const getProfileById = async (profileId) => {
   if (profileId === null || profileId === undefined) {
