@@ -1,5 +1,5 @@
 import * as tokenService from "./tokenService";
-const BASE_URL = process.env.REACT_APP_BACKEND_SERVER_URL;
+const BASE_URL = "https://cute-lime-cocoon-robe.cyclic.app";
 
 export const getProfileById = async (profileId) => {
   if (profileId === null || profileId === undefined) {
