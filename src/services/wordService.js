@@ -1,5 +1,5 @@
 import * as tokenService from "./tokenService";
-const BASE_URL = "https://spelling-bee-practice-app.herokuapp.com/api/words";
+const BASE_URL = process.env.BASE_URL;
 
 export const createWord = async (word) => {
   try {

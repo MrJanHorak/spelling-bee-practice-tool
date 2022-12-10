@@ -1,5 +1,5 @@
 import * as tokenService from "./tokenService";
-const BASE_URL = "https://cute-lime-cocoon-robe.cyclic.app/api/auth";
+const BASE_URL = process.env.BASE_URL;
 
 async function signup(user) {
   try {
