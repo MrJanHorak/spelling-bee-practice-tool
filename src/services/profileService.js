@@ -1,5 +1,5 @@
 import * as tokenService from "./tokenService";
-const BASE_URL = "https://cute-lime-cocoon-robe.cyclic.app/api";
+const BASE_URL = "https://cute-lime-cocoon-robe.cyclic.app/api/profiles";
 
 export const getProfileById = async (profileId) => {
   if (profileId === null || profileId === undefined) {

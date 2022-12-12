@@ -1,5 +1,5 @@
 import * as tokenService from "./tokenService";
-const BASE_URL = "https://cute-lime-cocoon-robe.cyclic.app/api";
+const BASE_URL = "https://cute-lime-cocoon-robe.cyclic.app/api/words";
 
 export const createWord = async (word) => {
   try {
