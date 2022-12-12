@@ -140,7 +140,6 @@ All individually downloaded for free from flaticon. The entire pack can be found
 
 [Front end on Netlify](https://spelling-bee-practice-app.netlify.app/)
 
-[Back end on Heroku](https://spelling-bee-practice-app.herokuapp.com/)
 [Back end on Cyclic.sh](https://cute-lime-cocoon-robe.cyclic.app/)
 
 
